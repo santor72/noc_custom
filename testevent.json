@@ -1,0 +1,9 @@
+[
+{
+         "profile": "Cisco.IOS",
+         "event_class__name": "Network | OSPF | Neighbor Up",
+         "raw_vars": {
+                     "message": "651: Feb  9 10:44:13: %OSPF-5-ADJCHG: Process 16143, Nbr 217.76.46.119 on TenGigabitEthernet6/5.1558 from FULL DOWN, Loading Done"
+                 }
+     }
+ ]

@@ -1,0 +1,3650 @@
+model;mac;llid;vendor;cli;interface;inus;ifaceName;id
+F660V3;;1;CZTE;"sho gpon onu sta gpon-olt_1/1/5 1
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/5:1       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/5:1
+
+ONU interface:         gpon-onu_1/1/5:1
+  Name:                ONU-5:1
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC1086197
+  Password:            
+  Device ID:           
+  Description:         ONU-5:1
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8278m
+  Online Duration:     386h 34m 08s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:45    2019-03-02 11:54:55     DyingGasp 
+   2   2019-03-02 12:27:30    2019-03-02 12:44:16     DyingGasp 
+   3   2019-03-02 12:59:29    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/5:1
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc1086197 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/5;N;OLT 1/1/5:1;ZTEGC1086197
+F660V2.0;;3;CZTE;"sho gpon onu sta gpon-olt_1/1/1 3
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:3       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:3
+
+ONU interface:         gpon-onu_1/1/1:3
+  Name:                ONU-1:3
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0074D97
+  Password:            
+  Device ID:           
+  Description:         kuzenkov
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8218m
+  Online Duration:     233h 03m 16s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-03-02 16:07:36    2019-03-03 10:48:41     DyingGasp 
+   2   2019-03-03 10:51:08    2019-03-03 14:04:22     DyingGasp 
+   3   2019-03-03 14:05:57    2019-03-08 21:48:46     DyingGasp 
+   4   2019-03-08 21:50:28    2019-03-08 22:28:53     DyingGasp 
+   5   2019-03-08 22:30:21    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:3
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc0074d97 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:3;ZTEGC0074D97
+F660V2.0;;1;CZTE;"sho gpon onu sta gpon-olt_1/1/1 1
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:1       enable       disable      unknown      DyingGasp    
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:1
+
+ONU interface:         gpon-onu_1/1/1:1
+  Name:                ONU-1:1
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         DyingGasp
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC10219E3
+  Password:            
+  Device ID:           
+  Description:         ONU-1:1
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7898m
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-03-15 17:57:38    2019-03-15 17:58:01     LOSi     
+   2   2019-03-15 17:59:36    2019-03-17 21:11:07     DyingGasp 
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:1
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc10219e3 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-controlled 
+OperState:           disable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:1;ZTEGC10219E3
+;;7;CZTE;"sho gpon onu sta gpon-olt_1/1/1 7
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:7       enable       disable      unknown      OffLine      
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:7
+
+ONU interface:         gpon-onu_1/1/1:7
+  Name:                ONU-1:7
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         OffLine
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0454CDB
+  Password:            
+  Device ID:           
+  Description:         samoilova
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        N/A
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:7
+
+Vendor ID:           N/A 
+Version:             N/A 
+SN:                  N/A 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   0 
+TotalTrafficSchNum:  0 
+TrafficMgmtOption:   N/A 
+OperState:           N/A 
+EquipID:             N/A 
+OMCC version:        80 
+Security capability: aes
+Model:               N/A
+Survival time:       N/A
+TotalGemPortNum:     0
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:7;ZTEGC0454CDB
+F660V3;;6;CZTE;"sho gpon onu sta gpon-olt_1/1/1 6
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:6       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:6
+
+ONU interface:         gpon-onu_1/1/1:6
+  Name:                ONU-1:6
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC108571A
+  Password:            
+  Device ID:           
+  Description:         frolova
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8294m
+  Online Duration:     339h 56m 35s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-21 11:20:21    2019-03-04 11:29:35     DyingGasp 
+   2   2019-03-04 11:30:49    2019-03-04 11:35:56     DyingGasp 
+   3   2019-03-04 11:37:03    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:6
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc108571a 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:6;ZTEGC108571A
+F660V3;;5;CZTE;"sho gpon onu sta gpon-olt_1/1/1 5
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:5       enable       disable      unknown      DyingGasp    
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:5
+
+ONU interface:         gpon-onu_1/1/1:5
+  Name:                ONU-1:5
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         DyingGasp
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC107DF5B
+  Password:            
+  Device ID:           
+  Description:         ryabuhin
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7698m
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-22 21:57:30    2019-02-22 23:18:01     DyingGasp 
+   2   2019-02-22 23:19:03    2019-02-24 09:26:47     DyingGasp 
+   3   2019-03-02 09:55:30    2019-03-02 10:20:50     DyingGasp 
+   4   2019-03-07 18:31:59    2019-03-09 16:11:37     DyingGasp 
+   5   2019-03-09 16:12:32    2019-03-10 09:05:01     DyingGasp 
+   6   2019-03-15 19:13:09    2019-03-15 22:16:31     DyingGasp 
+   7   2019-03-16 06:51:26    2019-03-17 05:11:30     DyingGasp 
+   8   2019-03-17 07:59:49    2019-03-17 09:02:37     DyingGasp 
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:5
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc107df5b 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           disable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:5;ZTEGC107DF5B
+;;4;CZTE;"sho gpon onu sta gpon-olt_1/1/1 4
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:4       enable       disable      unknown      OffLine      
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:4
+
+ONU interface:         gpon-onu_1/1/1:4
+  Name:                ONU-1:4
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         OffLine
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC108B149
+  Password:            
+  Device ID:           
+  Description:         lobova
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        N/A
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:4
+
+Vendor ID:           N/A 
+Version:             N/A 
+SN:                  N/A 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   0 
+TotalTrafficSchNum:  0 
+TrafficMgmtOption:   N/A 
+OperState:           N/A 
+EquipID:             N/A 
+OMCC version:        80 
+Security capability: aes
+Model:               N/A
+Survival time:       N/A
+TotalGemPortNum:     0
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:4;ZTEGC108B149
+;;1;CZTE;"sho gpon onu sta gpon-olt_1/1/3 1
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/3:1       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/3:1
+
+ONU interface:         gpon-onu_1/1/3:1
+  Name:                ONU-3:1
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC101AFAD
+  Password:            
+  Device ID:           
+  Description:         ONU-3:1
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        4028m
+  Online Duration:     355h 31m 13s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:08    2019-03-03 19:55:43     LOSi     
+   2   2019-03-03 19:57:17    2019-03-03 20:00:47     DyingGasp 
+   3   2019-03-03 20:02:26    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/3:1
+
+Vendor ID:           ZTEG 
+Version:             V2.20.20P1T6S 
+SN:                  ZTEGc101afad 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             N/A 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/3;N;OLT 1/1/3:1;ZTEGC101AFAD
+;;9;CZTE;"sho gpon onu sta gpon-olt_1/1/1 9
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:9       enable       disable      unknown      OffLine      
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:9
+
+ONU interface:         gpon-onu_1/1/1:9
+  Name:                ONU-1:9
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         OffLine
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0004761
+  Password:            
+  Device ID:           
+  Description:         kupriyanova
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        N/A
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:9
+
+Vendor ID:           N/A 
+Version:             N/A 
+SN:                  N/A 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   0 
+TotalTrafficSchNum:  0 
+TrafficMgmtOption:   N/A 
+OperState:           N/A 
+EquipID:             N/A 
+OMCC version:        80 
+Security capability: aes
+Model:               N/A
+Survival time:       N/A
+TotalGemPortNum:     0
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:9;ZTEGC0004761
+F660V2.1;;8;CZTE;"sho gpon onu sta gpon-olt_1/1/1 8
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:8       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:8
+
+ONU interface:         gpon-onu_1/1/1:8
+  Name:                ONU-1:8
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0223AEB
+  Password:            
+  Device ID:           
+  Description:         baeva
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8061m
+  Online Duration:     353h 11m 02s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:46    2019-02-22 20:23:34     LOSi     
+   2   2019-02-22 20:25:07    2019-02-22 20:38:28     DyingGasp 
+   3   2019-02-22 20:40:18    2019-03-03 22:17:50     DyingGasp 
+   4   2019-03-03 22:19:38    2019-03-03 22:20:59     DyingGasp 
+   5   2019-03-03 22:22:38    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:8
+
+Vendor ID:           ZTEG 
+Version:             V2.1 
+SN:                  ZTEGc0223aeb 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.1 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.1
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:8;ZTEGC0223AEB
+F660V2.0;;4;CZTE;"sho gpon onu sta gpon-olt_1/1/3 4
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/3:4       enable       disable      unknown      DyingGasp    
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/3:4
+
+ONU interface:         gpon-onu_1/1/3:4
+  Name:                ONU-3:4
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         DyingGasp
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0059B2D
+  Password:            
+  Device ID:           
+  Description:         ONU-3:4
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        5051m
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:51    2019-03-02 18:32:40     DyingGasp 
+   2   2019-03-02 20:58:16    2019-03-02 22:50:53     DyingGasp 
+   3   2019-03-02 22:54:16    2019-03-03 19:47:15     DyingGasp 
+   4   2019-03-03 19:48:38    2019-03-12 15:45:14     DyingGasp 
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/3:4
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc0059b2d 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           disable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/3;N;OLT 1/1/3:4;ZTEGC0059B2D
+F660V3;;2;CZTE;"sho gpon onu sta gpon-olt_1/1/3 2
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/3:2       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/3:2
+
+ONU interface:         gpon-onu_1/1/3:2
+  Name:                ONU-3:2
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0440382
+  Password:            
+  Device ID:           
+  Description:         ONU-3:2
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        4044m
+  Online Duration:     218h 15m 01s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:45    2019-02-24 14:27:45     DyingGasp 
+   2   2019-02-24 14:28:52    2019-03-02 18:32:40     DyingGasp 
+   3   2019-03-02 18:47:30    2019-03-02 22:25:46     DyingGasp 
+   4   2019-03-02 22:27:40    2019-03-09 13:17:33     DyingGasp 
+   5   2019-03-09 13:18:39    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/3:2
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc0440382 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/3;N;OLT 1/1/3:2;ZTEGC0440382
+F660V3;;3;CZTE;"sho gpon onu sta gpon-olt_1/1/3 3
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/3:3       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/3:3
+
+ONU interface:         gpon-onu_1/1/3:3
+  Name:                ONU-3:3
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0453303
+  Password:            
+  Device ID:           
+  Description:         ONU-3:3
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        5417m
+  Online Duration:     114h 27m 12s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-21 01:07:21    2019-03-02 20:53:55     DyingGasp 
+   2   2019-03-02 20:58:00    2019-03-02 22:50:53     DyingGasp 
+   3   2019-03-02 22:53:40    2019-03-03 21:17:06     LOSi     
+   4   2019-03-03 21:18:11    2019-03-13 21:04:08     LOSi     
+   5   2019-03-13 21:06:28    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/3:3
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc0453303 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/3;N;OLT 1/1/3:3;ZTEGC0453303
+F660V2.0;;17;CZTE;"sho gpon onu sta gpon-olt_1/1/1 17
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:17      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:17
+
+ONU interface:         gpon-onu_1/1/1:17
+  Name:                ONU-1:17
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC101BB2B
+  Password:            
+  Device ID:           
+  Description:         meshankin
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7971m
+  Online Duration:     10h 31m 14s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-03-08 05:02:30    2019-03-09 04:59:55     DyingGasp 
+   2   2019-03-09 05:02:29    2019-03-11 04:59:54     DyingGasp 
+   3   2019-03-11 05:02:27    2019-03-12 04:59:55     DyingGasp 
+   4   2019-03-12 05:02:34    2019-03-13 04:59:55     DyingGasp 
+   5   2019-03-13 05:02:28    2019-03-14 04:59:55     DyingGasp 
+   6   2019-03-14 05:02:28    2019-03-15 04:59:55     DyingGasp 
+   7   2019-03-15 05:02:27    2019-03-15 23:24:20     DyingGasp 
+   8   2019-03-15 23:25:57    2019-03-16 04:59:55     DyingGasp 
+   9   2019-03-16 05:02:26    2019-03-18 04:59:55     DyingGasp 
+  10   2019-03-18 05:02:27    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:17
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc101bb2b 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:17;ZTEGC101BB2B
+F660V2.0;;16;CZTE;"sho gpon onu sta gpon-olt_1/1/1 16
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:16      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:16
+
+ONU interface:         gpon-onu_1/1/1:16
+  Name:                ONU-1:16
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0093E26
+  Password:            
+  Device ID:           
+  Description:         LU_kitaika
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8850m
+  Online Duration:     43h 39m 20s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:09    2019-03-16 16:41:18     DyingGasp 
+   2   2019-03-16 16:44:00    2019-03-16 19:41:32     DyingGasp 
+   3   2019-03-16 19:44:32    2019-03-16 19:45:49     DyingGasp 
+   4   2019-03-16 19:50:25    2019-03-16 19:51:49     DyingGasp 
+   5   2019-03-16 19:54:21    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:16
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc0093e26 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:16;ZTEGC0093E26
+F660V3;;15;CZTE;"sho gpon onu sta gpon-olt_1/1/1 15
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:15      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:15
+
+ONU interface:         gpon-onu_1/1/1:15
+  Name:                ONU-1:15
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC1085254
+  Password:            
+  Device ID:           
+  Description:         polishuk
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8372m
+  Online Duration:     352h 34m 00s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:45    2019-03-03 22:58:44     LOSi     
+   2   2019-03-03 22:59:41    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:15
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc1085254 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:15;ZTEGC1085254
+F660V2.0;;14;CZTE;"sho gpon onu sta gpon-olt_1/1/1 14
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:14      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:14
+
+ONU interface:         gpon-onu_1/1/1:14
+  Name:                ONU-1:14
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC101E24A
+  Password:            
+  Device ID:           
+  Description:         nikitin
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7651m
+  Online Duration:     260h 09m 15s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:54    2019-02-20 22:10:07     DyingGasp 
+   2   2019-02-20 22:12:33    2019-02-27 15:57:14     DyingGasp 
+   3   2019-02-27 15:58:59    2019-03-07 19:22:39     DyingGasp 
+   4   2019-03-07 19:24:27    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:14
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc101e24a 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:14;ZTEGC101E24A
+F660V2.1;;13;CZTE;"sho gpon onu sta gpon-olt_1/1/1 13
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:13      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:13
+
+ONU interface:         gpon-onu_1/1/1:13
+  Name:                ONU-1:13
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC02164F5
+  Password:            
+  Device ID:           
+  Description:         dagadaev
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7784m
+  Online Duration:     593h 14m 34s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:03    2019-02-21 22:17:36     DyingGasp 
+   2   2019-02-21 22:19:08    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:13
+
+Vendor ID:           ZTEG 
+Version:             V2.1 
+SN:                  ZTEGc02164f5 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.1 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.1
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:13;ZTEGC02164F5
+F660V2.0;;12;CZTE;"sho gpon onu sta gpon-olt_1/1/1 12
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:12      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:12
+
+ONU interface:         gpon-onu_1/1/1:12
+  Name:                ONU-1:12
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0051996
+  Password:            
+  Device ID:           
+  Description:         jienbaeva
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7711m
+  Online Duration:     619h 19m 51s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:51    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:12
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc0051996 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:12;ZTEGC0051996
+;;11;CZTE;"sho gpon onu sta gpon-olt_1/1/1 11
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:11      enable       disable      unknown      OffLine      
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:11
+
+ONU interface:         gpon-onu_1/1/1:11
+  Name:                ONU-1:11
+  Type:                4ETH
+  State:               ready
+  Admin state:         enable
+  Phase state:         OffLine
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0463EA8
+  Password:            
+  Device ID:           
+  Description:         shirabokov
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        N/A
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:11
+
+Vendor ID:           N/A 
+Version:             N/A 
+SN:                  N/A 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   0 
+TotalTrafficSchNum:  0 
+TrafficMgmtOption:   N/A 
+OperState:           N/A 
+EquipID:             N/A 
+OMCC version:        80 
+Security capability: aes
+Model:               N/A
+Survival time:       N/A
+TotalGemPortNum:     0
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:11;ZTEGC0463EA8
+;;10;CZTE;"sho gpon onu sta gpon-olt_1/1/1 10
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:10      enable       disable      unknown      OffLine      
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:10
+
+ONU interface:         gpon-onu_1/1/1:10
+  Name:                ONU-1:10
+  Type:                4ETH
+  State:               ready
+  Admin state:         enable
+  Phase state:         OffLine
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC1085D04
+  Password:            
+  Device ID:           
+  Description:         ONU-1:10
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        N/A
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:10
+
+Vendor ID:           N/A 
+Version:             N/A 
+SN:                  N/A 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   0 
+TotalTrafficSchNum:  0 
+TrafficMgmtOption:   N/A 
+OperState:           N/A 
+EquipID:             N/A 
+OMCC version:        80 
+Security capability: aes
+Model:               N/A
+Survival time:       N/A
+TotalGemPortNum:     0
+SysUpTime:           0
+Region code:         N/A
+
+zte320-melihovo.chv#sho run int gpon-onu_1/1/1:10
+Building configuration...
+!
+interface gpon-onu_1/1/1:10
+  tcont 1 name unlim profile unlim
+  gemport 1 name unlim unicast tcont 1 dir both
+  switchport mode hybrid vport 1
+  service-port 1 vport 1 user-vlan 1222 vlan 1222 
+!
+end
+zte320-melihovo.chv#sho onu run con gpon-onu_1/1/1:10
+pon-onu-mng gpon-onu_1/1/1:10
+  service 1 iphost 1 gemport 1 vlan 1222
+  pppoe 1 nat enable user 15500200 password s2ne9s3e
+  dhcp-ip ethuni eth_0/1 from-onu
+  dhcp-ip ethuni eth_0/2 from-onu
+  dhcp-ip ethuni eth_0/3 from-onu
+  dhcp-ip ethuni eth_0/4 from-onu
+!
+";1/1/1;N;OLT 1/1/1:10;ZTEGC1085D04
+F660V2.0;;19;CZTE;"sho gpon onu sta gpon-olt_1/1/1 19
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:19      enable       disable      unknown      DyingGasp    
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:19
+
+ONU interface:         gpon-onu_1/1/1:19
+  Name:                ONU-1:19
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         DyingGasp
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC1027BFF
+  Password:            
+  Device ID:           
+  Description:         Lebedev
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8313m
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-25 17:45:40    2019-02-25 18:58:20     DyingGasp 
+   2   2019-03-01 19:21:40    2019-03-01 21:44:20     DyingGasp 
+   3   2019-03-01 21:46:00    2019-03-02 20:59:01     DyingGasp 
+   4   2019-03-08 18:30:56    2019-03-09 11:32:25     DyingGasp 
+   5   2019-03-09 11:34:28    2019-03-09 18:26:23     DyingGasp 
+   6   2019-03-15 18:10:29    2019-03-16 10:03:05     DyingGasp 
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:19
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc1027bff 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           disable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:19;ZTEGC1027BFF
+F660V3;;18;CZTE;"sho gpon onu sta gpon-olt_1/1/1 18
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:18      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:18
+
+ONU interface:         gpon-onu_1/1/1:18
+  Name:                ONU-1:18
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC1161E30
+  Password:            
+  Device ID:           
+  Description:         jerebenko
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8270m
+  Online Duration:     619h 19m 59s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:45    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:18
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc1161e30 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:18;ZTEGC1161E30
+;;1;CZTE;"sho gpon onu sta gpon-olt_1/1/7 1
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/7:1       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/7:1
+
+ONU interface:         gpon-onu_1/1/7:1
+  Name:                ONU-7:1
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC00548B7
+  Password:            
+  Device ID:           
+  Description:         ONU-7:1
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7523m
+  Online Duration:     170h 10m 59s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-03-11 13:21:32    2019-03-11 13:22:18     LOS      
+   2   2019-03-11 13:22:45    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/7:1
+
+Vendor ID:           ZTEG 
+Version:             V2.20.20P1T6S 
+SN:                  ZTEGc00548b7 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             N/A 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/7;N;OLT 1/1/7:1;ZTEGC00548B7
+;;12;CZTE;"sho gpon onu sta gpon-olt_1/1/2 12
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:12      enable       disable      unknown      OffLine      
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:12
+
+ONU interface:         gpon-onu_1/1/2:12
+  Name:                ONU-2:12
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         OffLine
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC005D126
+  Password:            
+  Device ID:           
+  Description:         ONU-2:12
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        N/A
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:12
+
+Vendor ID:           N/A 
+Version:             N/A 
+SN:                  N/A 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   0 
+TotalTrafficSchNum:  0 
+TrafficMgmtOption:   N/A 
+OperState:           N/A 
+EquipID:             N/A 
+OMCC version:        80 
+Security capability: aes
+Model:               N/A
+Survival time:       N/A
+TotalGemPortNum:     0
+SysUpTime:           0
+Region code:         N/A
+
+zte320-melihovo.chv#sho run int gpon-onu_1/1/2:12
+Building configuration...
+!
+interface gpon-onu_1/1/2:12
+  tcont 1 name unlim profile unlim
+  gemport 1 name unlim unicast tcont 1 dir both
+  switchport mode hybrid vport 1
+  service-port 1 vport 1 user-vlan 1222 vlan 1222 
+!
+end
+zte320-melihovo.chv#sho onu run con gpon-onu_1/1/2:12
+pon-onu-mng gpon-onu_1/1/2:12
+  service 1 iphost 1 gemport 1 vlan 1222
+  interface wifi wifi_0/2 state lock
+  interface wifi wifi_0/3 state lock
+  interface wifi wifi_0/4 state lock
+  pppoe 1 nat enable user 15500705 password 3keaeyk7
+  dhcp-ip ethuni eth_0/1 from-onu
+  dhcp-ip ethuni eth_0/2 from-onu
+  dhcp-ip ethuni eth_0/3 from-onu
+  dhcp-ip ethuni eth_0/4 from-onu
+!
+";1/1/2;N;OLT 1/1/2:12;ZTEGC005D126
+F660V3;;13;CZTE;"sho gpon onu sta gpon-olt_1/1/2 13
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:13      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:13
+
+ONU interface:         gpon-onu_1/1/2:13
+  Name:                ONU-2:13
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0549BF4
+  Password:            
+  Device ID:           
+  Description:         ONU-2:13
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8315m
+  Online Duration:     164h 37m 05s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:45    2019-02-28 23:55:45     DyingGasp 
+   2   2019-02-28 23:56:51    2019-03-03 20:31:49     DyingGasp 
+   3   2019-03-03 20:32:52    2019-03-06 11:09:56     LOSi     
+   4   2019-03-06 11:11:10    2019-03-11 13:56:03     DyingGasp 
+   5   2019-03-11 13:56:57    2019-03-11 18:55:48     DyingGasp 
+   6   2019-03-11 18:56:40    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:13
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc0549bf4 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/2;N;OLT 1/1/2:13;ZTEGC0549BF4
+F660V2.0;;10;CZTE;"sho gpon onu sta gpon-olt_1/1/2 10
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:10      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:10
+
+ONU interface:         gpon-onu_1/1/2:10
+  Name:                ONU-2:10
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0004761
+  Password:            
+  Device ID:           
+  Description:         ONU-2:10
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8355m
+  Online Duration:     312h 22m 42s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:09    2019-03-05 15:09:09     DyingGasp 
+   2   2019-03-05 15:11:03    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:10
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc0004761 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/2;N;OLT 1/1/2:10;ZTEGC0004761
+F660V2.0;;11;CZTE;"sho gpon onu sta gpon-olt_1/1/2 11
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:11      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:11
+
+ONU interface:         gpon-onu_1/1/2:11
+  Name:                ONU-2:11
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC00083BA
+  Password:            
+  Device ID:           
+  Description:         Nazin
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        9356m
+  Online Duration:     619h 19m 42s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:03    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:11
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc00083ba 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/2;N;OLT 1/1/2:11;ZTEGC00083BA
+F660V3;;8;CZTE;"sho gpon onu sta gpon-olt_1/1/2 8
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:8       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:8
+
+ONU interface:         gpon-onu_1/1/2:8
+  Name:                ONU-2:8
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC04441EF
+  Password:            
+  Device ID:           
+  Description:         ONU-2:8
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        9294m
+  Online Duration:     619h 20m 01s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:45    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:8
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc04441ef 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/2;N;OLT 1/1/2:8;ZTEGC04441EF
+F660V2.0;;9;CZTE;"sho gpon onu sta gpon-olt_1/1/2 9
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:9       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:9
+
+ONU interface:         gpon-onu_1/1/2:9
+  Name:                ONU-2:9
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0054A16
+  Password:            
+  Device ID:           
+  Description:         ONU-2:9
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8452m
+  Online Duration:     355h 25m 00s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:15:31    2019-03-03 19:51:22     DyingGasp 
+   2   2019-03-03 19:52:40    2019-03-03 20:07:22     DyingGasp 
+   3   2019-03-03 20:08:46    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:9
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc0054a16 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/2;N;OLT 1/1/2:9;ZTEGC0054A16
+F660V3;;5;CZTE;"sho gpon onu sta gpon-olt_1/1/6 5
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/6:5       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/6:5
+
+ONU interface:         gpon-onu_1/1/6:5
+  Name:                ONU-6:5
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC1157D85
+  Password:            
+  Device ID:           
+  Description:         ONU-6:5
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7436m
+  Online Duration:     78h 30m 07s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-03-09 21:08:20    2019-03-10 10:12:19     DyingGasp 
+   2   2019-03-10 10:13:39    2019-03-10 13:47:23     DyingGasp 
+   3   2019-03-10 13:49:38    2019-03-10 20:32:35     DyingGasp 
+   4   2019-03-10 20:33:50    2019-03-11 09:47:35     DyingGasp 
+   5   2019-03-11 09:51:20    2019-03-12 10:23:25     DyingGasp 
+   6   2019-03-12 10:24:50    2019-03-12 20:54:24     DyingGasp 
+   7   2019-03-12 20:56:30    2019-03-13 20:12:09     DyingGasp 
+   8   2019-03-13 20:14:28    2019-03-14 12:51:33     DyingGasp 
+   9   2019-03-14 12:53:37    2019-03-15 09:01:54     DyingGasp 
+  10   2019-03-15 09:03:39    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/6:5
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc1157d85 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/6;Y;OLT 1/1/6:5;ZTEGC1157D85
+F660V3;;4;CZTE;"sho gpon onu sta gpon-olt_1/1/6 4
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/6:4       enable       disable      unknown      DyingGasp    
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/6:4
+
+ONU interface:         gpon-onu_1/1/6:4
+  Name:                ONU-6:4
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         DyingGasp
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC108B060
+  Password:            
+  Device ID:           
+  Description:         Grishenko
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7371m
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-03-14 18:45:21    2019-03-14 20:52:33     DyingGasp 
+   2   2019-03-14 20:53:40    2019-03-14 21:51:21     DyingGasp 
+   3   2019-03-14 22:29:10    2019-03-14 23:15:56     DyingGasp 
+   4   2019-03-15 08:55:39    2019-03-15 09:53:19     DyingGasp 
+   5   2019-03-15 11:45:10    2019-03-15 12:36:39     DyingGasp 
+   6   2019-03-15 14:49:30    2019-03-15 22:51:45     DyingGasp 
+   7   2019-03-16 07:34:09    2019-03-16 12:24:03     DyingGasp 
+   8   2019-03-16 12:25:11    2019-03-16 15:11:29     DyingGasp 
+   9   2019-03-16 15:13:30    2019-03-16 22:23:29     DyingGasp 
+  10   2019-03-16 22:40:42    2019-03-17 00:07:20     DyingGasp 
+";1/1/6;N;OLT 1/1/6:4;ZTEGC108B060
+F660V2.0;;3;CZTE;"sho gpon onu sta gpon-olt_1/1/6 3
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/6:3       enable       disable      unknown      DyingGasp    
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/6:3
+
+ONU interface:         gpon-onu_1/1/6:3
+  Name:                ONU-6:3
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         DyingGasp
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0074B07
+  Password:            
+  Device ID:           
+  Description:         ONU-6:3
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7331m
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:09    2019-02-23 11:52:38     DyingGasp 
+   2   2019-02-23 11:54:10    2019-02-26 19:13:36     DyingGasp 
+   3   2019-02-26 19:15:16    2019-03-05 20:40:49     DyingGasp 
+   4   2019-03-05 20:42:27    2019-03-09 08:27:21     DyingGasp 
+   5   2019-03-09 08:28:55    2019-03-12 14:16:34     DyingGasp 
+   6   2019-03-12 14:18:05    2019-03-13 12:25:58     DyingGasp 
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/6:3
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc0074b07 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-controlled 
+OperState:           disable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/6;N;OLT 1/1/6:3;ZTEGC0074B07
+F660V2.0;;2;CZTE;"sho gpon onu sta gpon-olt_1/1/6 2
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/6:2       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/6:2
+
+ONU interface:         gpon-onu_1/1/6:2
+  Name:                ONU-6:2
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC000D537
+  Password:            
+  Device ID:           
+  Description:         ONU-6:2
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7733m
+  Online Duration:     355h 25m 56s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:51    2019-03-01 10:14:04     DyingGasp 
+   2   2019-03-01 10:17:16    2019-03-01 13:09:13     DyingGasp 
+   3   2019-03-01 13:10:42    2019-03-01 13:24:20     DyingGasp 
+   4   2019-03-01 13:36:40    2019-03-03 20:05:56     DyingGasp 
+   5   2019-03-03 20:07:51    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/6:2
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc000d537 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/6;N;OLT 1/1/6:2;ZTEGC000D537
+F660V2.0;;1;CZTE;"sho gpon onu sta gpon-olt_1/1/6 1
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/6:1       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/6:1
+
+ONU interface:         gpon-onu_1/1/6:1
+  Name:                ONU-6:1
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC000B83F
+  Password:            
+  Device ID:           
+  Description:         ONU-6:1
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7674m
+  Online Duration:     101h 07m 17s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-24 13:52:10    2019-02-24 14:04:06     SFi      
+   2   2019-02-24 14:04:19    2019-02-25 14:36:28     DyingGasp 
+   3   2019-02-25 14:38:11    2019-02-25 14:40:04     DyingGasp 
+   4   2019-02-25 14:41:52    2019-03-02 10:44:38     DyingGasp 
+   5   2019-03-02 10:46:36    2019-03-02 10:47:08     DyingGasp 
+   6   2019-03-02 10:49:16    2019-03-07 12:01:31     LOSi     
+   7   2019-03-07 12:02:53    2019-03-09 22:16:04     DyingGasp 
+   8   2019-03-09 22:18:07    2019-03-10 17:11:29     DyingGasp 
+   9   2019-03-10 17:13:04    2019-03-14 10:23:42     DyingGasp 
+  10   2019-03-14 10:26:30    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/6:1
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc000b83f 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/6;N;OLT 1/1/6:1;ZTEGC000B83F
+F660V2.1;;1;CZTE;"sho gpon onu sta gpon-olt_1/1/2 1
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:1       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:1
+
+ONU interface:         gpon-onu_1/1/2:1
+  Name:                ONU-2:1
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC028C0C0
+  Password:            
+  Device ID:           
+  Description:         pravlenie_istok
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        9092m
+  Online Duration:     603h 19m 57s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:52    2019-02-21 12:12:19     DyingGasp 
+   2   2019-02-21 12:13:51    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:1
+
+Vendor ID:           ZTEG 
+Version:             V2.1 
+SN:                  ZTEGc028c0c0 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.1 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.1
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/2;N;OLT 1/1/2:1;ZTEGC028C0C0
+F660;;2;CZTE;"sho gpon onu sta gpon-olt_1/1/2 2
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:2       enable       disable      unknown      DyingGasp    
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:2
+
+ONU interface:         gpon-onu_1/1/2:2
+  Name:                ONU-2:2
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         DyingGasp
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC000D83D
+  Password:            
+  Device ID:           
+  Description:         kuznecov_9
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        9174m
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:51    2019-03-17 08:34:57     DyingGasp 
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:2
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc000d83d 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           disable 
+EquipID:             F660 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/2;N;OLT 1/1/2:2;ZTEGC000D83D
+F660V3;;3;CZTE;"sho gpon onu sta gpon-olt_1/1/2 3
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:3       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:3
+
+ONU interface:         gpon-onu_1/1/2:3
+  Name:                ONU-2:3
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0548BC6
+  Password:            
+  Device ID:           
+  Description:         kuznecov_32
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        9077m
+  Online Duration:     70h 20m 40s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:45    2019-03-05 17:21:11     DyingGasp 
+   2   2019-03-05 17:22:20    2019-03-14 07:44:20     DyingGasp 
+   3   2019-03-14 07:46:26    2019-03-15 17:11:42     DyingGasp 
+   4   2019-03-15 17:13:08    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:3
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc0548bc6 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/2;N;OLT 1/1/2:3;ZTEGC0548BC6
+F660V3;;4;CZTE;"sho gpon onu sta gpon-olt_1/1/2 4
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:4       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:4
+
+ONU interface:         gpon-onu_1/1/2:4
+  Name:                ONU-2:4
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC11551A4
+  Password:            
+  Device ID:           
+  Description:         ONU-2:4
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        simple
+  Service Profile:     bridge             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        9232m
+  Online Duration:     619h 19m 46s
+  FEC:                 upstream
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:03    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:4
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc11551a4 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/2;N;OLT 1/1/2:4;ZTEGC11551A4
+F660V2.0;;5;CZTE;"sho gpon onu sta gpon-olt_1/1/2 5
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:5       enable       disable      unknown      DyingGasp    
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:5
+
+ONU interface:         gpon-onu_1/1/2:5
+  Name:                ONU-2:5
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         DyingGasp
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0093CF0
+  Password:            
+  Device ID:           
+  Description:         ONU-2:5
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        9163m
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-03-08 09:04:36    2019-03-09 00:28:20     DyingGasp 
+   2   2019-03-09 09:03:09    2019-03-09 11:57:44     DyingGasp 
+   3   2019-03-09 17:01:32    2019-03-09 23:59:33     DyingGasp 
+   4   2019-03-10 08:54:21    2019-03-10 12:53:19     DyingGasp 
+   5   2019-03-10 15:20:13    2019-03-10 16:41:43     DyingGasp 
+   6   2019-03-15 20:36:12    2019-03-15 20:36:24     DyingGasp 
+   7   2019-03-15 20:38:20    2019-03-15 22:35:22     DyingGasp 
+   8   2019-03-16 08:25:13    2019-03-16 22:56:50     DyingGasp 
+   9   2019-03-16 23:28:33    2019-03-17 00:31:57     DyingGasp 
+  10   2019-03-17 08:55:01    2019-03-17 16:40:49     DyingGasp 
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:5
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc0093cf0 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           disable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/2;N;OLT 1/1/2:5;ZTEGC0093CF0
+F660V3;;6;CZTE;"sho gpon onu sta gpon-olt_1/1/2 6
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:6       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:6
+
+ONU interface:         gpon-onu_1/1/2:6
+  Name:                ONU-2:6
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC108C3FF
+  Password:            
+  Device ID:           
+  Description:         ONU-2:6
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        9197m
+  Online Duration:     42h 58m 00s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:31    2019-03-16 20:34:55     DyingGasp 
+   2   2019-03-16 20:35:49    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:6
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc108c3ff 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/2;N;OLT 1/1/2:6;ZTEGC108C3FF
+F660V3;;7;CZTE;"sho gpon onu sta gpon-olt_1/1/2 7
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/2:7       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/2:7
+
+ONU interface:         gpon-onu_1/1/2:7
+  Name:                ONU-2:7
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC1157CEA
+  Password:            
+  Device ID:           
+  Description:         uchastok_121
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        9966m
+  Online Duration:     619h 19m 58s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:52    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/2:7
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc1157cea 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/2;N;OLT 1/1/2:7;ZTEGC1157CEA
+F660V3;;5;CZTE;"sho gpon onu sta gpon-olt_1/1/4 5
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/4:5       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/4:5
+
+ONU interface:         gpon-onu_1/1/4:5
+  Name:                ONU-4:5
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0465D93
+  Password:            
+  Device ID:           
+  Description:         ONU-4:5
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        5784m
+  Online Duration:     377h 09m 20s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-23 15:57:20    2019-02-23 15:59:26     LOSi     
+   2   2019-02-23 16:02:21    2019-03-02 18:32:40     DyingGasp 
+   3   2019-03-02 22:24:30    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/4:5
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc0465d93 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/4;N;OLT 1/1/4:5;ZTEGC0465D93
+F660V2.0;;4;CZTE;"sho gpon onu sta gpon-olt_1/1/4 4
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/4:4       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/4:4
+
+ONU interface:         gpon-onu_1/1/4:4
+  Name:                ONU-4:4
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC005A041
+  Password:            
+  Device ID:           
+  Description:         ONU-4:4
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        6188m
+  Online Duration:     20h 32m 13s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:52    2019-02-23 16:48:11     DyingGasp 
+   2   2019-02-23 18:36:55    2019-02-24 11:33:00     DyingGasp 
+   3   2019-02-24 18:14:12    2019-03-02 18:32:40     DyingGasp 
+   4   2019-03-02 22:25:05    2019-03-08 11:11:05     DyingGasp 
+   5   2019-03-09 19:43:34    2019-03-09 20:11:47     DyingGasp 
+   6   2019-03-10 15:58:43    2019-03-16 14:29:41     DyingGasp 
+   7   2019-03-17 19:01:37    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/4:4
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc005a041 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/4;N;OLT 1/1/4:4;ZTEGC005A041
+F660V3;;6;CZTE;"sho gpon onu sta gpon-olt_1/1/4 6
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/4:6       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/4:6
+
+ONU interface:         gpon-onu_1/1/4:6
+  Name:                ONU-4:6
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC108E7EC
+  Password:            
+  Device ID:           
+  Description:         ONU-4:6
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        5832m
+  Online Duration:     20h 23m 44s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-03-02 16:34:50    2019-03-02 16:35:21     DyingGasp 
+   2   2019-03-02 16:36:40    2019-03-02 16:46:08     DyingGasp 
+   3   2019-03-02 16:47:20    2019-03-02 17:06:09     DyingGasp 
+   4   2019-03-14 09:48:16    2019-03-15 17:48:15     DyingGasp 
+   5   2019-03-15 17:49:16    2019-03-15 18:10:51     DyingGasp 
+   6   2019-03-15 18:12:09    2019-03-15 18:49:49     DyingGasp 
+   7   2019-03-15 18:50:49    2019-03-15 21:03:34     DyingGasp 
+   8   2019-03-15 21:04:39    2019-03-16 07:17:51     DyingGasp 
+   9   2019-03-16 07:18:57    2019-03-17 19:09:01     DyingGasp 
+  10   2019-03-17 19:10:07    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/4:6
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc108e7ec 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/4;N;OLT 1/1/4:6;ZTEGC108E7EC
+F660V3;;1;CZTE;"sho gpon onu sta gpon-olt_1/1/4 1
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/4:1       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/4:1
+
+ONU interface:         gpon-onu_1/1/4:1
+  Name:                ONU-4:1
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC054FE5A
+  Password:            
+  Device ID:           
+  Description:         maxim_35
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        5952m
+  Online Duration:     377h 09m 21s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:45    2019-03-01 17:34:05     LOSi     
+   2   2019-03-01 17:34:47    2019-03-01 17:34:53     LOSi     
+   3   2019-03-01 17:35:27    2019-03-02 18:32:40     DyingGasp 
+   4   2019-03-02 22:24:30    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/4:1
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc054fe5a 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/4;Y;OLT 1/1/4:1;ZTEGC054FE5A
+;;6;CZTE;"sho gpon onu sta gpon-olt_1/1/6 6
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/6:6       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/6:6
+
+ONU interface:         gpon-onu_1/1/6:6
+  Name:                ONU-6:6
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0063B3C
+  Password:            
+  Device ID:           
+  Description:         Suhin
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7067m
+  Online Duration:     101h 32m 10s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-03-14 09:58:01    2019-03-14 10:00:28     DyingGasp 
+   2   2019-03-14 10:01:41    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/6:6
+
+Vendor ID:           ZTEG 
+Version:             V2.20.20T5S 
+SN:                  ZTEGc0063b3c 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             N/A 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/6;N;OLT 1/1/6:6;ZTEGC0063B3C
+F660V3;;2;CZTE;"sho gpon onu sta gpon-olt_1/1/4 2
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/4:2       enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/4:2
+
+ONU interface:         gpon-onu_1/1/4:2
+  Name:                ONU-4:2
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC108EF0C
+  Password:            
+  Device ID:           
+  Description:         ONU-4:2
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        general
+  Service Profile:     bridge             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        5691m
+  Online Duration:     49h 39m 43s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-27 15:06:16    2019-03-02 18:32:40     DyingGasp 
+   2   2019-03-02 19:47:13    2019-03-02 22:25:05     DyingGasp 
+   3   2019-03-02 22:26:02    2019-03-03 19:59:46     DyingGasp 
+   4   2019-03-03 20:01:23    2019-03-03 20:07:48     DyingGasp 
+   5   2019-03-03 20:09:43    2019-03-03 20:14:38     DyingGasp 
+   6   2019-03-03 22:28:55    2019-03-16 13:53:09     DyingGasp 
+   7   2019-03-16 13:54:09    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/4:2
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc108ef0c 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/4;Y;OLT 1/1/4:2;ZTEGC108EF0C
+F660V2.0;;22;CZTE;"sho gpon onu sta gpon-olt_1/1/1 22
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:22      enable       disable      unknown      DyingGasp    
+ONU Number: 0/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:22
+
+ONU interface:         gpon-onu_1/1/1:22
+  Name:                ONU-1:22
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         DyingGasp
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC005D490
+  Password:            
+  Device ID:           
+  Description:         mahova
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7828m
+  Online Duration:     0h 0m 0s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-22 13:14:28    2019-02-24 17:43:42     DyingGasp 
+   2   2019-03-01 21:09:56    2019-03-03 18:52:07     DyingGasp 
+   3   2019-03-07 21:26:07    2019-03-10 19:16:22     DyingGasp 
+   4   2019-03-15 17:02:34    2019-03-17 17:53:35     DyingGasp 
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:22
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc005d490 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           disable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:22;ZTEGC005D490
+F660V2.0;;23;CZTE;"sho gpon onu sta gpon-olt_1/1/1 23
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:23      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:23
+
+ONU interface:         gpon-onu_1/1/1:23
+  Name:                ONU-1:23
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC005E362
+  Password:            
+  Device ID:           
+  Description:         Kuzmina
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8527m
+  Online Duration:     619h 19m 58s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:54    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:23
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc005e362 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:23;ZTEGC005E362
+F660V3;;20;CZTE;"sho gpon onu sta gpon-olt_1/1/1 20
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:20      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:20
+
+ONU interface:         gpon-onu_1/1/1:20
+  Name:                ONU-1:20
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC054814E
+  Password:            
+  Device ID:           
+  Description:         ONU-1:20
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8180m
+  Online Duration:     364h 28m 54s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:31    2019-02-23 11:50:55     DyingGasp 
+   2   2019-02-23 11:52:04    2019-03-03 09:27:06     DyingGasp 
+   3   2019-03-03 09:31:59    2019-03-03 11:02:53     DyingGasp 
+   4   2019-03-03 11:04:59    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:20
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc054814e 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:20;ZTEGC054814E
+F660V2.0;;21;CZTE;"sho gpon onu sta gpon-olt_1/1/1 21
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:21      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:21
+
+ONU interface:         gpon-onu_1/1/1:21
+  Name:                ONU-1:21
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC0059525
+  Password:            
+  Device ID:           
+  Description:         ONU-1:21
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8114m
+  Online Duration:     339h 04m 25s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:54    2019-02-25 15:05:10     DyingGasp 
+   2   2019-02-25 15:06:46    2019-03-03 20:18:17     DyingGasp 
+   3   2019-03-03 20:19:46    2019-03-04 12:19:17     DyingGasp 
+   4   2019-03-04 12:20:46    2019-03-04 12:23:09     DyingGasp 
+   5   2019-03-04 12:24:45    2019-03-04 12:27:54     DyingGasp 
+   6   2019-03-04 12:29:28    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:21
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc0059525 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:21;ZTEGC0059525
+F660V2.1;;26;CZTE;"sho gpon onu sta gpon-olt_1/1/1 26
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:26      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:26
+
+ONU interface:         gpon-onu_1/1/1:26
+  Name:                ONU-1:26
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC028D506
+  Password:            
+  Device ID:           
+  Description:         ONU-1:26
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7931m
+  Online Duration:     340h 44m 50s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:21    2019-02-22 15:49:11     DyingGasp 
+   2   2019-02-22 15:50:42    2019-03-02 22:02:38     DyingGasp 
+   3   2019-03-02 22:04:10    2019-03-03 13:26:46     DyingGasp 
+   4   2019-03-03 13:28:21    2019-03-03 19:53:10     DyingGasp 
+   5   2019-03-03 19:54:43    2019-03-03 20:23:27     DyingGasp 
+   6   2019-03-03 20:24:55    2019-03-04 10:36:24     DyingGasp 
+   7   2019-03-04 10:49:03    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:26
+
+Vendor ID:           ZTEG 
+Version:             V2.1 
+SN:                  ZTEGc028d506 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.1 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.1
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:26;ZTEGC028D506
+F660V2.0;;24;CZTE;"sho gpon onu sta gpon-olt_1/1/1 24
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:24      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:24
+
+ONU interface:         gpon-onu_1/1/1:24
+  Name:                ONU-1:24
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC009BE13
+  Password:            
+  Device ID:           
+  Description:         Bazhina
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        8364m
+  Online Duration:     619h 19m 41s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:14:13    0000-00-00 00:00:00              
+   2   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   3   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   4   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   5   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   6   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:24
+
+Vendor ID:           ZTEG 
+Version:             V2.0 
+SN:                  ZTEGc009be13 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   32 
+TotalTrafficSchNum:  8 
+TrafficMgmtOption:   priority-rate-controlled 
+OperState:           enable 
+EquipID:             F660V2.0 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V2.0
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:24;ZTEGC009BE13
+F660V3;;25;CZTE;"sho gpon onu sta gpon-olt_1/1/1 25
+OnuIndex               Admin State  OMCC State   O7 State     Phase State
+----------------------------------------------------------------------------
+gpon-onu_1/1/1:25      enable       enable       operation    working      
+ONU Number: 1/1        
+zte320-melihovo.chv#sho gpon onu detail-info gpon-onu_1/1/1:25
+
+ONU interface:         gpon-onu_1/1/1:25
+  Name:                ONU-1:25
+  Type:                4ETH_wifi
+  State:               ready
+  Admin state:         enable
+  Phase state:         working
+  Authentication mode: sn
+  SN Bind:             enable with SN check
+  Serial number:       ZTEGC1157BFD
+  Password:            
+  Device ID:           
+  Description:         ONU-1:25
+  Vport mode:          gemport
+  DBA Mode:            Hybrid
+  ONU Status:          enable
+  OMCI BW Profile:     enable
+  Line Profile:        N/A
+  Service Profile:     N/A             
+  Alarm Profile:       N/A
+  Performance Profile: N/A
+  ONU Distance:        7994m
+  Online Duration:     161h 06m 46s
+  FEC:                 none
+  1PPS+ToD:            disable
+------------------------------------------
+       Authpass Time          OfflineTime             Cause
+   1   2019-02-20 20:13:45    2019-02-22 13:01:05     DyingGasp 
+   2   2019-02-22 13:02:01    2019-02-23 13:14:15     DyingGasp 
+   3   2019-02-23 13:15:15    2019-03-11 21:53:03     DyingGasp 
+   4   2019-03-11 21:54:19    2019-03-11 21:57:05     DyingGasp 
+   5   2019-03-11 21:58:20    2019-03-11 22:23:24     DyingGasp 
+   6   2019-03-11 22:27:08    0000-00-00 00:00:00              
+   7   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   8   0000-00-00 00:00:00    0000-00-00 00:00:00              
+   9   0000-00-00 00:00:00    0000-00-00 00:00:00              
+  10   0000-00-00 00:00:00    0000-00-00 00:00:00              
+zte320-melihovo.chv#sho gpon remote-onu equip gpon-onu_1/1/1:25
+
+Vendor ID:           ZTEG 
+Version:             V3.0 
+SN:                  ZTEGc1157bfd 
+Admin status:        unlock 
+Battery backup:      false 
+Security mode:       aes 
+Product code:        0 
+TotalPrioQueueNum:   28 
+TotalTrafficSchNum:  7 
+TrafficMgmtOption:   priority-controlled 
+OperState:           enable 
+EquipID:             F660V3 
+OMCC version:        a0 
+Security capability: aes
+Model:               F660V3
+Survival time:       N/A
+TotalGemPortNum:     256
+SysUpTime:           0
+Region code:         N/A
+
+";1/1/1;N;OLT 1/1/1:25;ZTEGC1157BFD

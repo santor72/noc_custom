@@ -1,0 +1,100 @@
+# -*- coding: utf-8 -*-
+# ----------------------------------------------------------------------
+# Zabbix Extractors
+# ----------------------------------------------------------------------
+# Copyright (C) 2007-2018 The NOC Project
+# See LICENSE for details
+# ----------------------------------------------------------------------
+
+# Python modules
+import requests
+from requests.auth import HTTPDigestAuth
+import json
+import pprint
+import re
+import csv
+import os
+import argparse
+import string
+# NOC modules
+from noc.sa.models.managedobject import ManagedObject
+from noc.main.models.remotesystem import RemoteSystem
+from noc.core.management.base import BaseCommand
+from noc.sa.models.action import Action
+import cPickle  as pickle
+headers = {'Content-type': 'application/json'}
+
+class Command(BaseCommand):
+    def help(self):
+        print("--olt - olt id in Userside")
+        print("-f --file - outputfile")
+
+    def getusdata(self):
+        self.us = RemoteSystem.objects.get(name = 'RNUserside')
+        self.url = self.us.config.get("apiurl", None)
+        self.url_rn = self.us.config.get("apiurl_rn", None)
+        self.apikey = self.us.config.get("apikey", None)
+        self.apiurl = self.url + self.apikey
+        self.apiurl_rn = self.url_rn + 'key='+ self.apikey
+
+    def add_arguments(self, parser):
+        parser.add_argument("-o", "--olt", dest="olt", default=None)
+        parser.add_argument("-f", "--file", dest="file", default=None)
+    
+    def handle(self, *args, **options):
+        self.olt_id = options.get("olt")
+        fname = options.get("file")
+        if (not self.olt_id):
+            self.help()
+            return
+        self.getusdata()
+#        self.olt =  ManagedObject.objects.get(remote_system  = self.us, remote_id = olt_id)
+        res = self.getonulist()
+        print(res)
+        if fname:
+            with open(fname, "w") as out_file:
+                writer = csv.writer(out_file, delimiter=',')
+                for item in res:
+                    writer.writerow(item)
+
+
+
+        
+    def getonulist(self):
+        l = []
+        r = self.apiurl_rn + '&cat=usm_pon&action=list_onu&device_id={}'.format(self.olt_id)
+        response = requests.get(r,verify=True, headers=headers)
+        if (response.ok):
+            data = json.loads(response.content)
+        else:
+            response.raise_for_status()
+        for items in data['onulist']:
+            item = data['onulist'][items]
+            i = string.replace(string.replace(item['ifaceName'],'OLT ',''),'EPON','').split(':')
+            l.append([item['ifaceName'],
+                i[0],
+                i[1],
+                item['id'],
+                item['mac'],
+                item['vendor'],
+                item['model']
+                ])
+#            l.append({'ifaceName' : item['ifaceName'],
+#                'interface' : i[0],
+#                'llid' : i[1],
+#                'id' : item['id'],
+#                'mac' : item['mac'],
+#                'vendor' : item['vendor'],
+#                'model' : item['model']
+#                })
+
+
+#        action = Action.objects.get(name='showonu')
+#        data = self.olt.scripts.commands(commands= [str(action.expand(self.olt))])
+
+        return l 
+
+
+
+if __name__ == "__main__":
+    Command().run()
