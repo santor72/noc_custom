@@ -1,5 +1,7 @@
 from noc.fm.models.activeevent import ActiveEvent
+from noc.core.mongo.connection import connect
 from datetime  import *
+connect()
 import re
 
 events = ActiveEvent.objects()

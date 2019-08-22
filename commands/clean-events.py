@@ -2,6 +2,8 @@ from noc.fm.models.activealarm import ActiveAlarm
 from noc.fm.models.activeevent import ActiveEvent
 from noc.fm.models.archivedalarm import ArchivedAlarm
 from datetime  import *
+from noc.core.mongo.connection import connect
+connect()
 
 alarms = ActiveAlarm.objects()
 events = ActiveEvent.objects()
