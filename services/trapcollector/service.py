@@ -10,10 +10,12 @@
 # Python modules
 import socket
 from collections import defaultdict, namedtuple
+
 # Third-party modules
 import tornado.ioloop
 import tornado.gen
 import re
+
 # NOC modules
 from noc.config import config
 from noc.core.perf import metrics
@@ -23,6 +25,7 @@ from noc.services.trapcollector.trapserver import TrapServer
 from noc.services.trapcollector.datastream import TrapDataStreamClient
 from noc.fm.models.ignorepattern import IgnorePattern
 from noc.fm.models.activealarm import ActiveAlarm
+from noc.core.mongo.connection import connect
 
 SourceConfig = namedtuple("SourceConfig", ["id", "addresses"])
 
@@ -36,6 +39,7 @@ class TrapCollectorService(Service):
 
     def __init__(self):
         super(TrapCollectorService, self).__init__()
+        connect()
         self.messages = []
         self.send_callback = None
         self.mappings_callback = None
@@ -46,8 +50,8 @@ class TrapCollectorService(Service):
         self.ignorept = {}
         ignore = IgnorePattern.objects.filter(source='SNMP Trap')
         for item in ignore:
-          l = item.pattern.split('|')
-          self.ignorept[l[0]] = re.compile(l[1])
+           l = item.pattern.split('|')
+           self.ignorept[l[0]] = re.compile(l[1])
 
     @tornado.gen.coroutine
     def on_activate(self):
@@ -58,32 +62,22 @@ class TrapCollectorService(Service):
                 addr, port = l.split(":")
             else:
                 addr, port = "", l
-            self.logger.info("Starting SNMP Trap server at %s:%s",
-                             addr, port)
+            self.logger.info("Starting SNMP Trap server at %s:%s", addr, port)
             try:
                 server.listen(port, addr)
             except socket.error as e:
                 metrics["error", ("type", "socket_listen_error")] += 1
-                self.logger.error(
-                    "Failed to start SNMP Trap server at %s:%s: %s",
-                    addr, port, e
-                )
+                self.logger.error("Failed to start SNMP Trap server at %s:%s: %s", addr, port, e)
         server.start()
         # Send spooled messages every 250ms
         self.logger.debug("Stating message sender task")
-        self.send_callback = tornado.ioloop.PeriodicCallback(
-            self.send_messages,
-            250,
-            self.ioloop
-        )
+        self.send_callback = tornado.ioloop.PeriodicCallback(self.send_messages, 250, self.ioloop)
         self.send_callback.start()
         # Get object mappings every 300s
         # Report invalid sources every 60 seconds
         self.logger.info("Stating invalid sources reporting task")
         self.report_invalid_callback = tornado.ioloop.PeriodicCallback(
-            self.report_invalid_sources,
-            60000,
-            self.ioloop
+            self.report_invalid_sources, 60000, self.ioloop
         )
         self.report_invalid_callback.start()
         # Start tracking changes
@@ -108,16 +102,12 @@ class TrapCollectorService(Service):
         Spool message to be sent
         """
         for item in self.ignorept:
-            if item in data:
-                if self.ignorept[item].match(data[item]):
-                    return
+             if item in data:
+                 if self.ignorept[item].match(data[item]):
+                     return
 
         metrics["events_out"] += 1
-        self.messages += [{
-            "ts": timestamp,
-            "object": object,
-            "data": data
-        }]
+        self.messages += [{"ts": timestamp, "object": object, "data": data}]
 
     @tornado.gen.coroutine
     def send_messages(self):
@@ -139,11 +129,7 @@ class TrapCollectorService(Service):
         while True:
             try:
                 yield client.query(
-                    limit=config.trapcollector.ds_limit,
-                    filters=[
-                        "pool(%s)" % config.pool
-                    ],
-                    block=1
+                    limit=config.trapcollector.ds_limit, filters=["pool(%s)" % config.pool], block=1
                 )
             except NOCError as e:
                 self.logger.info("Failed to get object mappings: %s", e)
@@ -160,8 +146,7 @@ class TrapCollectorService(Service):
         self.logger.info(
             "Dropping %d messages with invalid sources: %s",
             total,
-            ", ".join("%s: %s" % (s, self.invalid_sources[s])
-                      for s in self.invalid_sources)
+            ", ".join("%s: %s" % (s, self.invalid_sources[s]) for s in self.invalid_sources),
         )
         self.invalid_sources = defaultdict(int)
 

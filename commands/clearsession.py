@@ -6,12 +6,14 @@ from pprint import pprint
 import argparse
 from utm5 import UTM5
 from noc.core.management.base import BaseCommand
+from noc.core.mongo.connection import connect
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("-a", "--account", dest="account", default=None)
 
     def handle(self, *args, **options):
+        connect()
         account_id = options.get("account")
         if account_id:
             logins = []
@@ -36,7 +38,7 @@ class Command(BaseCommand):
                     from noc.sa.models.action import Action
                     from noc.sa.models.managedobject import ManagedObject
                     action = Action.objects.get(name='clearsession')
-                    bras = [ManagedObject.objects.get(id=105), ManagedObject.objects.get(id=86)]
+                    bras = [ManagedObject.objects.get(id=105), ManagedObject.objects.get(id=360)]
                     for i in range(len(bras)):
                         commands = [str(action.expand(bras[i],username=x)) for x in logins]
                         bras[i].scripts.commands(commands=commands)
