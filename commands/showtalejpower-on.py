@@ -48,16 +48,17 @@ class Command(BaseCommand):
         from noc.sa.models.action import Action
         from noc.sa.models.managedobject import ManagedObject
         from noc.fm.models.activeevent import ActiveEvent
-        from noc.fm.models.activealarm import ActiveAlarm
         from noc.fm.models.eventclass import EventClass
         from noc.fm.models.eventlog import EventLog
-        from noc.fm.models.alarmclass import AlarmClass
         my_logger = logging.getLogger('MyLogger')
         rx_statestr = re.compile('^gpon-onu_1\/1\/6:13\s+(?P<AdminState>\S+)\s+(?P<OMCCState>\S+)\s+(?P<O7State>\S+)\s+(?P<PhaseState>\S+)\s+$')
         action = Action.objects.get(name='showonuinfo')
         olt = [ManagedObject.objects.get(id=361)]
         commands = [str(action.expand(olt[0],interface='1/1/6', llid=x))  for x in [13]] 
-        ac = AlarmClass.objects.get(name='Chassis | PSU | PSU Failed')
+	my_logger.info('Onu on 1/1/6:13 offline. May be power loss')
+#	syslogsend('Onu on 1/1/6:13 offline. May be power loss', 1, 18)
+	syslogsend('Onu on 1/1/6:13 offline. May be power loss', 1, 18)
+	return
         s = olt[0].scripts.commands(commands=commands)
         s1 = s['output'][0].split('\n')
 #        print(s1);
@@ -65,14 +66,26 @@ class Command(BaseCommand):
             if rx_statestr.match(s1[i]):
                r = rx_statestr.search(s1[i])
                print(r.group('O7State') + '\t' +  r.group('PhaseState'))
-               if (r.group('O7State') != 'operation' or r.group('PhaseState') != 'working'):
-                   my_logger.info('Event power loss')
-                   syslogsend('Onu on 1/1/6:13 offline. May be power loss', 1, 18)
-               else:
-                   alarm = ActiveAlarm.objects.filter(alarm_class=ac,managed_object=ManagedObject.objects.get(name="noc-activator").id)
-                   my_logger.info('Event power up')
-                   if alarm:
-                      syslogsend('Onu on 1/1/6:13 online', 1, 18)
+               if (r.group('O7State') != 'operation' or r.group('PhaseState') != 'orking'):
+                   print('raise')
+                   ac = EventClass.objects.get(id='5c49700b94c61c465e031c9e')
+                   a = ActiveEvent(
+                     id = ObjectId(),
+                     source = 'Script',
+                     timestamp = time.time(),
+                     managed_object = olt[0].id,
+                     event_class = ac.id,
+                     start_timestamp  = time.time(),
+                     repeats = 0,
+                     log=[
+                       EventLog(
+                          timestamp = time.time(),
+                          message='Talej may have power error. Test ONU state no in [operation,working]'
+                        )
+                     ]
+                   )
+                   a.save()
+                   print(a)
 
 if __name__ == "__main__":
     Command().run()
