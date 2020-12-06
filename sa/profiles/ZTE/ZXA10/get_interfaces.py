@@ -58,7 +58,10 @@ class Script(BaseScript):
         for p in ports:
             if int(p["port"]) < 1 or p["realtype"] == "":
                 continue
-            prefix = self.type[p["realtype"]]
+            if p["realtype"] in self.type:
+               prefix = self.type[p["realtype"]]
+            else:
+               continue
             for i in range(int(p["port"])):
                 ifname = "%s%s/%s/%s" % (prefix, p["shelf"], p["slot"], str(i + 1))
                 try:

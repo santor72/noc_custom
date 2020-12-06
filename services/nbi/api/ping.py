@@ -25,7 +25,7 @@ import tornado.queues
 
 # NOC modules
 from noc.core.management.base import BaseCommand
-from noc.lib.validators import is_ipv4
+from noc.core.validators import is_ipv4
 from noc.core.ioloop.ping import Ping
 from noc.config import config
 
