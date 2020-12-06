@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
 # ---------------------------------------------------------------------
 # Vendor: ZTE
-# OS:     ZXA10C
+# OS:     ZXA10
 # ---------------------------------------------------------------------
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
-"""
-"""
+
+
 # Python modules
 import re
 
@@ -16,7 +15,7 @@ from noc.core.profile.base import BaseProfile
 
 
 class Profile(BaseProfile):
-    name = "ZTE.ZXA10C"
+    name = "ZTE.ZXA10"
     pattern_more = r"^ --More--"
     pattern_unprivileged_prompt = r"^\S+?>"
     pattern_syntax_error = r"%Error \d+: (Incomplete command|Invalid input)"
@@ -29,12 +28,12 @@ class Profile(BaseProfile):
     requires_netmask_conversion = True
     convert_mac = BaseProfile.convert_mac_to_cisco
     config_volatile = [r"^ntp clock-period .*?^"]
-    telnet_naws = "\x7f\x7f\x7f\x7f"
+    telnet_naws = b"\x7f\x7f\x7f\x7f"
 
     rx_card = re.compile(
         r"1\s+(?P<shelf>\d+)\s+(?P<slot>\d+)\s+"
-        r"(?P<cfgtype>\S+)\s+(?P<realtype>\S+|)\s+(?P<port>\d+)\s+"
-        r"(?P<hardver>\d+|)\s+(?P<softver>V\S+|)\s+(?P<status>INSERVICE|OFFLINE|STANDBY)"
+        r"(?P<cfgtype>\S+)\s+(?P<realtype>\S+)\s+(?P<port>\d+)\s+"
+        r"(?P<hardver>\S+)\s+(?P<softver>V\S+)\s+(?P<status>INSERVICE|OFFLINE|STANDBY)"
     )
 
     def fill_ports(self, script):

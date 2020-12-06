@@ -1,27 +1,28 @@
-# -*- coding: utf-8 -*-
 # ---------------------------------------------------------------------
-# ZTE.ZXA10C.get_interfaces
+# ZTE.ZXA10.get_interfaces
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2019 The NOC Project
+# Copyright (C) 2007-2020 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
-"""
-"""
+
+# Python modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetinterfaces import IGetInterfaces
+
+# NOC modules
 import re
 
 
 class Script(BaseScript):
-    name = "ZTE.ZXA10C.get_interfaces"
+    name = "ZTE.ZXA10.get_interfaces"
     interface = IGetInterfaces
     TIMEOUT = 240
 
-    type = {"GUSQ": "gei_", "VDWVD": "vdsl_", "SCXN": "gei_", "PRWGS": ""}
+    type = {"GUSQ": "gei_", "VDWVD": "vdsl_", "SCXN": "gei_", "PRWGS": "", "SMXA":"gei_","GTGOG":"gpon-olt_","GTGOH":"gpon-olt_","GTGHG":"gpon-olt_","GTGOE":"gpon-olt_"}
     rx_iface = re.compile(
         r"^(?P<ifname>\S+) is (?P<admin_status>activate|deactivate|down|administratively down|up),\s*"
         r"line protocol is (?P<oper_status>down|up).+\n"
-        r"^\s+Description is none",
+        r"^\s+Description is (?P<descr>.+)\n",
         re.MULTILINE,
     )
     rx_vlan = re.compile(
@@ -47,22 +48,31 @@ class Script(BaseScript):
         re.MULTILINE,
     )
     rx_mac = re.compile(
-        r"^\s+Description is none\s*\n" r"^\s+MAC address is (?P<mac>\S+)\s*\n", re.MULTILINE
+        r"^\s+Description is (?P<descr>.+)\n^\s+MAC address is (?P<mac>\S+)\s*\n", re.MULTILINE
     )
 
     def execute_cli(self):
         interfaces = []
         ports = self.profile.fill_ports(self)
+        print(ports)
         for p in ports:
             if int(p["port"]) < 1 or p["realtype"] == "":
                 continue
             prefix = self.type[p["realtype"]]
             for i in range(int(p["port"])):
                 ifname = "%s%s/%s/%s" % (prefix, p["shelf"], p["slot"], str(i + 1))
-                v = self.cli("show interface %s" % ifname)
+                try:
+                   v = self.cli("show interface %s" % ifname)
+                except:
+                   ifname = "%s%s/%s/%s" % ("xgei_", p["shelf"], p["slot"], str(i + 1))
+                   try:
+                      v = self.cli("show interface %s" % ifname)
+                   except:
+                      continue
                 match = self.rx_iface.search(v)
                 admin_status = bool(match.group("admin_status") == "up")
                 oper_status = bool(match.group("oper_status") == "up")
+                descr = match.group("descr").strip()
                 iface = {
                     "name": ifname,
                     "type": "physical",
@@ -70,6 +80,8 @@ class Script(BaseScript):
                     "oper_status": oper_status,
                     "subinterfaces": [],
                 }
+                if descr not in ["none", "none."]:
+                    iface["description"] = descr
                 if prefix == "gei_":
                     v = self.cli("show vlan port %s" % ifname)
                     match = self.rx_vlan.search(v)
