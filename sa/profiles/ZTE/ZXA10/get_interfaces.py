@@ -8,7 +8,7 @@
 # Python modules
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetinterfaces import IGetInterfaces
-
+#from noc.sa.profiles.Generic.get_ifindexes import Script as BaseScript
 # NOC modules
 import re
 
@@ -51,8 +51,32 @@ class Script(BaseScript):
         r"^\s+Description is (?P<descr>.+)\n^\s+MAC address is (?P<mac>\S+)\s*\n", re.MULTILINE
     )
 
+    def get_ifindex_map(self):
+        """
+        Retrieve name -> ifindex map
+        """
+        m = {}
+        if self.has_snmp():
+            try:
+                # IF-MIB::ifDescr
+#                t = self.snmp.get_table(".1.3.6.1.2.1.31.1.1.1.1")
+                t = self.scripts.get_ifindexes()
+                return t
+                print('aaaaaaa')
+                print(t)
+                for i in t:
+                    if t[i].startswith("ControlEthernet"):
+                        continue
+                    #m[self.profile.convert_interface_name(t[i])] = i
+                    m[t[i]] = i
+            except self.snmp.TimeOutError:
+                pass
+        return m
+
     def execute_cli(self):
         interfaces = []
+        ifindex = self.get_ifindex_map()
+        print(ifindex)
         ports = self.profile.fill_ports(self)
         print(ports)
         for p in ports:
@@ -83,8 +107,24 @@ class Script(BaseScript):
                     "oper_status": oper_status,
                     "subinterfaces": [],
                 }
+                if iface["name"] in ifindex:
+                    iface["snmp_ifindex"] = ifindex[iface["name"]]
                 if descr not in ["none", "none."]:
                     iface["description"] = descr
+                if prefix == "xgei_":
+                    v = self.cli("show vlan port %s" % ifname)
+                    match = self.rx_vlan.search(v)
+                    sub = {
+                        "name": ifname,
+                        "admin_status": admin_status,
+                        "oper_status": oper_status,
+                        "enabled_afi": ["BRIDGE"],
+                    }
+                    if match.group("untagged"):
+                        sub["untagged_vlan"] = match.group("untagged")
+                    if match.group("tagged"):
+                        sub["tagged_vlans"] = self.expand_rangelist(match.group("tagged"))
+                    iface["subinterfaces"] += [sub]
                 if prefix == "gei_":
                     v = self.cli("show vlan port %s" % ifname)
                     match = self.rx_vlan.search(v)
