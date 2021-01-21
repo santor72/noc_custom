@@ -47,7 +47,7 @@ class ShowAPI(NBIAPI):
     @authenticated
     @tornado.gen.coroutine
     def post(self):
-	connect()
+        connect()
         code, result = yield self.executor.submit(self.handler)
         self.set_status(code)
         if isinstance(result, six.string_types):

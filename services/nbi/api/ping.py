@@ -59,7 +59,7 @@ class PingAPI(NBIAPI):
     def doping(self, ip):
         if is_ipv4(ip):
            if os.system('ping -c 2 -W 1 %s > /dev/null'%ip) == 0:
-    	     return {ip : 'Up'};
+             return {ip : 'Up'};
            else:
              return {ip : 'Down'};
     
