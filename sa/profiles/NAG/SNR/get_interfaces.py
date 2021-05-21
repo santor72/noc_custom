@@ -1,9 +1,10 @@
 # ---------------------------------------------------------------------
 # NAG.SNR.get_interfaces
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2019 The NOC Project
+# Copyright (C) 2007-2020 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
+
 # Python modules
 import re
 
@@ -51,14 +52,15 @@ class Script(BaseScript):
     )
     rx_lag_port = re.compile(r"\s*\S+ is LAG member port, LAG port:(?P<lag_port>\S+)\n")
 
-    def execute(self):
+    def execute_cli(self):
         interfaces = []
         # Get LLDP interfaces
         lldp = []
         c = self.cli("show lldp", ignore_errors=True)
         if self.rx_lldp_en.search(c):
             ll = self.rx_lldp.search(c)
-            lldp = ll.group("local_if").split()
+            if ll:
+                lldp = ll.group("local_if").split()
         v = self.cli("show interface", cached=True)
         for match in self.rx_sh_int.finditer(v):
             name = match.group("interface")
@@ -66,12 +68,8 @@ class Script(BaseScript):
             o_stat = match.group("oper_status").lower() == "up"
             other = match.group("other")
             match1 = self.rx_hw.search(other)
-            iftype = self.profile.get_interface_type(name)
-            if not iftype:
-                 self.logger.info("Ignoring unknown interface type for: %s", name)
-                 continue
             iface = {
-                "type": iftype,
+                "type": self.profile.get_interface_type(name),
                 "name": name,
                 "admin_status": a_stat,
                 "oper_status": o_stat,
@@ -82,7 +80,7 @@ class Script(BaseScript):
                 iface["enabled_protocols"] = ["LLDP"]
             if iface["type"] == "physical":
                 sub["enabled_afi"] = ["BRIDGE"]
-            if match1 and match1.group("mac"):
+            if match1.group("mac"):
                 iface["mac"] = match1.group("mac")
                 sub["mac"] = match1.group("mac")
             match1 = self.rx_alias.search(other)

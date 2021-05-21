@@ -19,13 +19,14 @@ class Command(BaseCommand):
                     from noc.sa.models.action import Action
                     from noc.sa.models.managedobject import ManagedObject
                     action = Action.objects.get(name='clearsession')
+                    #https://api.ccs.ru/php7/api/v1/utm5/user/15528987/session
 #                    bras = [ManagedObject.objects.get(id=105), ManagedObject.objects.get(id=86), ManagedObject.objects.get(id=360)]
                     bras = [ManagedObject.objects.get(id=105), ManagedObject.objects.get(id=360)]
                     for i in range(len(bras)):
-                	print("clear session on {0}".format([bras[i]]))
+                        print("clear session on {0}".format([bras[i]]))
                         commands = str(action.expand(bras[i],username=login))
-                	print("clear session on {0}".format([bras[i]]))
-                	print(commands)
+                        print("clear session on {0}".format([bras[i]]))
+                        print(commands)
                         bras[i].scripts.commands(commands=commands)
         else:
             print("Need --account parametr")
