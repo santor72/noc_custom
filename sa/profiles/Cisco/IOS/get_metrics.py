@@ -220,7 +220,6 @@ class Script(GetMetricsScript):
         sensor_values = self.snmp.join(["1.3.6.1.2.1.47.1.1.1.1.7", "1.3.6.1.4.1.9.9.91.1.1.1.1.4"])
         sensor_precession = self.snmp.join(["1.3.6.1.2.1.47.1.1.1.1.7", "1.3.6.1.4.1.9.9.91.1.1.1.1.3"])
         sensor_type = self.snmp.join(["1.3.6.1.2.1.47.1.1.1.1.7", "1.3.6.1.4.1.9.9.91.1.1.1.1.1"])
-        self.logger.info("We are in dom_metrics")
         RxPower = {}
         TxPower = {}
         Temp = {}
@@ -264,14 +263,9 @@ class Script(GetMetricsScript):
             match = rx_if_name.match(Temp[item]['name'])
             if_name = "{} {}".format(match.group("interface"), match.group("num"))
             value = convert_sensor(Temp[item]['value'], Temp[item]['precession'])
-#            value = Temp[item]['value']
             result[if_name].update({'temp': value})
-#            rxvalue= convert_sensor(RxPower[item]['value'], RxPower[item]['precession'], RxPower[item]['type'])
-#            txvalue= convert_sensor(TxPower[item]['value'], TxPower[item]['precession'], TxPower[item]['type'])
-#            self.logger.info(str(RxPower[item]['name'] + " " + str(rxvalue) + " " + str(txvalue) + " " + Temp[item]['value']))
         for item in result:
             ipath = ["", "", "", item]
             self.set_metric(id=("Interface | DOM | RxPower", ipath), value=result[item]["rx_power"])
             self.set_metric(id=("Interface | DOM | TxPower", ipath), value=result[item]["tx_power"])
             self.set_metric(id=("Interface | DOM | Temperature", ipath), value=result[item]["temp"])
-        self.logger.info(str(result))
