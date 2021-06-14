@@ -24,7 +24,7 @@ class Profile(BaseProfile):
     command_enter_config = "configure terminal"
     command_leave_config = "exit"
     command_save_config = "write\n"
-    pattern_prompt = r"^(?P<hostname>\S+?)(?:-\d+)?(?:\(config[^\)]*\))?#"
+    pattern_prompt = r"^(?P<hostname>\S+?)(?:-\d+)?(?:\(config[^\)]*\))?(?:\(gpon-onu-mng \S+\))?#"
     requires_netmask_conversion = True
     convert_mac = BaseProfile.convert_mac_to_cisco
     config_volatile = [r"^ntp clock-period .*?^"]
