@@ -30,6 +30,7 @@ class Command(BaseCommand):
              customer_id=getcustomer(usurl,login)
              if customer_id:
                 devices=getdevices(usurl,customer_id)
+                pprint(devices)
                 action = Action.objects.get(name='disable_interface')
                 for device in devices:
                    mo = ManagedObject.objects.get(address=device['host'])

@@ -43,6 +43,7 @@ Request = DictParameter(
         "llid": IntParameter(required=True),
         "login": StringParameter(required=True),
         "passwd": StringParameter(required=True),
+        "vlanid": StringParameter(required=True)
     }
 )
 
@@ -78,14 +79,14 @@ class ZTERegONU(NBIAPI):
         mo = ManagedObject.objects.get(address = hostip)
         if not mo:
            return 404, "MO not found"
-        vlanid = mo.get_attr('pppoevlan')
+#        vlanid = mo.get_attr('pppoevlan')
         actionname = str(req["action"])
         data = {'port': str(req["port"]),
                 'sn': str(req["sn"]),
                 'llid': int(req["llid"]),
                 'login': str(req["login"]),
                 'passwd': str(req["passwd"]),
-                'vlanid': vlanid
+                'vlanid': str(req["vlanid"])
                 }
 #delete onu
         action = Action.objects.get(name='zteunregonu')

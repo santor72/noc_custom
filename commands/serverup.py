@@ -31,9 +31,11 @@ class Command(BaseCommand):
              if customer_id:
                 devices=getdevices(usurl,customer_id)
                 action = Action.objects.get(name='enable_interface')
+                
                 for device in devices:
                    mo = ManagedObject.objects.get(address=device['host'])
                    commands = [str(action.expand(mo,interface=device['ifname']))]
+                   pprint(commands)
                    r = mo.scripts.commands(commands=commands)
                    pprint(r)
         else:
