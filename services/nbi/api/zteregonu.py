@@ -73,13 +73,13 @@ class ZTERegONU(NBIAPI):
             req = Request.clean(req)
         except ValueError as e:
             return 400, "Bad request: %s" % e
-        actionoutput=[]
-        output=[]
+        actionoutput=["Result is"]
+        output=["Result is"]
         hostip = str(req["host"])
         mo = ManagedObject.objects.get(address = hostip)
         if not mo:
            return 404, "MO not found"
-#        vlanid = mo.get_attr('pppoevlan')
+        vlanid = mo.get_attr('pppoevlan')
         actionname = str(req["action"])
         data = {'port': str(req["port"]),
                 'sn': str(req["sn"]),
@@ -108,11 +108,11 @@ class ZTERegONU(NBIAPI):
         actionoutput.append(result)
 
         cmd4 = ['show run interface gpon-olt_{}'.format(data['port']),
-                'show run interface gpon-onu_{}:{}'.format(data['port'],data['llid']),
-                'show onu running config gpon-onu_{}:{}'.format(data['port'],data['llid'])
+#                'show run interface gpon-onu_{}:{}'.format(data['port'],data['llid']),
+#                'show onu running config gpon-onu_{}:{}'.format(data['port'],data['llid'])
                ]
         params={"commands":cmd4, "ignore_cli_errors":True}
-        result = mo.scripts.commands(**params)
-        output.append(result)
-        return 200, output
+        #result = mo.scripts.commands(**params)
+        #output.append(result)
+        return 200, actionoutput
 
