@@ -5,8 +5,9 @@ from datetime  import *
 from noc.core.mongo.connection import connect
 from noc.fm.models.eventclass import EventClass
 connect()
-classes = [ 'Unknown | Syslog',
-      'Unknown | SNMP Trap'
+classes = [ 'Security | Authentication | Login',
+      'Security | Authentication | Logout',
+      'Security | Audit | Command'
     ]
 
 for eclass in classes:
