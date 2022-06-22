@@ -5,12 +5,12 @@ from datetime  import *
 from noc.core.mongo.connection import connect
 from noc.fm.models.eventclass import EventClass
 connect()
-classes = [ 'Security | Authentication | Login',
-      'Security | Authentication | Logout',
-      'Security | Audit | Command'
-    ]
+class_names = [ 'Security | Authentication | Login',
+                'Security | Authentication | Logout',
+                'Security | Audit | Command'
+              ]
 
-for eclass in classes:
+for eclass in EventClass.objects.filter(name__in=class_names):
  events = ActiveEvent.objects.filter(event_class=eclass)
  for e in events:
     print(e.id)
