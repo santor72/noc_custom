@@ -1,9 +1,9 @@
-from noc.fm.models.activealarm import ActiveAlarm
-from noc.fm.models.activeevent import ActiveEvent
-from noc.fm.models.archivedalarm import ArchivedAlarm
 from datetime  import *
+import re
+from noc.fm.models.activeevent import ActiveEvent
 from noc.core.mongo.connection import connect
 from noc.fm.models.eventclass import EventClass
+
 connect()
 class_names = [ 'Security | Authentication | Login',
                 'Security | Authentication | Logout',
