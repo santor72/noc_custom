@@ -14,13 +14,13 @@ re2_events=re.compile(".+217.76.35.203.+")
 
 for eclass in EventClass.objects.filter(name__in=class_names):
  events = ActiveEvent.objects.filter(event_class=eclass)
- for e in events:
+ for event in events:
   if 'message' in event.raw_vars:
     if re_events.match(event.raw_vars['message']):
-       print(e.id)
+       print(event.id)
        event.delete()
   if '1.3.6.1.2.1.16.9.1.1.2.178' in event.raw_vars:
     if re2_events.match(event.raw_vars['1.3.6.1.2.1.16.9.1.1.2.178']):
-       print(e.id)
+       print(event.id)
        event.delete()
 
