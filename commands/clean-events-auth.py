@@ -1,21 +1,26 @@
+from noc.fm.models.activealarm import ActiveAlarm
 from noc.fm.models.activeevent import ActiveEvent
-from noc.core.mongo.connection import connect
+from noc.fm.models.archivedalarm import ArchivedAlarm
 from datetime  import *
+from noc.core.mongo.connection import connect
+from noc.fm.models.eventclass import EventClass
 connect()
-import re
-
-events = ActiveEvent.objects()
-
+class_names = [ 'Security | Authentication | Login',
+                'Security | Authentication | Logout',
+                'Security | Audit | Command'
+              ]
 re_events=re.compile(".+[LOGIN|LOGOUT|login|logout].+217.76.35.203")
-events = ActiveEvent.objects()
-for event in events:
+re2_events=re.compile(".+217.76.35.203.+")
+
+for eclass in EventClass.objects.filter(name__in=class_names):
+ events = ActiveEvent.objects.filter(event_class=eclass)
+ for e in events:
   if 'message' in event.raw_vars:
     if re_events.match(event.raw_vars['message']):
+       print(e.id)
        event.delete()
-
-re2_events=re.compile(".+217.76.35.203.+")
-for event in events:
   if '1.3.6.1.2.1.16.9.1.1.2.178' in event.raw_vars:
     if re2_events.match(event.raw_vars['1.3.6.1.2.1.16.9.1.1.2.178']):
+       print(e.id)
        event.delete()
 
