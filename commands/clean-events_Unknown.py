@@ -5,11 +5,11 @@ from datetime  import *
 from noc.core.mongo.connection import connect
 from noc.fm.models.eventclass import EventClass
 connect()
-classes = [ 'Unknown | Syslog',
+class_names = [ 'Unknown | Syslog',
       'Unknown | SNMP Trap'
     ]
 
-for eclass in classes:
+for eclass in EventClass.objects.filter(name__in=class_names):
  events = ActiveEvent.objects.filter(event_class=eclass)
  for e in events:
     print(e.id)
