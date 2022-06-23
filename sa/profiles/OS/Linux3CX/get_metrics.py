@@ -1,4 +1,4 @@
-i# ---------------------------------------------------------------------
+# ---------------------------------------------------------------------
 # 3CX.get_metrics
 # ---------------------------------------------------------------------
 # Copyright (C) 2007-2019 The NOC Project
@@ -14,16 +14,16 @@ from noc.core.text import parse_kv
 from noc.sa.profiles.Generic.get_metrics import Script as GetMetricsScript, metrics
 
 class Script(GetMetricsScript):
-    def execute(self, metrics):
-        self.logger.debug('Yesssssssssssssssssssss')
+#    def execute(self, metrics):
+#        self.logger.debug('Yesssssssssssssssssssss')
 
     @metrics([
                   'Telephony | SIP | Sessions | Active'
             ],
-        access="S",
-        volatile=False,
+        access=None,
+        volatile=True,
     )
     def collect_telephony_metrics(self, metrics):
-        self.logger.debug('Yesssssssssssssssssssss')
+        self.set_metric(id=("Telephony | SIP | Sessions | Active"), value=m[10])
         
 
