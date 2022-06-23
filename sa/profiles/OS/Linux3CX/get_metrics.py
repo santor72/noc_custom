@@ -24,6 +24,6 @@ class Script(GetMetricsScript):
         volatile=True,
     )
     def collect_telephony_metrics(self, metrics):
-        self.set_metric(id=("Telephony | SIP | Sessions | Active"), value=m[10])
+        self.set_metric(id=("Telephony | SIP | Sessions | Active"), value=[10])
         
 
