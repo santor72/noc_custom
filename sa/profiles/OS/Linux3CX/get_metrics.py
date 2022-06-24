@@ -41,7 +41,7 @@ class Script(GetMetricsScript):
             c = len(r['result'])
         else:
             c = None
-        self.set_metric(id=("Telephony | SIP | Sessions | Active", None), value=c, path=("0", ""))
+        self.set_metric(id=("Telephony | SIP | Sessions | Active", None), value=c, path=[])
         cx.logout()
 
 
