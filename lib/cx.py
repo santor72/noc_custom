@@ -6,11 +6,11 @@ import datetime
 
 headers = {'Content-type': 'application/json'}
 class obj3CX:
-    pbxurl = 'https://pbx03.ccs.ru:5001'
     Cookies = None
-    def __init__(self,login=None, passwd=None):
-       self.login = login
+    def __init__(self,user=None, passwd=None, url=None):
+       self.user = user
        self.passwd = passwd
+       self.pbxurl = url
        
     def __del__(self):
         if self.Cookies:
@@ -23,7 +23,7 @@ class obj3CX:
                 
     def login(self):
         request = self.pbxurl + '/api/login'
-        query = {"Username": self.login, "Password": self.passwd}
+        query = {"Username": self.user, "Password": self.passwd}
         res = False
         try:
             #Login to PBX
