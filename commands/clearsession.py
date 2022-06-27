@@ -7,6 +7,11 @@ import argparse
 from utm5 import UTM5
 from noc.core.management.base import BaseCommand
 from noc.core.mongo.connection import connect
+from noc.sa.models.managedobjectselector import ManagedObjectSelector
+from noc.sa.models.action import Action
+from noc.sa.models.managedobject import ManagedObject
+
+selector_name='bras'
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
@@ -35,10 +40,10 @@ class Command(BaseCommand):
                                 logins.append(service['data']['login'])
                 if len((logins)) > 0:
                     #Для всех логинов, для всех брасов формируем список комманд и выполняем их
-                    from noc.sa.models.action import Action
-                    from noc.sa.models.managedobject import ManagedObject
                     action = Action.objects.get(name='clearsession')
-                    bras = [ManagedObject.objects.get(id=105), ManagedObject.objects.get(id=360)]
+                    #bras = [ManagedObject.objects.get(id=105), ManagedObject.objects.get(id=360)]
+                    selector = ManagedObjectSelector.objects.filter(name=selector_name)
+                    bras = selector[0].managed_objects
                     for i in range(len(bras)):
                         commands = [str(action.expand(bras[i],username=x)) for x in logins]
                         bras[i].scripts.commands(commands=commands)
