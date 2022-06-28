@@ -18,8 +18,20 @@ from noc.custom.lib.cx import obj3CX
 from noc.core.comp import smart_text
 from noc.core.nsq.topic import TopicQueue
 
+def date_range(start, stop, step):
+    while start < stop:
+        yield start
+        start +=step
+
+def findrange(dlist, d):
+    r = 0
+    for i in range(len(dlist)):
+        if (d > dlist[i] and d < dlist[i+1]):
+            r = dlist[i+1]
+    return int(r.timestamp())
+
 def yhistory(*args, **kwargs):
-    url_string = 'http://10.1.40.201:8086/write?db=cc'
+    url_string = 'http://10.1.40.201:8086/write?db=cc02'
     ts = int((datetime.datetime.now()).timestamp())
     c_count = {}
     result = []
@@ -36,6 +48,12 @@ def yhistory(*args, **kwargs):
     cx = obj3CX(user=cxuser,passwd=cxpasswd, url=cxurl)
     cx.login()
     try:
+      d1 = []
+      offset = datetime.timedelta(hours=3)
+      tz = datetime.timezone(offset)
+      now = datetime.datetime.now().replace(hour=0, minute=0, second=0, tzinfo=tz)
+      for d in date_range(now-datetime.timedelta(days=1), now+datetime.timedelta(minutes=5), datetime.timedelta(minutes=5)):
+          d1.append(d)
       result_answered = cx.calls_logs('Yesterday', 'OnlyAnswered')
       result_unanswered = cx.calls_logs('Yesterday', 'OnlyUnanswered')
       if not result_answered['failed']:
@@ -52,21 +70,23 @@ def yhistory(*args, **kwargs):
       for item in answered:
         if not item['Destination'].find('IVR '):
            continue
-        if item['ts'] in c_count.keys():
-           c_count[item['ts']]['a'] = c_count[item['ts']]['a'] + 1 
+        ts = findrange(d1, item['date'])
+        if ts in c_count.keys():
+           c_count[ts]['a'] = c_count[ts]['a'] + 1 
         else: 
-           c_count[item['ts']] = {}
-           c_count[item['ts']]['a'] = 1
-           c_count[item['ts']]['u'] = 0
+           c_count[ts] = {}
+           c_count[ts]['a'] = 1
+           c_count[ts]['u'] = 0
       for item in unanswered:
         if not item['Destination'].find('IVR '):
            continue
-        if item['ts'] in c_count.keys():
-          c_count[item['ts']]['u'] = c_count[item['ts']]['u'] + 1
+        ts = findrange(d1, item['date'])
+        if ts in c_count.keys():
+          c_count[ts]['u'] = c_count[ts]['u'] + 1
         else:
-          c_count[item['ts']] = {}
-          c_count[item['ts']]['u'] = 1
-          c_count[item['ts']]['a'] = 0
+          c_count[ts] = {}
+          c_count[ts]['u'] = 1
+          c_count[ts]['a'] = 0
       result = ['object']
       for k,v in c_count.items():
         dt_object = datetime.datetime.fromtimestamp(k)
@@ -92,8 +112,3 @@ def yhistory(*args, **kwargs):
       cx.logout()
 #      return result
 
-
-
-if __name__ == "__main__":
-    yhistory()
-    

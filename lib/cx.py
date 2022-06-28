@@ -102,9 +102,11 @@ class obj3CX:
             for item in temp:
                 date_time_str = (re.findall(r"^\d{4}-\d{2}-\d{2}T\d{2}",
                                             item['CallTime']))[0]
-                date_time_str = date_time_str.replace('T',' ') + ':00:00'
-                date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S').replace(tzinfo=tz)
+#                date_time_str = date_time_str.replace('T',' ') + ':00:00'
+#                date_time_obj = datetime.datetime.strptime(date_time_str, '%Y-%m-%d %H:%M:%S').replace(tzinfo=tz)
+                date_time_obj = datetime.datetime.strptime(item['CallTime'], '%Y-%m-%dT%H:%M:%S%z')
                 item['ts'] = int(date_time_obj.timestamp())
+                item['date']= date_time_obj
             res['result'] = temp
         except Exception as e:
             res['failed'] =  True
