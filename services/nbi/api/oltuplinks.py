@@ -54,7 +54,7 @@ class OltUplinksAPI(NBIAPI):
             oltint = Interface.objects.filter(managed_object__in=[x.id for x in mo], profile__in=[x.id for x in iprofiles])
             result=[]
             for item in oltint:
-                name="{0] - {1}".format(item.managed_object.name, item.name)
+                name="{0} - {1}".format(item.managed_object.name, item.name)
                 bi_id = item.managed_object.bi_id
                 path = item.name
                 result.append(f"{name}:{bi_id};{path}")
