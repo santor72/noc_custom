@@ -32,8 +32,8 @@ from noc.core.management.base import BaseCommand
 from noc.core.validators import is_ipv4
 from noc.core.ioloop.ping import Ping
 from noc.config import config
-class InetIfAPI(NBIAPI):
-    name = "inetif"
+class InetIfPointAPI(NBIAPI):
+    name = "inetifpoint"
 
     @authenticated
     @tornado.gen.coroutine
