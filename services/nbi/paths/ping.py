@@ -27,7 +27,7 @@ class ObjectPingAPI(NBIAPI):
     def get_routes(self):
         route = {
             "path": "/api/nbi/ping",
-            "method": "GET",
+            "method": "POST",
             "endpoint": self.handler,
             "response_model": ObjectPingResponse,
             "name": "ping",
