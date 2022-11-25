@@ -35,6 +35,8 @@ from noc.sa.interfaces.base import (
 from noc.pm.models.metrictype import MetricType
 from noc.services.nbi.base import NBIAPI
 
+router = APIRouter()
+
 class GetllidzteRequest(BaseModel):
     host: str
     port: str
