@@ -45,7 +45,7 @@ class GetllidzteAPI(NBIAPI):
 
     def get_routes(self):
         route = {
-            "path": "/api/nbi/    api_name = "getllidzte",
+            "path": "/api/nbi/getllidzte",
             "method": "POST",
             "endpoint": self.handler,
             "response_class": JSONResponse,
@@ -88,3 +88,5 @@ class GetllidzteAPI(NBIAPI):
         data = [new_onu_id, onu_exist]
         return Response(content=data, media_type="application/json")
 
+# Install router
+GetllidzteAPI(router)
