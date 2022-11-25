@@ -3,7 +3,8 @@ import os
 #from typing import List, Union
 
 # Third-party modules
-from fastapi import APIRouter, Header, HTTPException
+from fastapi import APIRouter, Header, HTTPException, Response
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 # NOC modules
@@ -30,7 +31,8 @@ class ObjectPingAPI(NBIAPI):
             "path": "/api/nbi/ping",
             "method": "POST",
             "endpoint": self.handler,
-            "response_model": ObjectPingResponse,
+            "response_class": JSONResponse,
+            "response_model": None,
             "name": "ping",
             "description": "Ping one Managed Objects.",
         }
@@ -45,8 +47,8 @@ class ObjectPingAPI(NBIAPI):
 
     def doping(self, ip):
         if os.system('ping -c 2 -W 1 %s > /dev/null'%ip) == 0:
-            return f"{ip} : 'Up'"
+            return Response(content=f"{ip} : 'Up'", media_type="application/json")
         else:
-            return f"{ip} : 'Down'"
+            return Response(content=f"{ip} : 'Down'", media_type="application/json")
 # Install router
 ObjectPingAPI(router)
