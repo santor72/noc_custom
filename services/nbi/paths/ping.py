@@ -45,8 +45,8 @@ class ObjectPingAPI(NBIAPI):
 
     def doping(self, ip):
         if os.system('ping -c 2 -W 1 %s > /dev/null'%ip) == 0:
-            return {ip : 'Up'};
+            return f"{ip} : 'Up'"
         else:
-             return {ip : 'Down'};
+            return f"{ip} : 'Down'"
 # Install router
 ObjectPingAPI(router)
