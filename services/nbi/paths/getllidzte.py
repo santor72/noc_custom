@@ -88,7 +88,7 @@ class GetllidzteAPI(NBIAPI):
         if new_onu_id == 0:
            new_onu_id = c_onu_id+1 
         data = [new_onu_id, onu_exist]
-        return Response(content=data, media_type="application/json")
+        return JSONResponse(content=data, media_type="application/json")
 
 # Install router
 GetllidzteAPI(router)
