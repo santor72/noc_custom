@@ -11,10 +11,10 @@ from __future__ import absolute_import
 from collections import defaultdict
 
 # Third-party modules
-import ujson
 import six
 import re
-from fastapi import APIRouter, Header, HTTPException
+from fastapi import APIRouter, Header, HTTPException, Response
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 # NOC modules
