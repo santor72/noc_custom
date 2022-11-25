@@ -41,7 +41,7 @@ class ObjectPingAPI(NBIAPI):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         if not is_ipv4(req.ip):
             raise HTTPException(400, "Bad request: no ip address")
-        return {result: self.doping(req.ip)}
+        return {"result": self.doping(req.ip)}
 
     def doping(self, ip):
         if os.system('ping -c 2 -W 1 %s > /dev/null'%ip) == 0:
