@@ -35,7 +35,7 @@ class ObjectPingAPI(NBIAPI):
         }
         return [route]
 
-    async def handler(self, req: ObjectStatusRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER):
+    async def handler(self, req: ObjectStatusRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         if not self.access_granted(access_header):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         if not is_ipv4(req.ip):
