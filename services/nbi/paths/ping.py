@@ -47,3 +47,5 @@ class ObjectPingAPI(NBIAPI):
             return {ip : 'Up'};
         else:
              return {ip : 'Down'};
+# Install router
+ObjectPingAPI(router)
