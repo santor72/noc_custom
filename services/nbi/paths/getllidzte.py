@@ -36,9 +36,9 @@ from noc.pm.models.metrictype import MetricType
 from noc.services.nbi.base import NBIAPI
 
 class GetllidzteRequest(BaseModel):
-    "host": str
-    "port": str
-    "sn": str
+    host: str
+    port: str
+    sn: str
     
 class GetllidzteAPI(NBIAPI):
     api_name = "getllidzte"
