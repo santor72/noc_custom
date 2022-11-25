@@ -59,10 +59,10 @@ class ZTERegONU(NBIAPI):
         actionname = req.action
         data = {'port': req.port,
                 'sn': req.sn,
-                'llid': req.llid),
-                'login': req.login),
-                'passwd': req.passwd),
-                'vlanid': req.vlanid)
+                'llid': req.llid,
+                'login': req.login,
+                'passwd': req.passwd,
+                'vlanid': req.vlanid
                 }
 #delete onu
         action = Action.objects.get(name='zteunregonu')
