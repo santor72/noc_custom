@@ -43,12 +43,12 @@ class ObjectPingAPI(NBIAPI):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         if not is_ipv4(req.ip):
             raise HTTPException(400, "Bad request: no ip address")
-        return {"result": self.doping(req.ip)}
+        return Response(content=self.doping(req.ip), media_type="application/json")
 
     def doping(self, ip):
         if os.system('ping -c 2 -W 1 %s > /dev/null'%ip) == 0:
-            return Response(content=f"{ip} : 'Up'", media_type="application/json")
+            return f"{ip} : 'Up'"
         else:
-            return Response(content=f"{ip} : 'Down'", media_type="application/json")
+            return f"{ip} : 'Down'"
 # Install router
 ObjectPingAPI(router)
