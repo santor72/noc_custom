@@ -9,6 +9,7 @@ from pydantic import BaseModel
 # NOC modules
 from noc.sa.models.objectstatus import ObjectStatus
 from noc.services.nbi.base import NBIAPI, API_ACCESS_HEADER, FORBIDDEN_MESSAGE
+from noc.core.validators import is_ipv4
 
 router = APIRouter()
 
