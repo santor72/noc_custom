@@ -33,7 +33,7 @@ class ZTERegONURequest(BaseModel):
     login: str
     passwd: str
     vlanid: str
-    model: str
+#    model: str
     llid: int
 
     
