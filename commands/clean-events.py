@@ -10,14 +10,14 @@ events = ActiveEvent.objects()
 ar_alarms = ArchivedAlarm.objects()
 
 for alarm in alarms:
-   if alarm.timestamp < datetime.now() - timedelta(2):
+   if alarm.timestamp < datetime.now() - timedelta(days=15):
     alarm.delete()
 
 for alarm in ar_alarms:
-   if alarm.timestamp < datetime.now() - timedelta(2):
+   if alarm.timestamp < datetime.now() - timedelta(days=15):
     alarm.delete()
 
 for event in events:
-   if alarm.timestamp < datetime.now() - timedelta(2):
+   if alarm.timestamp < datetime.now() - timedelta(days=15):
     event.delete()
 
