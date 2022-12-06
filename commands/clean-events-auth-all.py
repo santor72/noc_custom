@@ -7,7 +7,9 @@ from noc.fm.models.eventclass import EventClass
 connect()
 class_names = [ 'Security | Authentication | Login',
                 'Security | Authentication | Logout',
-                'Security | Audit | Command'
+                'Security | Audit | Command',
+                'Security | Authentication | SNMP Authentication Failure',
+                'Security | Authentication | Authentication Failed'
               ]
 
 for eclass in EventClass.objects.filter(name__in=class_names):
