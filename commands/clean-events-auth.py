@@ -7,7 +7,8 @@ from noc.fm.models.eventclass import EventClass
 connect()
 class_names = [ 'Security | Authentication | Login',
                 'Security | Authentication | Logout',
-                'Security | Audit | Command'
+                'Security | Audit | Command',
+                'Security | Authentication | SNMP Authentication Failure'
               ]
 re_events=re.compile(".+[LOGIN|LOGOUT|login|logout].+217.76.35.203")
 re2_events=re.compile(".+217.76.35.203.+")
