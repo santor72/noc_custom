@@ -12,7 +12,6 @@ from pydantic import BaseModel
 
 # NOC modules
 from noc.services.nbi.base import NBIAPI, API_ACCESS_HEADER, FORBIDDEN_MESSAGE
-from noc.sa.models.managedobjectselector import ManagedObjectSelector
 from noc.sa.models.managedobject import ManagedObject
 from noc.inv.models.interface import Interface
 from noc.inv.models.interfaceprofile import InterfaceProfile
