@@ -65,4 +65,4 @@ class ObjectInetifAPI(NBIAPI):
 
 
 # Install router
-ObjectPingAPI(router)
+ObjectInetifAPI(router)
