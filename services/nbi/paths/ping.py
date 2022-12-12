@@ -18,7 +18,6 @@ router = APIRouter()
 class ObjectPingRequest(BaseModel):
     ip: str
 
-
 class ObjectPingResponse(BaseModel):
     result: str
 
