@@ -68,4 +68,4 @@ class ObjectOltuplinksAPI(NBIAPI):
 
 
 # Install router
-ObjectInetifAPI(router)
+ObjectOltuplinksAPI(router)
