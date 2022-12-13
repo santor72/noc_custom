@@ -23,30 +23,30 @@ router = APIRouter()
 #class ObjectInetifRequest(BaseModel):
 
 
-class ObjectInetifResponse(BaseModel):
+class ObjectInetifpointResponse(BaseModel):
     result: List[Dict]
 
-class ObjectInetifAPI(NBIAPI):
+class ObjectInetifpointAPI(NBIAPI):
     api_name = "inetif"
     openapi_tags = ["inetif API"]
 
     def get_routes(self):
         route_get = {
-            "path": "/api/nbi/inetif",
+            "path": "/api/nbi/inetifpoint",
             "method": "POST",
             "endpoint": self.handler,
             "response_class": JSONResponse,
             "response_model": None,
-            "name": "inetif",
+            "name": "inetifpoint",
             "description": "",
             }
         route_post ={
-            "path": "/api/nbi/inetif",
+            "path": "/api/nbi/inetifpoint",
             "method": "GET",
             "endpoint": self.handler,
             "response_class": JSONResponse,
             "response_model": None,
-            "name": "inetif",
+            "name": "inetifpoint",
             "description": ""
         }
         return [route_get, route_post]
@@ -56,7 +56,7 @@ class ObjectInetifAPI(NBIAPI):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
         result=[]
-        iprofiles = InterfaceProfile.objects.filter(name__contains='Uplink-Inet')
+        iprofiles = InterfaceProfile.objects.filter(name__contains='Uplink-Inet-point')
         inetint = Interface.objects.filter(profile__in=[x.id for x in iprofiles])
         for item in inetint:
             name=f"{item.managed_object.name} {item.description}({item.name})"
