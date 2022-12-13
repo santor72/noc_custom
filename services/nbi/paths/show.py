@@ -21,6 +21,7 @@ from noc.sa.models.action import Action
 from noc.sa.models.managedobject import ManagedObject
 from noc.core.mongo.connection import connect
 from noc.services.nbi.base import NBIAPI, API_ACCESS_HEADER, FORBIDDEN_MESSAGE
+from noc.core.validators import is_ipv4
 
 router = APIRouter()
 
