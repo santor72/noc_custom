@@ -14,7 +14,6 @@ from collections import defaultdict
 import six
 import re
 from fastapi import APIRouter, Header, HTTPException, Response
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 # NOC modules
@@ -40,7 +39,7 @@ class Show(NBIAPI):
             "path": "/api/nbi/show",
             "method": "POST",
             "endpoint": self.handler,
-            "response_class": JSONResponse,
+            "response_class": ShowgResponse,
             "response_model": None,
             "name": "show",
             "description": "run show command",
@@ -59,4 +58,4 @@ class Show(NBIAPI):
         return JSONResponse(content=data, media_type="application/json")
 
 # Install router
-ZTERegONU(router)
+Show(router)
