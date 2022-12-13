@@ -15,6 +15,7 @@ import six
 import re
 from fastapi import APIRouter, Header, HTTPException, Response
 from pydantic import BaseModel
+from fastapi.responses import JSONResponse
 
 # NOC modules
 from noc.sa.models.action import Action
@@ -40,7 +41,7 @@ class Show(NBIAPI):
             "path": "/api/nbi/show",
             "method": "POST",
             "endpoint": self.handler,
-            "response_class": ShowgResponse,
+            "response_class": JSONResponse,
             "response_model": None,
             "name": "show",
             "description": "run show command",
@@ -56,7 +57,7 @@ class Show(NBIAPI):
         if not mo:
             raise HTTPException(404, "Bad request: no MO found")
         data = mo.scripts.commands(commands = [req.cmd])
-        return {'result' : data['output'][0]}
+        return JSONResponse(content=data, media_type="application/json")
 
 # Install router
 Show(router)
