@@ -56,7 +56,7 @@ class Show(NBIAPI):
         if not mo:
             raise HTTPException(404, "Bad request: no MO found")
         data = mo.scripts.commands(commands = [req.cmd])
-        return data['output'][0]
+        return {'result' : data['output'][0]}
 
 # Install router
 Show(router)
