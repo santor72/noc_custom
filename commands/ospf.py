@@ -33,15 +33,15 @@ def make_link(router_bi_id, router_id, peer,links):
     if peer['bi_id'] and peer['interface_id'] and peer['peer_int_id']:
         for item in links:
             if 'mo1' in item.keys()  and 'mo2' in item.keys():
-                if (item['mo1'] == {router_bi_id:peer['interface_id']}) and (item['mo2'] == {peer['bi_id']:peer['interface_id']}):
+                if (item['mo1'] == {router_bi_id:peer['interface_id']}) and (item['mo2'] == {peer['bi_id']:peer['peer_int_id']}):
                     y = 1
-                if (item['mo2'] == {router_bi_id:peer['interface_id']}) and (item['mo1'] == {peer['bi_id']:peer['interface_id']}):
+                if (item['mo2'] == {router_bi_id:peer['interface_id']}) and (item['mo1'] == {peer['bi_id']:peer['peer_int_id']}):
                     y = 1
             if y == 1:
                 break
             link['type']='noc'
             link['mo1'] = {router_bi_id:peer['interface_id']}
-            link['mo2'] = {peer['bi_id']:peer['interface_id']}
+            link['mo2'] = {peer['bi_id']:peer['peer_int_id']}
             link['ip1'] = router_id
             link['ip2'] = peer['peer_id']
     else:
