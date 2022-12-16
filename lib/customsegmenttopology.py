@@ -188,7 +188,7 @@ class CustomSegmentTopology(BaseTopology):
         # Bulk fetch all interfaces data
         ifs: Dict["ObjectId", "Interface"] = {
             i["_id"]: i
-            for i in Interface._get_collection().find(
+            for i in SubInterface._get_collection().find(
                 {"_id": {"$in": all_ifaces}},
                 {
                     "_id": 1,
