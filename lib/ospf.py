@@ -13,32 +13,18 @@ from noc.inv.models.interface import Interface
 from noc.inv.models.subinterface import SubInterface
 
 def get_mo(ips=[]):
+    result = None
     for ip in ips:
         result = ManagedObject.objects.filter(address = ip, is_managed=True)
         if result:
-            return result[0]
-    for ip in ips:
-        si = SubInterface.objects.filter(ipv4_addresses__contains='217.76.46.119')
-        if si:
-            for s in si:
-                if s.managed_object.is_managed:
-                    return s.managed_object
-    return None
+            break
+    return result
 
-def get_ifname_by_ip(ip):
-    si = SubInterface.objects.filter(ipv4_addresses__contains=ip)
-    if si:
-        for s in si:
-            if s.managed_object.is_managed:
-                return s.name
-    return ''
-
-def get_mo_bi(ips=[]):
-    mo = get_mo(ips)
-    if mo:
-        return mo.bi_id
-    else:
-        return None
+def addpeer(peer_rec, ospf_leaf):
+    peer_mo = get_mo([peer[0], peer_address])
+    if peer_mo:
+        peer_record['bi_id'] = peer_mo.bi_id
+    peers.append(peer_record)
 
 def Huawei_VRP_get_ospf_process_peers(mo=None, pid=None, peers=[]):
     try:
@@ -54,15 +40,17 @@ def Huawei_VRP_get_ospf_process_peers(mo=None, pid=None, peers=[]):
         for neitem in l:
             m_ne = re_peer.match(neitem)
             if m_ne:
-                peers.append({
+                peer_record = {
                     'peer_id': m_ne.group('ip'),
                     'state': m_ne.group('state'),
                     'peer_address': '',
                     'interface': m_ne.group('interface'),
                     'area': m_ne.group('area'),
-                    'bi_id': get_mo_bi([m_ne.group('ip')]),
+                    'bi_id': '',
                     'peer_int': ''
-                })
+                  }
+                )
+                addpeer(peer_record, peers)
         return 1
     except:
         return -1
@@ -138,21 +126,22 @@ def Cisco_IOS_get_ospf_process_peers(mo=None, pid=None, peers=[]):
                     marea = re_area.match(peerdetail['output'][0])
                     if marea:
                         area = marea.group('area')
-                peers.append({
+                peer_record = {
                     'peer_id': peer[0],
                     'state': peer[2],
                     'peer_address': peer[4],
                     'interface': peer[5],
                     'area': area,
-                    'bi_id': get_mo_bi([peer[0],peer[4]]),
-                    'peer_int': get_ifname_by_ip(peer[4])
-                })
+                    'bi_id': '',
+                    'peer_int': ''
+                    }
+                addpeer(peer_record, peers)
         return 1
     except:
         return -1
 
 def get_ospf_peer_peers(mo, ospf, p_id, notfound):
-    try:
+    #try:
         if not mo.profile.name.replace('.','_')+'_get_ospf_peers_all' in globals():
             if not mo.address in notfound:
                 notfound.append({mo.address:'no getter'})
@@ -178,8 +167,8 @@ def get_ospf_peer_peers(mo, ospf, p_id, notfound):
                     notfound.append({p['peer_id']:'MO noit found'})
                 continue
         return 1
-    except:
-        notfound.append(mo.address)
+    #except:
+    #    notfound.append(mo.address)
     
 
 def handler():
@@ -187,26 +176,23 @@ def handler():
     area0routers =  ManagedObject.objects.filter(labels__contains=[' ospf_16143_area0'])
     for router in area0routers:
         routerprofile = router.profile.name.replace('.','_')
-        print('core router process '+ router.address)
         globals()[routerprofile+'_get_ospf_peers_all'](router,ospf_topo,'16143')
+        break
     notfound = []
     ospf1 = copy.deepcopy(ospf_topo)
-    for proc_item in ospf1:
-        print(proc_item)
-        for router_item in ospf1[proc_item]:
-            if router_item == 'routers':
-                continue
+    for proc_item in ospf1.keys():
+        for router_item in ospf1[proc_item].keys():
             for peer_item in ospf1[proc_item][router_item]['peers']:
                 router = ManagedObject.objects.filter(address = peer_item['peer_id'], is_managed=True)
                 if router:
                     if not peer_item['peer_id'] in list(ospf_topo[proc_item]['routers'].keys()):
-                        ospf_topo[proc_item]['routers'] = { peer_item['peer_id']: router[0].bi_id}
+                        ospf_topo[proc_item]['routers'] = { peer_item['peer_id']: router.bi_id}
                     if not router[0].bi_id in list(ospf_topo[proc_item].keys()):
                         print('Core peer {}'.format(router[0].name))
                         get_ospf_peer_peers(router[0], ospf_topo, proc_item,notfound)
                 else:
                     if not peer_item['peer_id'] in list(ospf_topo[proc_item]['routers'].keys()):
-                        ospf_topo[proc_item]['routers'] = { peer_item['peer_id']: ''}
+                        ospf_topo[proc_item]['routers'] = { peer_item['peer_id']: router.bi_id}
                     if not peer_item['peer_id'] in notfound:
                         notfound.append({peer_item['peer_id']:'MO not found'})
                     continue
@@ -216,6 +202,3 @@ def handler():
         pickle.dump(notfound, f)
     pprint(ospf_topo)
 
-if __name__ == "__main__":
-    connect()
-    handler()

@@ -38,25 +38,43 @@ class OSPF_Topo:
                             if peer_peeritem['peer_id'] == v['id']:
                                 link['node2_int'] = peer_peeritem['interface']
                 self.links.append(link)
+
     def makejs(self):
-        self.js={'nodes': [], 'edges': [] }
+        n = []
+        self.js['nodes'] = []
+        self.js['edges'] = []
         for k,v in self.raw.items():
-            self.js['nodes'].append({ 'id': k, 'type': 'server', 'label': v['id']})
-        for k in self.links:
-            self.js['edges'].append({
-                'source': k['node1_bi'],
-                'target': k['node2_bi'],
-                'label': k['node1_int']
-            })
+            if not v['id'] in n:
+                n.append(v['id'])
+                self.js['nodes'].append({ 'id': v['id'], 'type': 'server', 'label': v['id']})
+            for v1 in v['peers']:
+                if not v1['peer_id'] in n:
+                    n.append(v1['peer_id'])
+                    self.js['nodes'].append({ 'id': v1['peer_id'], 'type': 'server', 'label': v1['peer_id']})
+                y = 0
+                for i in self.js['edges']:
+                    if i['source'] == v['id'] and i['target'] == v1['peer_id']:
+                        i['label'] = i['label'] + ' - ' + v1['interface']
+                        y = 1
+                        break
+                    if i['source'] == v1['peer_id'] and i['target'] == v['id']:
+                        i['label'] = v1['interface'] + ' - ' +  i['label']
+                        y = 1
+                        break
+                if y == 1:
+                    continue
+                self.js['edges'].append({
+                    'source': v['id'],
+                    'target': v1['peer_id'],
+                    'label': v1['interface']
+                })
 
-
-
-connect()
+#connect()
 topology = OSPF_Topo()
 with open('/tmp/ospf_topo.pickle', 'rb') as f:
          data = pickle.load(f)
 topology.raw = data['16143']
-topology.makelinks()
+#topology.makelinks()
 topology.makejs()
 s = json.dumps(topology.js)
 with open('/tmp/ospf_topo.js', 'w') as f2:
