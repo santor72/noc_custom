@@ -45,8 +45,8 @@ class Map2Application(ExtApplication):
     inv.net application
     """
 
-    title = _("Network Map")
-    menu = _("Network Map")
+    title = _("Custom Network Map")
+    menu = _("Custom Network Map")
     glyph = "globe"
 
     implied_permissions = {"launch": ["inv:networksegment:lookup"]}
