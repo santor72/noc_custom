@@ -11,6 +11,7 @@ import logging
 import itertools
 from collections import defaultdict
 from typing import Dict, List, Set
+import pickle
 
 # Third-party modules
 import cachetools
