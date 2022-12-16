@@ -167,13 +167,13 @@ def get_ospf_peer_peers(mo, ospf, p_id, notfound):
             r = ManagedObject.objects.filter(address = p['peer_id'], is_managed=True)
             if r:
                 if not p['peer_id'] in list(oospf[p_id]['routers'].keys()):
-                        ospf[p_id]['routers'] = { p['peer_id']: r.bi_id}
+                        ospf[p_id]['routers'][p['peer_id']] = r.bi_id
                 if not r[0].bi_id in ospf[p_id]:
                     print('Leaf peer {}'.format(r[0].name))
                     get_ospf_peer_peers(r[0], ospf, p_id,notfound)
             else:
                 if not p['peer_id'] in list(oospf[p_id]['routers'].keys()):
-                        ospf[p_id]['routers'] = { p['peer_id']: ''}
+                        ospf[p_id]['routers'][p['peer_id']] = ''
                 if not p['peer_id'] in notfound:
                     notfound.append({p['peer_id']:'MO noit found'})
                 continue
@@ -200,13 +200,13 @@ def handler():
                 router = ManagedObject.objects.filter(address = peer_item['peer_id'], is_managed=True)
                 if router:
                     if not peer_item['peer_id'] in list(ospf_topo[proc_item]['routers'].keys()):
-                        ospf_topo[proc_item]['routers'] = { peer_item['peer_id']: router[0].bi_id}
+                        ospf_topo[proc_item]['routers'][peer_item['peer_id']] = router[0].bi_id
                     if not router[0].bi_id in list(ospf_topo[proc_item].keys()):
                         print('Core peer {}'.format(router[0].name))
                         get_ospf_peer_peers(router[0], ospf_topo, proc_item,notfound)
                 else:
                     if not peer_item['peer_id'] in list(ospf_topo[proc_item]['routers'].keys()):
-                        ospf_topo[proc_item]['routers'] = { peer_item['peer_id']: ''}
+                        ospf_topo[proc_item]['routers'][peer_item['peer_id']] = ''
                     if not peer_item['peer_id'] in notfound:
                         notfound.append({peer_item['peer_id']:'MO not found'})
                     continue
