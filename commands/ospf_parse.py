@@ -60,7 +60,7 @@ class OSPF_Topo:
                         y = 1
                         break
                     if i['source'] == v1['peer_id'] and i['target'] == v['id']:
-                        i['label'] = v1['interface'] + 1
+                        i['label'] = i['label'] + 1
                         y = 1
                         break
                 if y == 1:
