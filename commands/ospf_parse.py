@@ -39,20 +39,30 @@ class OSPF_Topo:
                                 link['node2_int'] = peer_peeritem['interface']
                 self.links.append(link)
 
+    def js_set_group(self, ip, area):
+        for node in self.js['nodes']:
+            if node['id'] == ip:
+                if node['group'] != '0.0.0.0' or area == '0.0.0.0':
+                    node['group'] = area
+    
     def makejs(self):
         n = []
         self.js['nodes'] = []
         self.js['edges'] = []
+        self.js['groups'] = ['others', '0.0.0.0']
         for k,v in self.raw.items():
             if k == 'routers':
                 continue
             if not v['id'] in n:
                 n.append(v['id'])
-                self.js['nodes'].append({ 'id': v['id'], 'type': 'server', 'label': v['id']})
+                self.js['nodes'].append({ 'id': v['id'], 'type': 'server', 'label': v['id'], 'group': 'others'})
             for v1 in v['peers']:
                 if not v1['peer_id'] in n:
                     n.append(v1['peer_id'])
-                    self.js['nodes'].append({ 'id': v1['peer_id'], 'type': 'server', 'label': v1['peer_id']})
+                    self.js['nodes'].append({ 'id': v1['peer_id'], 'type': 'server', 'label': v1['peer_id'], 'group': 'others'})
+                if (not v1['area'] in self.js['groups']) and not (v1['area'] in ['0','0.0.0.0']):
+                    self.js['groups'].append(v1['area'])
+                self.js_set_group(v1['peer_id'], '0.0.0.0' if v1['area'] == '0' else v1['area'])
                 y = 0
                 for i in self.js['edges']:
                     if i['source'] == v['id'] and i['target'] == v1['peer_id']:
@@ -70,6 +80,7 @@ class OSPF_Topo:
                     'target': v1['peer_id'],
                     'label': 1
                 })
+
 
 #connect()
 topology = OSPF_Topo()
