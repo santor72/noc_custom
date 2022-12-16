@@ -174,8 +174,8 @@ class CustomSegmentTopology(BaseTopology):
         links: List[Link] = []
         ospflinks = [x for x in  self.ospftopo['16143']['links'] if x['type'] == 'noc']
         for ospflink in ospflinks:
-            mo1_biid,mo1_int  = list(*ospflink[0]['mo1'].items())
-            mo2_biid,mo2_int  = list(*ospflink[0]['mo2'].items())
+            mo1_biid,mo1_int  = list(*ospflink['mo1'].items())
+            mo2_biid,mo2_int  = list(*ospflink['mo2'].items())
             mo1_int_int = SubInterface.objects.get(id=mo1_int)
             mo2_int_int = SubInterface.objects.get(id=mo2_int)
             links.append(Link(interfaces=[mo1_int_int, mo2_int_int]))
