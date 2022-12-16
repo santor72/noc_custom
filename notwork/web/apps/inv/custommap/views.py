@@ -41,7 +41,7 @@ from noc.services.web.apps.inv.map.views import MapApplication
 tags_lock = threading.RLock()
 
 
-class CustomMapApplication(MapApplication):
+class CustommapApplication(MapApplication):
     """
     inv.net application
     """
