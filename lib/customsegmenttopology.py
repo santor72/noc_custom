@@ -20,6 +20,7 @@ from bson import ObjectId
 # NOC modules
 from noc.sa.models.managedobject import ManagedObject
 from noc.inv.models.interface import Interface
+from noc.inv.models.subinterface import SubInterface
 from noc.inv.models.link import Link
 from noc.core.log import PrefixLoggerAdapter
 from noc.core.ip import IP
