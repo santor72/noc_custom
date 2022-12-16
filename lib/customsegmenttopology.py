@@ -171,7 +171,7 @@ class CustomSegmentTopology(BaseTopology):
 
         # Get all links, belonging to segment 
         links: List[Link] = []
-        ospflinks = [x for x in  self.ospftopo['16143'] if x['type'] == 'noc']
+        ospflinks = [x for x in  self.ospftopo['16143']['links'] if x['type'] == 'noc']
         for ospflink in ospflinks:
             mo1_biid,mo1_int  = list(*links[0]['mo1'].items())
             mo2_biid,mo2_int  = list(*links[0]['mo2'].items())
