@@ -44,6 +44,8 @@ class OSPF_Topo:
         self.js['nodes'] = []
         self.js['edges'] = []
         for k,v in self.raw.items():
+            if k == 'routers':
+                continue
             if not v['id'] in n:
                 n.append(v['id'])
                 self.js['nodes'].append({ 'id': v['id'], 'type': 'server', 'label': v['id']})
