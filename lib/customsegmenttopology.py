@@ -179,9 +179,6 @@ class CustomSegmentTopology(BaseTopology):
             mo2_int_int = SubInterface.objects.get(id=mo2_int)
             links.append(Link(interfaces=[mo1_int_int, mo2_int_int]))
 
-        links: List[Link] = list(
-            Link.objects.filter(linked_segments__in=[s.id for s in self.segment_siblings])
-        )
         # All linked interfaces from map
         all_ifaces: List["ObjectId"] = list(
             itertools.chain.from_iterable(link.interface_ids for link in links)
