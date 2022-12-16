@@ -69,6 +69,10 @@ class CustomSegmentTopology(BaseTopology):
             self.logger.info("[%s] No uplinks found. Skipping", policy)
         self.logger.info("Failed to find uplinks")
         return []
+    @property
+    def ospftopo(self):
+        with open('/tmp/ospf_topo.pickle', 'rb') as f:
+            return  pickle.load(f)
 
     def get_uplinks_seghier(self) -> List[str]:
         """
@@ -165,7 +169,16 @@ class CustomSegmentTopology(BaseTopology):
             else:
                 return 0
 
-        # Get all links, belonging to segment
+        # Get all links, belonging to segment 
+        links: List[Link] = []
+        ospflinks = links = [x for x in  self.ospftopo['16143'] if x['type'] == 'noc']
+        for ospflink in ospflinks:
+            mo1_biid,mo1_int  = list(*links[0]['mo1'].items())
+            mo2_biid,mo2_int  = list(*links[0]['mo2'].items())
+            mo1_int_int = SubInterface.objects.get(id=mo1_int)
+            mo2_int_int = SubInterface.objects.get(id=mo2_int)
+            links.append(Link(interfaces=[mo1_int_int, mo2_int_int]))
+
         links: List[Link] = list(
             Link.objects.filter(linked_segments__in=[s.id for s in self.segment_siblings])
         )
