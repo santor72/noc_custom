@@ -43,13 +43,18 @@ class OSPF_Topo:
         for node in self.js['nodes']:
             if node['id'] == ip:
                 if node['group'] != '0.0.0.0' or area == '0.0.0.0':
-                    node['group'] = area
+                    node['group'] = area if area else 'others' 
     
+    def js_addgroup(self, group):
+        if group and (not group in ['0','0.0.0.0']):
+            if not group in [x['id'] for x in self.js['groups']]:
+                self.js['groups'].append({'id': group, 'label': group})
+            
     def makejs(self):
         n = []
         self.js['nodes'] = []
         self.js['edges'] = []
-        self.js['groups'] = ['others', '0.0.0.0']
+        self.js['groups'] = [{'id': 'others', 'label': 'others'}, {'id': '0.0.0.0', 'label': '0.0.0.0'}]
         for k,v in self.raw.items():
             if k == 'routers':
                 continue
@@ -60,17 +65,16 @@ class OSPF_Topo:
                 if not v1['peer_id'] in n:
                     n.append(v1['peer_id'])
                     self.js['nodes'].append({ 'id': v1['peer_id'], 'type': 'server', 'label': v1['peer_id'], 'group': 'others'})
-                if (not v1['area'] in self.js['groups']) and not (v1['area'] in ['0','0.0.0.0']):
-                    self.js['groups'].append(v1['area'])
+                self.js_addgroup('0.0.0.0' if v1['area'] == '0' else v1['area'])
                 self.js_set_group(v1['peer_id'], '0.0.0.0' if v1['area'] == '0' else v1['area'])
                 y = 0
                 for i in self.js['edges']:
                     if i['source'] == v['id'] and i['target'] == v1['peer_id']:
-                        i['label'] = i['label'] + 1
+                        #i['label'] = i['label'] + 1
                         y = 1
                         break
                     if i['source'] == v1['peer_id'] and i['target'] == v['id']:
-                        i['label'] = i['label'] + 1
+                        #i['label'] = i['label'] + 1
                         y = 1
                         break
                 if y == 1:
@@ -89,6 +93,7 @@ with open('/tmp/ospf_topo.pickle', 'rb') as f:
 topology.raw = data['16143']
 #topology.makelinks()
 topology.makejs()
+pprint(topology.js)
 s = json.dumps(topology.js)
 with open('/tmp/ospf_topo.js', 'w') as f2:
     f2.write('const elements = ' + s+';\r\n')
