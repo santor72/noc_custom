@@ -40,7 +40,7 @@ from noc.core.cache.decorator import cachedmethod
 tags_lock = threading.RLock()
 
 
-class Map2Application(ExtApplication):
+class MapApplication(ExtApplication):
     """
     inv.net application
     """
