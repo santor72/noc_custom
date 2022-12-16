@@ -54,11 +54,11 @@ class OSPF_Topo:
                 y = 0
                 for i in self.js['edges']:
                     if i['source'] == v['id'] and i['target'] == v1['peer_id']:
-                        i['label'] = i['label'] + ' - ' + v1['interface']
+                        i['label'] = i['label'] + 1
                         y = 1
                         break
                     if i['source'] == v1['peer_id'] and i['target'] == v['id']:
-                        i['label'] = v1['interface'] + ' - ' +  i['label']
+                        i['label'] = v1['interface'] + 1
                         y = 1
                         break
                 if y == 1:
@@ -66,7 +66,7 @@ class OSPF_Topo:
                 self.js['edges'].append({
                     'source': v['id'],
                     'target': v1['peer_id'],
-                    'label': v1['interface']
+                    'label': 1
                 })
 
 #connect()
