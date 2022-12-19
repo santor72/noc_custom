@@ -173,13 +173,17 @@ class CustomSegmentTopology(BaseTopology):
 
         # Get all links, belonging to segment 
         links: List[Link] = []
+        import copy
         ospflinks = [x for x in  self.ospftopo['16143']['links'] if x['type'] == 'noc']
+        l_i= 1
         for ospflink in ospflinks:
             mo1_biid,mo1_int  = list(*ospflink['mo1'].items())
             mo2_biid,mo2_int  = list(*ospflink['mo2'].items())
             mo1_int_int = SubInterface.objects.get(id=mo1_int)
             mo2_int_int = SubInterface.objects.get(id=mo2_int)
-            links.append(Link(interfaces=[mo1_int_int, mo2_int_int]))
+            lnew = Link(interfaces=[mo1_int_int, mo2_int_int])
+            lnew.id = l_i
+            links.append(lnew)
 
         # All linked interfaces from map
         all_ifaces: List["ObjectId"] = list(
