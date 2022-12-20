@@ -188,7 +188,7 @@ class CustomSegmentTopology(BaseTopology):
             lnew.id = l_i
             links.append(lnew)
             l_i = l_i+1
-
+ 
         # All linked interfaces from map
         all_ifaces: List["ObjectId"] = list(
             itertools.chain.from_iterable(link.interface_ids for link in links)
