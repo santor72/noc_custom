@@ -10,7 +10,7 @@ import re
 import time
 from collections import defaultdict
 from itertools import compress, chain
-from pprint import pprint
+from pprint import pprint, pformat
 
 # NOC modules
 from noc.sa.profiles.Generic.get_interfaces import Script as BaseScript
@@ -424,7 +424,7 @@ class Script(BaseScript):
             ip = match.group("ip")
             ipv4_interfaces[c_iface] += [ip]
         self.logger.info('IPV4 interfaces')
-        self.logger.info(list(ipv4_interfaces.keys()))
+        self.logger.info(pformat(ipv4_interfaces))
         # Get IPv6 interfaces
         ipv6_interfaces = defaultdict(list)  # interface -> [ipv6 addresses]
         c_iface = None
