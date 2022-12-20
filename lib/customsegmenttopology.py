@@ -12,6 +12,7 @@ import itertools
 from collections import defaultdict
 from typing import Dict, List, Set
 import pickle
+import re
 
 # Third-party modules
 import cachetools
@@ -172,6 +173,15 @@ class CustomSegmentTopology(BaseTopology):
                 return 0
 
         # Get all links, belonging to segment 
+        def cloud_node(intname):
+            re_vlan = re.compile(r"^.+(?P<vlname>\d)+.?$")
+            match = re_vlan.match(intname) 
+            print(intname)
+            if match:
+                return match.group('vlname')
+            else:
+                return False
+
         links: List[Link] = []
         import copy
         ospflinks = [x for x in  self.ospftopo['16143']['links'] if x['type'] == 'noc']
@@ -183,9 +193,17 @@ class CustomSegmentTopology(BaseTopology):
             mo2_int_int = SubInterface.objects.get(id=mo2_int)
             if mo1_int != mo2_int:
                 lnew = Link(interfaces=[mo1_int_int, mo2_int_int])
+                lnew.id = l_i
             else:
                 lnew = Link(interfaces=[mo1_int_int])
-            lnew.id = l_i
+                cloudname = cloud_node(mo1_int_int.name)
+                lnew.id = 9999999
+                '''
+                if cloudname:
+                    lnew.id = 9999999
+                else:
+                    lnew.id = l_i
+                '''
             links.append(lnew)
             l_i = l_i+1
  
