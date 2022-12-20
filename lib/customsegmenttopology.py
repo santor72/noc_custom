@@ -175,7 +175,7 @@ class CustomSegmentTopology(BaseTopology):
         links: List[Link] = []
         import copy
         ospflinks = [x for x in  self.ospftopo['16143']['links'] if x['type'] == 'noc']
-        l_i= 2
+        l_i= 5001
         for ospflink in ospflinks:
             mo1_biid,mo1_int  = list(*ospflink['mo1'].items())
             mo2_biid,mo2_int  = list(*ospflink['mo2'].items())
