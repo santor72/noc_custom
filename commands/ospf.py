@@ -137,22 +137,22 @@ def Huawei_VRP_get_ospf_process_peers(mo=None, pid=None, peers=[]):
                     m_peerip = re_peerip.match(dispeer['output'][0])
                     if m_peerip:
                         peer_address = m_peerip.group('peerip')
-                        interface_id = get_ifname_by_ip(m_peerip.group('intip'))
+                        interface_id = get_ifid_by_ip(m_peerip.group('intip'))
                         peer_int = get_ifname_by_ip(m_peerip.group('peerip'))
-                        peer_int_id = get_ifname_by_ip(m_peerip.group('peerip'))
+                        peer_int_id = get_ifid_by_ip(m_peerip.group('peerip'))
                 peers.append({
                     'peer_id': m_ne.group('ip'),
                     'state': m_ne.group('state'),
                     'peer_address': peer_address,
                     'interface': m_ne.group('interface'),
-                    'interface_id': '',
+                    'interface_id': interface_id,
                     'area': m_ne.group('area'),
                     #Ищем ManagedObject по адресам пира
                     'bi_id': get_mo_bi([m_ne.group('ip')]),
                     #Ищем интерфейс пира по адресам пира
                     #Имя интерфейса из noc не совпадает с полным имененм на оборудовании
-                    'peer_int': '',
-                    'peer_int_id': ''
+                    'peer_int': peer_int,
+                    'peer_int_id': peer_int_id
                 })
         return 1
     #except:
