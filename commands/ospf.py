@@ -27,9 +27,12 @@ def make_link(router_bi_id, router_id, peer,links):
     если хоть одного нет type router
     Проверяем наличие в словаре links такой связи
     если нет добавляем
+    Если линк в общих вланах 1552 или 1652 добавляем только первый роутер в линк
     '''
     link={'type':'unk'}
     y = 0
+    re_1552 = re.compile(r"^.+1552.?$")
+    re_1652 = re.compile(r"^.+1652.?$")
     if peer['bi_id'] and peer['interface_id'] and peer['peer_int_id']:
         for item in links:
             if 'mo1' in item.keys()  and 'mo2' in item.keys():
@@ -41,9 +44,13 @@ def make_link(router_bi_id, router_id, peer,links):
                 break
             link['type']='noc'
             link['mo1'] = {router_bi_id:peer['interface_id']}
-            link['mo2'] = {peer['bi_id']:peer['peer_int_id']}
             link['ip1'] = router_id
-            link['ip2'] = peer['peer_id']
+            if re_1552.findall(peer['interface']) or re_1652.findall(peer['interface']):
+                link['mo2'] = {router_bi_id:peer['interface_id']}
+                link['ip2'] = router_id
+            else:
+                link['mo2'] = {peer['bi_id']:peer['peer_int_id']}
+                link['ip2'] = peer['peer_id']
     else:
         for item in links:
             if 'ip1' in item.keys()  and 'ip2' in item.keys():
@@ -107,7 +114,7 @@ def get_mo_bi(ips=[]):
         return None
 
 def Huawei_VRP_get_ospf_process_peers(mo=None, pid=None, peers=[]):
-    try:
+    #try:
         if not mo:
             return 0
         if not pid:
@@ -117,13 +124,26 @@ def Huawei_VRP_get_ospf_process_peers(mo=None, pid=None, peers=[]):
             return -1
         l = ospfne['output'][0].split('\n')
         re_peer = re.compile(r"^.+(?P<area>\d+.\d+.\d+.\d+)\s+(?P<interface>\S+)\s+(?P<ip>\d+.\d+.\d+.\d+)\s+(?P<state>\S+)\s+")
+        re_peerip = re.compile(r".+Area.+interface\s+(?P<intip>\d+.\d+.\d+.\d+)\(.+\s+Router ID:.+Address:\s+(?P<peerip>\d+.\d+.\d+.\d+)\s+", re.MULTILINE | re.DOTALL)
         for neitem in l:
             m_ne = re_peer.match(neitem)
             if m_ne:
+                dispeer = mo.scripts.commands(commands = ["dis ospf peer {} {}".format(m_ne.group('interface'), m_ne.group('ip'))])
+                peer_address = ''
+                interface_id = ''
+                peer_int = ''
+                peer_int_id = ''
+                if dispeer and dispeer['output']:
+                    m_peerip = re_peerip.match(dispeer['output'][0])
+                    if m_peerip:
+                        peer_address = m_peerip.group('peerip')
+                        interface_id = get_ifname_by_ip(m_peerip.group('intip'))
+                        peer_int = get_ifname_by_ip(m_peerip.group('peerip'))
+                        peer_int_id = get_ifname_by_ip(m_peerip.group('peerip'))
                 peers.append({
                     'peer_id': m_ne.group('ip'),
                     'state': m_ne.group('state'),
-                    'peer_address': '',
+                    'peer_address': peer_address,
                     'interface': m_ne.group('interface'),
                     'interface_id': '',
                     'area': m_ne.group('area'),
@@ -135,11 +155,11 @@ def Huawei_VRP_get_ospf_process_peers(mo=None, pid=None, peers=[]):
                     'peer_int_id': ''
                 })
         return 1
-    except:
-        return -1
+    #except:
+    #    return -1
 
 def Huawei_VRP_get_ospf_peers_all(mo=None,ospf={}, p_id=None):
-    try:
+    #try:
         if not mo:
             return 0
         ospfprocess = mo.scripts.commands(commands = ['dis ospf asbr-summary | i OSPF'])
@@ -158,8 +178,8 @@ def Huawei_VRP_get_ospf_peers_all(mo=None,ospf={}, p_id=None):
                 ospf[process_id]['routers'][router_id] = mo.bi_id
                 Huawei_VRP_get_ospf_process_peers(mo, process_id, ospf[process_id][mo.bi_id]['peers'])
         return 1
-    except:
-        return -1
+    #except:
+    #    return -1
 
 def Cisco_IOS_get_ospf_peers_all(mo=None,ospf={}, p_id=None):
     try:
