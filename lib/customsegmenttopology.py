@@ -193,9 +193,11 @@ class CustomSegmentTopology(BaseTopology):
             mo2_int_int = SubInterface.objects.get(id=mo2_int)
             if mo1_int != mo2_int:
                 lnew = Link(interfaces=[mo1_int_int, mo2_int_int])
+                lnew.description = '{} - {}\n{}-{}'.format(mo1_int_int.name, ','.join(mo1_int_int.ipv4_addresses), mo2_int_int.name, ','.join(mo2_int_int.ipv4_addresses))
                 lnew.id = l_i
             else:
                 lnew = Link(interfaces=[mo1_int_int])
+                lnew.description = '{} - {}'.format(mo1_int_int.name, ','.join(mo1_int_int.ipv4_addresses))
                 cloudname = cloud_node(mo1_int_int.name)
                 lnew.id = 9999999
                 '''
@@ -302,6 +304,7 @@ class CustomSegmentTopology(BaseTopology):
                         "bw": max(in_bw, out_bw),
                     },
                 )
+                self.link_hints[link_id] = link.description
                 pn += 2
 
     def iter_uplinks(self):
