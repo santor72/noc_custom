@@ -56,8 +56,8 @@ class GETONUINFO(NBIAPI):
         cmd = str(action.expand(mo,**data))
         params={"commands":cmd.split('\n'), "ignore_cli_errors":True}
         result = mo.scripts.commands(**params)
-        actionoutput.append(result)
-        return JSONResponse(content=actionoutput, media_type="application/json")
+        #actionoutput.append(result)
+        return JSONResponse(content=result, media_type="application/json")
 
 # Install router
 GETONUINFO(router)
