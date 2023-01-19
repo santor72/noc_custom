@@ -304,7 +304,7 @@ class CustomSegmentTopology(BaseTopology):
                         "bw": max(in_bw, out_bw),
                     },
                 )
-                self.link_hints[link_id] = link.description
+                #self.link_hints[link_id] = link.description
                 pn += 2
 
     def iter_uplinks(self):

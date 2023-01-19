@@ -41,15 +41,33 @@ class Script(GetMetricsScript):
          return
 
     @metrics(
-            [
-              "Interface | DOM | RxPower",
-              "Interface | DOM | TxPower",
-             ],
-            has_capability="DB | Interfaces",
-            #has_script="get_dom_status",
-            access="S",  # CLI version
-            volatile=False,
-            )
+         [
+             "Interface | DOM | RxPower",
+             "Interface | DOM | Temperature",
+             "Interface | DOM | TxPower",
+             "Interface | DOM | Voltage",
+         ],
+         has_capability="DB | Interfaces",
+         has_script="get_dom_status",
+         access="S",  # CLI version
+         volatile=False,
+    )
+#    def collect_dom_metrics(self, metrics):
+#         r = {}
+#         for m in self.scripts.get_dom_status():
+#             ipath = ["", "", "", m["interface"]]
+#             if m.get("temp_c") is not None:
+#                 self.set_metric(id=("Interface | DOM | Temperature", ipath), value=m["temp_c"])
+#             if m.get("voltage_v") is not None:
+#                 self.set_metric(id=("Interface | DOM | Voltage", ipath), value=m["voltage_v"])
+#             if m.get("optical_rx_dbm") is not None:
+#                 self.set_metric(id=("Interface | DOM | RxPower", ipath), value=m["optical_rx_dbm"])
+#             if m.get("current_ma") is not None:
+#                 self.set_metric(id=("Interface | DOM | Bias Current", ipath), value=m["current_ma"])
+#             if m.get("optical_tx_dbm") is not None:
+#                 self.set_metric(id=("Interface | DOM | TxPower", ipath), value=m["optical_tx_dbm"])
+#         return r
+
 
     def collect_dom_metrics(self, metrics):
         """
@@ -60,7 +78,10 @@ class Script(GetMetricsScript):
         for i, n, s in self.snmp.join(["1.3.6.1.2.1.2.2.1.2", "1.3.6.1.4.1.40418.7.100.30.1.1.17"]):
              if s != None and s != 'NULL':
                   ipath = ["", "", "", n]
-                  self.logger.info("\n{}\n".format('\t'.join(ipath)))
+#                  self.logger.info("\n{}\n".format('\t'.join(ipath)))
+#                  self.logger.info("!!!!!!!!!!!!!!!!!")
+#                  self.logger.info(self.rx_val.search(s).group('val'))
+#                  self.logger.info("!!!!!!!!!!!!!!!!!")
                   self.set_metric(id=("Interface | DOM | RxPower", ipath), value=self.rx_val.search(s).group('val'))
                   c = 1
         if c == 0:
