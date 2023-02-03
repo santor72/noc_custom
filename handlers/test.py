@@ -11,4 +11,4 @@ from noc.sa.models.managedobject import ManagedObject
 from noc.custom.lib.ospf import *
 
 def hk_test_handler(djob):
-    return dir(djob)
+    return ['show ver']
