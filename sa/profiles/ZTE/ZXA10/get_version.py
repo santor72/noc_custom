@@ -13,7 +13,7 @@ import re
 from noc.core.script.base import BaseScript
 from noc.sa.interfaces.igetversion import IGetVersion
 from noc.sa.models.profile import Profile
-from noc.sa.models.managedobject import ManagedObject
+
 
 class Script(BaseScript):
     name = "ZTE.ZXA10.get_version"
@@ -44,17 +44,13 @@ class Script(BaseScript):
             v = self.cli("show software", cached=True)
             match = self.rx_version2.search(v)
         r = {
-            "vendor": "ZTE",
+            "vendor": self.credentials.get("address"),
+#            "vendor": "ZTE",
             "platform": match.group("platform"),
             "version": match.group("version"),
         }
-        if re.match(r'^V2.1.+$', r["version"]):
-           mo =  ManagedObject.objects.filter(address=self.credentials.get("address"))
-           p=Profile.objects.filter(name='ZTE.ZXA10')
-           m = ManagedObject.objects.get(id=mo[0].id)
-           m.profile = p[0]
-           m.save()
-           print(m.profile.name)
+#        if re.match('sdf', r["version"]) and self.:
+#        
         try:
             v = self.cli("show backboard ")
             match = self.rx_serial.search(v)
