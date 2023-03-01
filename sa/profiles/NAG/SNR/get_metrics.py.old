@@ -1,20 +1,45 @@
 # ---------------------------------------------------------------------
-# Qtech.QSW2800.get_metrics
+# Cisco.IOS.get_metrics
 # ---------------------------------------------------------------------
 # Copyright (C) 2007-2019 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
-# NOC modules
-from noc.sa.profiles.Generic.get_metrics import Script as GetMetricsScript
-from .oidrules.slot import SlotRule
-from .oidrules.enterprise import EnterpriseRule
+# Python modules
+import re
 
+# NOC modules
+from noc.core.text import parse_kv
+from noc.sa.profiles.Generic.get_metrics import Script as GetMetricsScript, metrics
+import re
+
+def convert_sensor(value,precession):
+        return value/(10*precession)
 
 class Script(GetMetricsScript):
-    name = "Qtech.QSW2800.get_metrics"
+    name = "NAG.SNR.get_metrics"
+    rx_line = re.compile(
+        r"^(?P<interface>\S+)\s+(?P<temp_c>\S+)(?:\s+(?P<voltage_v>\S+))?\s+(?P<current_ma>\S+)\s+(?P<optical_rx_dbm>\S+)\s+(?P<optical_tx_dbm>\S+)$"
+    )
+    rx_val = re.compile(r"^(?P<val>-*\d+\.*\d*)\S*")
 
-    OID_RULES = [SlotRule, EnterpriseRule]
+    def dombycli(self, metrics):
+         self.logger.info("\n\n\nStarting to track DOM by CLI\n\n\n")
+         for m in self.scripts.get_dom_status():
+             ipath = ["", "", "", "Ethernet"+m["interface"]]
+             self.logger.info("\n{}\n".format('\t'.join(ipath)))
+             if m.get("temp_c") is not None:
+                 self.set_metric(id=("Interface | DOM | Temperature", ipath), value=m["temp_c"])
+             if m.get("voltage_v") is not None:
+                 self.set_metric(id=("Interface | DOM | Voltage", ipath), value=m["voltage_v"])
+             if m.get("optical_rx_dbm") is not None:
+                 self.set_metric(id=("Interface | DOM | RxPower", ipath), value=m["optical_rx_dbm"])
+             if m.get("current_ma") is not None:
+                 self.set_metric(id=("Interface | DOM | Bias Current", ipath), value=m["current_ma"])
+             if m.get("optical_tx_dbm") is not None:
+                 self.set_metric(id=("Interface | DOM | TxPower", ipath), value=m["optical_tx_dbm"])
+         return
+
     @metrics(
          [
              "Interface | DOM | RxPower",
@@ -42,4 +67,5 @@ class Script(GetMetricsScript):
              if m.get("optical_tx_dbm") is not None:
                  self.set_metric(id=("Interface | DOM | TxPower", ipath), value=m["optical_tx_dbm"])
          return r
+
 
