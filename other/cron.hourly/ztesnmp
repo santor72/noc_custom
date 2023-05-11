@@ -1,0 +1,49 @@
+#!/bin/bash
+exec 1>>/root/ztesnmp/signalsout.log
+exec 2>>/root/ztesnmp/signalserr.log
+c=Cadyiewjie
+
+olt125=`/opt/noc/noc getmobylabel -s pointolt -p ZTE.ZXA10-1-2 --loglevel=none | tail -1`
+olt21=`/opt/noc/noc getmobylabel -s pointolt -p ZTE.ZXA10 --loglevel=none | tail -1`
+timestamp=$(date +%s)
+echo Start
+date
+cd /root/ztesnmp
+for n1 in $olt125; do
+echo "et signals for $n1"
+	if [ ! -d $n1 ]; then mkdir $n1; fi
+	snmpwalk -v 2c -c $c $n1 .1.3.6.1.4.1.3902.1012.3.28.1.1.5 > /root/ztesnmp/$n1/$n1.onulist.$timestamp
+	snmpwalk -v 2c -c $c $n1 .1.3.6.1.4.1.3902.1012.3.50.12.1.1.10 > /root/ztesnmp/$n1/$n1.onurx.$timestamp
+	snmpwalk -v 2c -c $c $n1 1.3.6.1.4.1.3902.1012.3.50.11.2.1.3 > /root/ztesnmp/$n1/$n1.oltonulist.$timestamp
+	snmpwalk -v 2c -c $c $n1 .1.3.6.1.4.1.3902.1015.1010.11.2.1.2 > /root/ztesnmp/$n1/$n1.oltrx.$timestamp
+	snmpwalk -v 2c -c $c $n1 .1.3.6.1.4.1.3902.1012.3.50.12.1.1.10 > /root/ztesnmp/$n1/$n1.newonurx.$timestamp
+done 
+
+for n1 in $olt21; do
+echo "et signals for $n1"
+	if [ ! -d $n1 ]; then mkdir $n1; fi
+	snmpwalk -v 2c -c $c $n1 .1.3.6.1.4.1.3902.1012.3.28.1.1.5 > /root/ztesnmp/$n1/$n1.onulist.$timestamp
+	snmpwalk -v 2c -c $c $n1 .1.3.6.1.4.1.3902.1012.3.50.12.1.1.10 > /root/ztesnmp/$n1/$n1.onurx.$timestamp
+	snmpwalk -v 2c -c $c $n1 .1.3.6.1.4.1.3902.1082.500.20.2.1.2.1.3 > /root/ztesnmp/$n1/$n1.oltonulist.$timestamp
+	snmpwalk -v 2c -c $c $n1 .1.3.6.1.4.1.3902.1082.500.1.2.4.2.1.2 > /root/ztesnmp/$n1/$n1.oltrx.$timestamp
+	snmpwalk -v 2c -c $c $n1 .1.3.6.1.4.1.3902.1082.500.20.2.2.2.1.10 > /root/ztesnmp/$n1/$n1.newonurx.$timestamp
+done 
+for n1 in $olt125; do
+	echo "submit to DB for $n1"
+	f=/tmp/forload.$$
+	/opt/noc/noc parseonurxsnmp --olt $n1 --onus /root/ztesnmp/$n1/$n1.onulist.$timestamp > $f
+	curl -i -XPOST 'http://10.1.40.201:8086/write?db=ponsignals' --data-binary @$f
+	rm -f $f
+	rm -f  /root/ztesnmp/$n1/*
+done 
+
+for n1 in $olt21; do
+	echo "submit to DB for $n1"
+	f=/tmp/forload.$$
+	/opt/noc/noc parseonurxsnmp --olt $n1 --onus /root/ztesnmp/$n1/$n1.onulist.$timestamp > $f
+	curl -i -XPOST 'http://10.1.40.201:8086/write?db=ponsignals' --data-binary @$f
+	rm -f $f
+	rm -f  /root/ztesnmp/$n1/*
+done 
+date
+echo End
