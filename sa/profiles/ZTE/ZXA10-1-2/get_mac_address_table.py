@@ -42,7 +42,7 @@ class Script(BaseScript):
                 {
                     "vlan_id": match.group("vlan_id"),
                     "mac": match.group("mac"),
-                    "interfaces": [match.group("interface")],
+                    "interfaces": [ifname],
                     "type": {"Dynamic": "D"}[match.group("type")],
                 }
             ]
