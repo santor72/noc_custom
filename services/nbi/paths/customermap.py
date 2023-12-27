@@ -163,7 +163,7 @@ class CustomerMapAPI(NBIAPI):
                 'primaryIP': item.get('host') or item.get('ip'),
                 'nazvanie': item.get('nazv'),
                 'location': item.get('location'),
-                'icon': 'switch'
+                'icon': 'switch' if item['type'] != 'customer' else 'host'
             })
         for k,item in self.links.items():
             topology_dict['links'].append({
