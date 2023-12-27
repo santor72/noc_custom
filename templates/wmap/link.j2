@@ -1,0 +1,151 @@
+{% macro link(id , nodea, nodeb, a,z, bandwidth, query_a, query_b) -%}
+        {
+          "arrows": {
+            "height": 3,
+            "offset": 1,
+            "width": 8
+          },
+          "id": "{{id}}",
+          "nodes": [
+            {
+              "anchors": {
+                "0": {
+                  "numFilledLinks": 0,
+                  "numLinks": 1
+                },
+                "1": {
+                  "numFilledLinks": 0,
+                  "numLinks": 1
+                },
+                "2": {
+                  "numFilledLinks": 0,
+                  "numLinks": 0
+                },
+                "3": {
+                  "numFilledLinks": 0,
+                  "numLinks": 0
+                },
+                "4": {
+                  "numFilledLinks": 0,
+                  "numLinks": 0
+                }
+              },
+              "colors": {
+                "background": "rgba(204, 204, 220, 0.16)",
+                "border": "rgba(204, 204, 220, 0.25)",
+                "font": "rgb(204, 204, 220)",
+                "statusDown": "#ff0000"
+              },
+              "compactVerticalLinks": false,
+              "id": "nodea['id']",
+              "isConnection": false,
+              "label": "{{nodea['label']}}",
+              "nodeIcon": {
+                "drawInside": true,
+                "name": "{{nodea['iconname']}}",
+                "padding": {
+                  "horizontal": 0,
+                  "vertical": 0
+                },
+                "size": {
+                  "height": 20,
+                  "width": 20
+                },
+                "src": "{{nodea['iconpath']}}"
+              },
+              "padding": {
+                "horizontal": 9,
+                "vertical": 11
+              },
+              "position": [
+                {{nodea['x']}},
+                {{modea['y']}}
+              ],
+              "useConstantSpacing": false
+            },
+            {
+              "anchors": {
+                "0": {
+                  "numFilledLinks": 0,
+                  "numLinks": 1
+                },
+                "1": {
+                  "numFilledLinks": 0,
+                  "numLinks": 0
+                },
+                "2": {
+                  "numFilledLinks": 0,
+                  "numLinks": 1
+                },
+                "3": {
+                  "numFilledLinks": 0,
+                  "numLinks": 0
+                },
+                "4": {
+                  "numFilledLinks": 0,
+                  "numLinks": 0
+                }
+              },
+              "colors": {
+                "background": "rgba(204, 204, 220, 0.16)",
+                "border": "rgba(204, 204, 220, 0.25)",
+                "font": "rgb(204, 204, 220)",
+                "statusDown": "#ff0000"
+              },
+              "compactVerticalLinks": false,
+              "id": "{{nodeb['id']}}",
+              "isConnection": false,
+              "label": "{{nodeb['label']}}",
+              "nodeIcon": {
+                "drawInside": true,
+                "name": "{{nodeb['iconname']}}",
+                "padding": {
+                  "horizontal": 0,
+                  "vertical": 0
+                },
+                "size": {
+                  "height": 40,
+                  "width": 40
+                },
+                "src": "{{nodeb['iconpath']}}"
+              },
+              "padding": {
+                "horizontal": 10,
+                "vertical": 4
+              },
+              "position": [
+                {{nodeb['x']}},
+                {{modeb['y']}}
+              ],
+              "useConstantSpacing": false
+            }
+          ],
+          "showThroughputPercentage": true,
+          "sides": {
+            "A": {
+              "anchor": 0,
+              "bandwidth": {{bandwidth}},
+              "currentBandwidthText": "0  Gb/s",
+              "currentPercentageText": "0.00%",
+              "currentText": "0.00%",
+              "currentValue": 0,
+              "currentValueText": "0  b/s",
+              "dashboardLink": "",
+              "labelOffset": 68,
+              "query": "{{query_a}}"
+            },
+            "Z": {
+              "anchor": 0,
+              "bandwidth": {{bandwidth}},
+              "currentBandwidthText": "0  Gb/s",
+              "currentPercentageText": "0.00%",
+              "currentText": "0.00%",
+              "currentValue": 0,
+              "currentValueText": "0  kb/s",
+              "dashboardLink": "",
+              "labelOffset": 52,
+              "query": "{{query_b}}"
+            }
+          },
+          "stroke": 4
+        }

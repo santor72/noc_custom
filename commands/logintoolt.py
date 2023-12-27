@@ -1,6 +1,7 @@
 # coding: utf-8
 import re
 import pickle
+import datetime
 
 from noc.core.management.base import BaseCommand
 from noc.core.mongo.connection import connect
@@ -14,9 +15,11 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         macdb = MACDBC()
         connect()
+        ts=int((datetime.datetime.now()).timestamp())
         bras=ManagedObject.objects.get(name='point-BNG01-podolsk')
         print('Get sessions')
         res_sessions_det = bras.scripts.commands(commands=["show subscriber session all detail location 0/RSP0/CPU0"])
+        re_poninterfaces=re.compile(r'^gpon-olt|EPON')
         sessions={}
         notfound={}
         if res_sessions_det.get('output') and res_sessions_det['output']:
@@ -28,13 +31,17 @@ class Command(BaseCommand):
             for item in sessionlist:
                 sessiondata = rx_sh_session.match(item)
                 if sessiondata:
-                    newitem = {'mac': sessiondata.group('mac'), 'vlan': sessiondata.group('vlan'),'bi_id':'','interface':''}
+                    newitem = {'ts':ts, 'mac': sessiondata.group('mac'), 'vlan': sessiondata.group('vlan'),'bi_id':'','interface':'','mo_name':'','mo_ip':''}
                     mac = int(MAC(MACAddressParameter(accept_bin=False).clean(sessiondata.group('mac'))))
                     m=macdb.mac_filter({"mac": mac})
                     for p in m:
-                        if re.match(r'^gpon-olt',p["interface"]) and p["vlan"] == sessiondata.group('vlan'):
+                        if re_poninterfaces.findall(p["interface"]) and p["vlan"] == sessiondata.group('vlan'):
                             newitem['bi_id'] = p['managed_object']
                             newitem['interface'] = p['interface']
+                            mo = ManagedObject.objects.get(bi_id=p['managed_object'])
+                            if not mo is None:
+                                newitem['mo_name']=mo.name
+                                newitem['mo_ip']=mo.address
                     if newitem['interface']:
                         sessions[sessiondata.group('login')]=newitem
                     else:

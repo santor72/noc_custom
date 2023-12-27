@@ -1,0 +1,58 @@
+{% macro node(id, label, iconname, iconpath, x, y) -%}
+        {
+          "anchors": {
+            "0": {
+              "numFilledLinks": 0,
+              "numLinks": 3
+            },
+            "1": {
+              "numFilledLinks": 0,
+              "numLinks": -1
+            },
+            "2": {
+              "numFilledLinks": 0,
+              "numLinks": 0
+            },
+            "3": {
+              "numFilledLinks": 0,
+              "numLinks": 0
+            },
+            "4": {
+              "numFilledLinks": 0,
+              "numLinks": 0
+            }
+          },
+          "colors": {
+            "background": "#00000000",
+            "border": "#00000000",
+            "font": "rgb(204, 204, 220)",
+            "statusDown": "#ff0000"
+          },
+          "compactVerticalLinks": false,
+          "id": "{{id}}",
+          "isConnection": false,
+          "label": "{{label}}",
+          "nodeIcon": {
+            "drawInside": true,
+            "name": "{{iconname}}",
+            "padding": {
+              "horizontal": 0,
+              "vertical": 0
+            },
+            "size": {
+              "height": 20,
+              "width": 20
+            },
+            "src": "{{iconpath}}"
+          },
+          "padding": {
+            "horizontal": 9,
+            "vertical": 11
+          },
+          "position": [
+            {{x}},
+            {{y}}
+          ],
+          "useConstantSpacing": false
+        }
+{%- endmacro %}

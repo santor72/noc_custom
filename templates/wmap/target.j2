@@ -1,0 +1,24 @@
+{% macro target(query, rawQuery) -%}
+    {
+      "database": "noc",
+      "datasource": {
+        "type": "vertamedia-clickhouse-datasource",
+        "uid": "qV6bq6bnk"
+      },
+      "dateColDataType": "date",
+      "dateLoading": false,
+      "dateTimeColDataType": "ts",
+      "dateTimeType": "DATETIME",
+      "datetimeLoading": false,
+      "extrapolate": true,
+      "format": "time_series",
+      "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+      "intervalFactor": 1,
+      "query": "SELECT $timeSeries as t, avg(load_in) as MSK_IXColonel FROM $table WHERE managed_object = 2232320672506806068 and path[4]=toString('xe-0/2/0') and $timeFilter GROUP BY t ORDER BY t",
+      "rawQuery": "SELECT (intDiv(toUInt32(ts), 15) * 15) * 1000 as t, avg(load_in) as MSK_IXColonel FROM noc.interface WHERE managed_object = 2232320672506806068 and path[4]=toString('xe-0/2/0') and date >= toDate(1703130835) AND date <= toDate(1703152435) AND ts >= toDateTime(1703130835) AND ts <= toDateTime(1703152435) GROUP BY t ORDER BY t",
+      "refId": "MSK_IXColonel",
+      "round": "0s",
+      "skip_comments": true,
+      "table": "interface",
+      "tableLoading": false
+    }
