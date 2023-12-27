@@ -111,8 +111,8 @@ class CustomerMapAPI(NBIAPI):
         else:
             result={'Result':'Fail', 'message': 'Customer find error'}
             return JSONResponse(content=result, media_type="application/json")
-        nodes[customer_id] = {}
-        nodes[customer_id] = {'id': customer_id, 
+        self.nodes[customer_id] = {}
+        self.nodes[customer_id] = {'id': customer_id, 
                       'type': 'customer',
                       'host':customer['Data']['login'],
                       'ip': customer['Data']['ip_mac'],
