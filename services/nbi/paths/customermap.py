@@ -21,8 +21,9 @@ router = APIRouter()
 
 class CustomerMapfResponse(BaseModel):
     result: List[Dict]
+
 class CustomerMapRequest(BaseModel):
-    'customer_id': int
+    customer_id: int
 
 class CustomerMapAPI(NBIAPI):
     api_name = "customermap"
