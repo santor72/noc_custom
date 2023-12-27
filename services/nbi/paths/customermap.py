@@ -122,4 +122,4 @@ class CustomerMapAPI(NBIAPI):
         return JSONResponse(content=result, media_type="application/json")
 
 # Install router
-ObjectInetifAPI(router)
+CustomerMapAPI(router)
