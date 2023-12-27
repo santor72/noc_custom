@@ -125,7 +125,7 @@ class CustomerMapAPI(NBIAPI):
             if ac_data['Result'] == 'OK':
                 for ac_item in ac_data['data']:
                     if ac_item['object_type']=='switch' or ac_item['object_type']=='radio':
-                        devdata = getnode(ac_item['object_type'], ac_item['object_id'])
+                        devdata = self.getnode(ac_item['object_type'], ac_item['object_id'])
                         ifnum =  ac_item.get('interface')
                         ifaces = devdata.get('ifaces')
                         uplink_ifaces = [x for x in devdata.get('uplink_iface_array')]
