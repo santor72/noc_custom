@@ -61,18 +61,18 @@ class CustomerMapAPI(NBIAPI):
             data = json.loads(response.content)
             if data['Result'] == 'OK':
                 for k in data['data']:
-                    if not k in nodes[dev_id].get('uplink_ifaces'):
+                    if not k in self.nodes[dev_id].get('uplink_ifaces'):
                         continue
                     for item in data['data'][k]:
-                        if item['connect_id'] in links:
+                        if item['connect_id'] in self.links:
                             continue
                         if item['object_type']=='switch' or item['object_type']=='radio':
                             if item['object_id'] in self.nodes:
-                                devdata = nodes[item['object_id']]
+                                devdata = self.nodes[item['object_id']]
                                 ifaces = devdata.get('ifaces')
                                 uplink_ifaces = devdata.get('uplink_iface_array')
                             else:
-                                devdata = getnode(item['object_type'], item['object_id'])                        
+                                devdata = self.getnode(item['object_type'], item['object_id'])                        
                                 ifaces = devdata.get('ifaces')
                                 uplink_ifaces = devdata.get('uplink_iface_array')
                                 self.nodes[item['object_id']] = {'id': item['object_id'],
@@ -93,7 +93,7 @@ class CustomerMapAPI(NBIAPI):
                                 'intb': ifaces.get(str(ifnum))
                                 }
                             if (devdata.get('host')!='217.76.46.108' and devdata.get('host')!='217.76.46.119' and devdata.get('host')!='10.76.33.82'):
-                                get_links(item['object_type'], item['object_id'])
+                                self.get_links(item['object_type'], item['object_id'])
     
     async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         result = {}
