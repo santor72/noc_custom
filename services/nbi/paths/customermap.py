@@ -164,7 +164,7 @@ class CustomerMapAPI(NBIAPI):
                 'primaryIP': item.get('host') or item.get('ip'),
                 'nazvanie': item.get('nazv'),
                 'location': item.get('location'),
-                'icon': 'switch' if item['type'] != 'customer' else ('cloud' if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82'] else 'host')
+                'icon': 'host' if item['type'] == 'customer' else ('cloud' if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82'] else 'switch')
             })
         for k,item in self.links.items():
             topology_dict['links'].append({
