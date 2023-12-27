@@ -154,8 +154,28 @@ class CustomerMapAPI(NBIAPI):
                 return JSONResponse(content=result, media_type="application/json")                                        
         else:
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
-            return JSONResponse(content=result, media_type="application/json")                            
-        result=[self.nodes, self.links]
+            return JSONResponse(content=result, media_type="application/json")  
+        topology_dict = {'nodes': [], 'links': []}
+        for k,item in self.nodes.items():
+            topology_dict['nodes'].append({
+                'id': int(item['id']),
+                'name': item.get('host'),
+                'primaryIP': item.get('host') or item.get('ip'),
+                'nazvanie': item.get('nazv'),
+                'location': item.get('location'),
+                'icon': 'switch'
+            })
+        for k,item in self.links.items():
+            topology_dict['links'].append({
+                'id': int(item['id']),
+                'source': int(item['nodea']),
+                'target': int(item['nodeb']),
+                'srcIfName': item['inta']['ifName'],
+                'tgtIfName': item['intb']['ifName'],
+                'srcDevice': int(item['nodea']),
+                'tgtDevice': int(item['nodeb'])
+            })                          
+        result=topology_dict
         return JSONResponse(content=result, media_type="application/json")
 
 # Install router
