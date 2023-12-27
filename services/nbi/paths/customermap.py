@@ -44,7 +44,7 @@ class CustomerMapAPI(NBIAPI):
             "description": "",
             }
         route_post ={
-            "path": "/api/nbi/inetif",
+            "path": "/api/nbi/customermap",
             "method": "POST",
             "endpoint": self.handler,
             "response_class": JSONResponse,
