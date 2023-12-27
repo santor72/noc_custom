@@ -111,6 +111,50 @@ class CustomerMapAPI(NBIAPI):
         else:
             result={'Result':'Fail', 'message': 'Customer find error'}
             return JSONResponse(content=result, media_type="application/json")
+        nodes[customer_id] = {}
+        nodes[customer_id] = {'id': customer_id, 
+                      'type': 'customer',
+                      'host':customer['Data']['login'],
+                      'ip': customer['Data']['ip_mac'],
+                      'location': customer['Data']['login'],
+                      'nazv': customer['Data']['login']
+                     }
+        ac_response = requests.get(f"{self.usurl}&cat=commutation&action=get_data&object_type=customer&object_id={customer_id}")
+        if(ac_response.ok):
+            ac_data = json.loads(ac_response.content)
+            if ac_data['Result'] == 'OK':
+                for ac_item in ac_data['data']:
+                    if ac_item['object_type']=='switch' or ac_item['object_type']=='radio':
+                        devdata = getnode(ac_item['object_type'], ac_item['object_id'])
+                        ifnum =  ac_item.get('interface')
+                        ifaces = devdata.get('ifaces')
+                        uplink_ifaces = [x for x in devdata.get('uplink_iface_array')]
+                        ifname=''
+                        if ifnum:
+                            if ifaces.get(ifnum):
+                                ifname = ifaces[ifnum].get('ifName')
+                        self.links[ac_item['connect_id']]={'id':ac_item['connect_id'], 'nodea': customer_id,'inta':{'ifIndex': 1,
+                                                                                                            'ifType': 1,
+                                                                                                            'ifName': 'C',
+                                                                                                            'ifNumber': 1},
+                                                    'nodeb':ac_item['object_id'], 'intb': ifaces.get(str(ifnum))}
+                        self.nodes[ac_item['object_id']] = {'id': ac_item['object_id'],
+                                                    'type':ac_item['object_type'],
+                                                    'nazv': devdata.get('nazv'),
+                                                    'location': devdata.get('location'),
+                                                    'uzelcode': devdata.get('uzelcode'),
+                                                    'host': devdata.get('host'),
+                                                    'ip': devdata.get('host'),
+                                                    'ifaces': ifaces,
+                                                    'uplink_ifaces': uplink_ifaces
+                                                    }
+                        self.get_links(ac_item['object_type'], ac_item['object_id'])
+            else:
+                result={'Result':'Fail', 'message': 'Fail find customer commutation'}
+                return JSONResponse(content=result, media_type="application/json")                                        
+        else:
+            result={'Result':'Fail', 'message': 'Fail request customer commutation'}
+            return JSONResponse(content=result, media_type="application/json")                            
         result=customer['Data']
         return JSONResponse(content=result, media_type="application/json")
 
