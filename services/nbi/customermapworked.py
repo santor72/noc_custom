@@ -58,21 +58,21 @@ class CustomerMapAPI(NBIAPI):
             data = json.loads(response.content)
             if data['Result'] == 'OK':
                 for k in data['data']:
-                    if not k in nodes[dev_id].get('uplink_ifaces'):
+                    if not k in self.nodes[dev_id].get('uplink_ifaces'):
                         continue
                     for item in data['data'][k]:
-                        if item['connect_id'] in links:
+                        if item['connect_id'] in self.links:
                             continue
                         if item['object_type']=='switch' or item['object_type']=='radio':
-                            if item['object_id'] in nodes:
-                                devdata = nodes[item['object_id']]
+                            if item['object_id'] in self.nodes:
+                                devdata = self.nodes[item['object_id']]
                                 ifaces = devdata.get('ifaces')
                                 uplink_ifaces = devdata.get('uplink_iface_array')
                             else:
                                 devdata = self.getnode(item['object_type'], item['object_id'])                        
                                 ifaces = devdata.get('ifaces')
                                 uplink_ifaces = devdata.get('uplink_iface_array')
-                                nodes[item['object_id']] = {'id': item['object_id'],
+                                self.nodes[item['object_id']] = {'id': item['object_id'],
                                                             'type':item['object_type'],
                                                             'nazv': devdata.get('nazv'),
                                                             'location': devdata.get('location'),
@@ -83,11 +83,11 @@ class CustomerMapAPI(NBIAPI):
                                                             'uplink_ifaces': uplink_ifaces
                                                             }
                             ifnum =  item.get('interface')
-                            links[item['connect_id']]={
+                            self.links[item['connect_id']]={
                                 'id':item['connect_id'],
                                 'nodea': dev_id,
                                 'nodeb':item['object_id'],
-                                'inta':nodes[dev_id]['ifaces'].get(k),
+                                'inta':self.nodes[dev_id]['ifaces'].get(k),
                                 'intb': ifaces.get(str(ifnum))
                                 }
                             if (devdata.get('host')!='217.76.46.108' and devdata.get('host')!='217.76.46.119' and devdata.get('host')!='10.76.33.82'):
@@ -111,8 +111,8 @@ class CustomerMapAPI(NBIAPI):
         else:
             result={'Result':'Fail', 'message': 'Customer find error'}
             return JSONResponse(content=result, media_type="application/json")
-        nodes[customer_id] = {}
-        nodes[customer_id] = {'id': customer_id, 
+        self.nodes[customer_id] = {}
+        self.nodes[customer_id] = {'id': customer_id, 
                       'type': 'customer',
                       'host':customer['Data']['login'],
                       'ip': customer['Data']['ip_mac'],
@@ -133,12 +133,12 @@ class CustomerMapAPI(NBIAPI):
                         if ifnum:
                             if ifaces.get(ifnum):
                                 ifname = ifaces[ifnum].get('ifName')
-                        links[ac_item['connect_id']]={'id':ac_item['connect_id'], 'nodea': customer_id,'inta':{'ifIndex': 1,
+                        self.links[ac_item['connect_id']]={'id':ac_item['connect_id'], 'nodea': customer_id,'inta':{'ifIndex': 1,
                                                                                                             'ifType': 1,
                                                                                                             'ifName': 'C',
                                                                                                             'ifNumber': 1},
                                                     'nodeb':ac_item['object_id'], 'intb': ifaces.get(str(ifnum))}
-                        nodes[ac_item['object_id']] = {'id': ac_item['object_id'],
+                        self.nodes[ac_item['object_id']] = {'id': ac_item['object_id'],
                                                     'type':ac_item['object_type'],
                                                     'nazv': devdata.get('nazv'),
                                                     'location': devdata.get('location'),
@@ -156,7 +156,7 @@ class CustomerMapAPI(NBIAPI):
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
             return JSONResponse(content=result, media_type="application/json")  
         topology_dict = {'nodes': [], 'links': []}
-        for k,item in nodes.items():
+        for k,item in self.nodes.items():
             topology_dict['nodes'].append({
                 'id': int(item['id']),
                 'name': 'MSK-IX' if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82'] else item.get('host'),
@@ -165,7 +165,7 @@ class CustomerMapAPI(NBIAPI):
                 'location': item.get('location'),
                 'icon': 'host' if item['type'] == 'customer' else ('cloud' if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82'] else 'switch')
             })
-        for k,item in links.items():
+        for k,item in self.links.items():
             topology_dict['links'].append({
                 'id': int(item['id']),
                 'source': int(item['nodea']),
