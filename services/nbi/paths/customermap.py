@@ -48,7 +48,7 @@ class CustomerMapAPI(NBIAPI):
         return [route_post]
 
     def getnode(self, dev_type, dev_id):
-        response = requests.get(f"{usurl}+&cat=device&action=get_data&object_type={dev_type}&object_id={dev_id}")
+        response = requests.get(f"{self.usurl}+&cat=device&action=get_data&object_type={dev_type}&object_id={dev_id}")
         if(response.ok):
             data = json.loads(response.content)
             return data['data'].get(str(dev_id))
