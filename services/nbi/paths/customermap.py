@@ -101,7 +101,7 @@ class CustomerMapAPI(NBIAPI):
                             if (devdata.get('host')!='217.76.46.108' and devdata.get('host')!='217.76.46.119' and devdata.get('host')!='10.76.33.82'):
                                 get_links(item['object_type'], item['object_id'])
     
-    def async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
+    async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         result = {}
 
         if not self.access_granted(access_header):
