@@ -155,7 +155,7 @@ class CustomerMapAPI(NBIAPI):
         else:
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
             return JSONResponse(content=result, media_type="application/json")                            
-        result=customer['Data']
+        result=[self.nodes, self.links]
         return JSONResponse(content=result, media_type="application/json")
 
 # Install router
