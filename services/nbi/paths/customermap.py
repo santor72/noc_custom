@@ -81,6 +81,7 @@ class CustomerMapAPI(NBIAPI):
                                                             'location': devdata.get('location'),
                                                             'uzelcode': devdata.get('uzelcode'),
                                                             'host': devdata.get('host'),
+                                                            'ip': devdata.get('host'),
                                                             'ifaces': ifaces,
                                                             'uplink_ifaces': uplink_ifaces
                                                             }
@@ -159,7 +160,7 @@ class CustomerMapAPI(NBIAPI):
         for k,item in self.nodes.items():
             topology_dict['nodes'].append({
                 'id': int(item['id']),
-                'name': 'MSK-IX' if item.get('host') in ['217.76.46.108','217.76.46.119','10.76.33.82'] else item.get('host'),
+                'name': 'MSK-IX' if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82'] else item.get('host'),
                 'primaryIP': item.get('host') or item.get('ip'),
                 'nazvanie': item.get('nazv'),
                 'location': item.get('location'),
