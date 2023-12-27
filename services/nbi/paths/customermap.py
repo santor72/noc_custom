@@ -34,15 +34,6 @@ class CustomerMapAPI(NBIAPI):
     customer={}
 
     def get_routes(self):
-        route_get = {
-            "path": "/api/nbi/customermap",
-            "method": "GET",
-            "endpoint": self.handler,
-            "response_class": JSONResponse,
-            "response_model": None,
-            "name": "customermap",
-            "description": "",
-            }
         route_post ={
             "path": "/api/nbi/customermap",
             "method": "POST",
@@ -52,7 +43,7 @@ class CustomerMapAPI(NBIAPI):
             "name": "customermap",
             "description": ""
         }
-        return [route_get, route_post]
+        return [route_post]
 
     def getnode(self, dev_type, dev_id):
         response = requests.get(f"{usurl}+&cat=device&action=get_data&object_type={dev_type}&object_id={dev_id}")
