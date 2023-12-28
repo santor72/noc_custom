@@ -123,8 +123,8 @@ class TopologyInfo:
                 'id': int(item['id']),
                 'source': int(item['nodea']),
                 'target': int(item['nodeb']),
-                'srcIfName': item['inta']['ifName'],
-                'tgtIfName': item['intb']['ifName'],
+                'srcIfName': item['inta']['ifname'],
+                'tgtIfName': item['intb']['ifname'],
                 'srcDevice': int(item['nodea']),
                 'tgtDevice': int(item['nodeb'])
             })   
