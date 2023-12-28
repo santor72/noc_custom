@@ -247,7 +247,7 @@ class CustomerMapAPI(NBIAPI):
                         deva = cur_node
                         devb = nextdev
                         inta = {'ifIndex': 1,'ifType': 1,'ifName': 'C','ifNumber': 1}
-                        nextdev['interfaces'][str(ac_item.get('interface'))]
+                        intb = nextdev['interfaces'][str(ac_item.get('interface'))]
                         topoinfo.newUSlink(deva, devb, inta, intb)   
                         if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
                             self.get_links(topoinfo, ac_item['object_type'], nextdev['ip'])
