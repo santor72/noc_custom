@@ -45,14 +45,14 @@ class CustomerMapAPI(NBIAPI):
         }
         return [route_post]
 
-    def generate_link_id(ip1,ifnum1,ip2,ifnum2):
+    def generate_link_id(self,ip1,ifnum1,ip2,ifnum2):
         if ip1 > ip2:
             idstr=f"{ip2}-{ifnum2}-{ip1}-{ifnum1}"
         elif ip1 < ip2:
             idstr=f"{ip1}-{ifnum1}-{ip2}-{ifnum2}"
         return idstr
 
-    def generate_node_id(ipstr='1.1.1.1'):
+    def generate_node_id(self,ipstr='1.1.1.1'):
         ip = netaddr.IPAddress(ipstr)
         return ip.value
 
