@@ -11,6 +11,7 @@ import json
 import requests
 import re
 from typing import List, Union, Dict
+import netaddr
 
 
 class Command(BaseCommand):
@@ -18,6 +19,16 @@ class Command(BaseCommand):
     openapi_tags = ["customermap API"]
     usurl="http://usrn.ccs.ru//api.php?key=weifdovIpyirdyilyablichhyasgojyatwejIkKenvaitnajal"
     profiles = []
+    def generate_link_id(ip1,ifnum1,ip2,ifnum2):
+        if ip1 > ip2:
+            idstr=f"{ip2}-{ifnum2}-{ip1}-{ifnum1}"
+        elif ip1 < ip2:
+            idstr=f"{ip1}-{ifnum1}-{ip2}-{ifnum2}"
+        return idstr
+
+    def generate_node_id(ipstr='1.1.1.1'):
+        ip = netaddr.IPAddress(ipstr)
+        return ip.value
 
     def getnode(self, dev_type, dev_id):
         response = requests.get(f"{self.usurl}+&cat=device&action=get_data&object_type={dev_type}&object_id={dev_id}")
@@ -28,26 +39,29 @@ class Command(BaseCommand):
             return {}
     
     def get_links(self, dev_type, dev_id, nodes, links):
+        #Получить списко коммутаций устойства
         response = requests.get(f"{self.usurl}&cat=commutation&action=get_data&object_type={dev_type}&object_id={dev_id}")
         if(response.ok):
             data = json.loads(response.content)
             if data['Result'] == 'OK':
+                #Перебираем соединения, если интерфейс устройства на имеет признак Uplink переходим к следующему интерфейсу
                 for k in data['data']:
                     if not k in nodes[dev_id].get('uplink_ifaces'):
                         continue
+                    #Цикл по списку коммутаций интерфейса
                     for item in data['data'][k]:
-                        if item['connect_id'] in links:
-                            continue
+                        #Проверяем наличие устройства с которым скоммутирован интерфейс в списке устройств nodes
                         if item['object_type']=='switch' or item['object_type']=='radio':
-                            if item['object_id'] in nodes:
-                                devdata = nodes[item['object_id']]
+                            newnodeid = generate_node_id(item['host'])
+                            if newnodeid in nodes:
+                                devdata = nodes[newnodeid]
                                 ifaces = devdata.get('ifaces')
                                 uplink_ifaces = devdata.get('uplink_iface_array')
                             else:
                                 devdata = self.getnode(item['object_type'], item['object_id'])                        
                                 ifaces = devdata.get('ifaces')
                                 uplink_ifaces = devdata.get('uplink_iface_array')
-                                nodes[item['object_id']] = {'id': item['object_id'],
+                                nodes[newnodeid] = {'id': item['object_id'],
                                                             'type':item['object_type'],
                                                             'nazv': devdata.get('nazv'),
                                                             'location': devdata.get('location'),
@@ -58,23 +72,28 @@ class Command(BaseCommand):
                                                             'uplink_ifaces': uplink_ifaces
                                                             }
                             ifnum =  item.get('interface')
-                            links[item['connect_id']]={
+                            #Создать id для линка
+                            newlinkid = self.generate_link_id(dev_id,nodes[dev_id][k].get('ifIndex'),newnodeid,ifaces['ifnum']['ifIndex'])
+                            if newlinkid in links:
+                                continue
+                            links[newlinkid]={
                                 'id':item['connect_id'],
-                                'nodea': dev_id,
-                                'nodeb':item['object_id'],
+                                'nodea': nodes[dev_id].get('ip'),
+                                'nodeb':item['host'],
                                 'inta':nodes[dev_id]['ifaces'].get(k),
                                 'intb': ifaces.get(str(ifnum))
                                 }
                             if (devdata.get('host')!='217.76.46.108' and devdata.get('host')!='217.76.46.119' and devdata.get('host')!='10.76.33.82'):
-                                self.get_links(item['object_type'], item['object_id'], nodes, links)
+                                self.get_links(item['object_type'], item['host'], nodes, links)
 
     def findnodebyip(self, nodes,ip):
-        for x in nodes.keys():
-            if nodes[x].get('ip'):
+        for x in nodes.keys():            
+            if ip == nodes[x].get('ip'):
                 return x
         return 0
 
     def findlink(self, nodes,links,link):
+        #print(link)
         ip_a=nodes[link['nodea']].get('ip')
         ip_b=nodes[link['nodeb']].get('ip')
         int_a = link['inta']['ifIndex']
@@ -88,10 +107,23 @@ class Command(BaseCommand):
                 if int_a in [b_int, a_int] and int_b in [a_int, b_int]:
                     return 1
         return 0
+    def getmaxnodeid(self,nodes):
+        maxid=0
+        for k in nodes.keys():
+            if int(nodes[k]['id']) > maxid:
+                maxid = int(nodes[k]['id'])
+        return maxid
+
+    def getmaxlinkid(self,links):
+        maxid=0
+        for k in links.keys():
+            if int(k) > maxid:
+                maxid = k
+        return maxid
 
     def nocaddnode(self,nodes,mo):
         if not self.findnodebyip(nodes, mo.address):
-            newid = f"noc{mo.id}"
+            newid = self.getmaxnodeid(nodes)
             nodes[newid] = {
                 'id' : newid,
                 'ip' : mo.address,
@@ -100,6 +132,7 @@ class Command(BaseCommand):
                 'location': mo.description,
                 'nazv': mo.name
             }
+            print(f"add node {newid} - {mo.address}")
             return 1
         return 0
 
@@ -118,8 +151,12 @@ class Command(BaseCommand):
                     isnew = self.nocaddnode(nodes,l.interfaces[1].managed_object)
                     nodea=self.findnodebyip(nodes, l.interfaces[0].managed_object.address)
                     nodeb=self.findnodebyip(nodes, l.interfaces[1].managed_object.address)
+                    if nodea == 0 or nodeb == 0:
+                        print(l.interfaces[0].managed_object.address)
+                        print(l.interfaces[1].managed_object.address)
+                        continue
                     link = {
-                        'id' : str(l.id),
+                        'id' : self.getmaxlinkid(links),
                         'nodea' : nodea,
                         'nodeb' : nodeb,
                         'inta' : {'ifIndex': l.interfaces[0].ifindex,
@@ -135,14 +172,19 @@ class Command(BaseCommand):
                     }
                     if not self.findlink(nodes, links, link):                
                         links[link['id']] = link
+                        print(f"add link {link['id']} {l.interfaces[0].managed_object.address} - {l.interfaces[1].managed_object.address}")
                     if isnew:
-                        nocgetlinks(nodes,links,l.interfaces[1].managed_object.id)
+                        self.nocgetlinks(nodes,links,l.interfaces[1].managed_object.id)
                 elif i.id == l.interfaces[1].id:
                     isnew = self.nocaddnode(nodes,l.interfaces[0].managed_object)
                     nodea=self.findnodebyip(nodes, l.interfaces[1].managed_object.address)
                     nodeb=self.findnodebyip(nodes, l.interfaces[0].managed_object.address)
+                    if nodea == 0 or nodeb == 0:
+                        print(l.interfaces[0].managed_object.address)
+                        print(l.interfaces[1].managed_object.address)                        
+                        continue
                     link={
-                        'id': str(l.id),
+                        'id': self.getmaxlinkid(links),
                         'nodea' : nodea,
                         'nodeb' : nodeb,
                         'inta' : {'ifIndex': l.interfaces[1].ifindex,
@@ -158,8 +200,9 @@ class Command(BaseCommand):
                     }
                     if not self.findlink(nodes, links, link):                
                         links[link['id']] = link
+                        print(f"add link {link['id']} {l.interfaces[0].managed_object.address} - {l.interfaces[1].managed_object.address}")
                     if isnew:
-                        nocgetlinks(nodes,links,l.interfaces[0].managed_object.id)
+                        self.nocgetlinks(nodes,links,l.interfaces[0].managed_object.id)
         return 0
 
     def asknoc(self,nodes,links):
@@ -212,7 +255,7 @@ class Command(BaseCommand):
                                                                                                             'ifName': 'C',
                                                                                                             'ifNumber': 1},
                                                     'nodeb':ac_item['object_id'], 'intb': ifaces.get(str(ifnum))}
-                        nodes[ac_item['object_id']] = {'id': ac_item['object_id'],
+                        nodes[ac_item['host']] = {'id': ac_item['object_id'],
                                                     'type':ac_item['object_type'],
                                                     'nazv': devdata.get('nazv'),
                                                     'location': devdata.get('location'),
@@ -222,7 +265,7 @@ class Command(BaseCommand):
                                                     'ifaces': ifaces,
                                                     'uplink_ifaces': uplink_ifaces
                                                     }
-                        self.get_links(ac_item['object_type'], ac_item['object_id'], nodes, links)
+                        self.get_links(ac_item['object_type'], ac_item['host'], nodes, links)
             else:
                 result={'Result':'Fail', 'message': 'Fail find customer commutation'}
                 return JSONResponse(content=result, media_type="application/json")                                        
@@ -233,7 +276,7 @@ class Command(BaseCommand):
         topology_dict = {'nodes': [], 'links': []}
         for k,item in nodes.items():
             topology_dict['nodes'].append({
-                'id': str(item['id']),
+                'id': int(item['id']),
                 'name': 'MSK-IX' if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82'] else item.get('host'),
                 'primaryIP': item.get('host') or item.get('ip'),
                 'nazvanie': item.get('nazv'),
@@ -242,19 +285,20 @@ class Command(BaseCommand):
             })
         for k,item in links.items():
             topology_dict['links'].append({
-                'id': str(item['id']),
-                'source': str(item['nodea']),
-                'target': str(item['nodeb']),
+                'id': int(item['id']),
+                'source': int(item['nodea']),
+                'target': int(item['nodeb']),
                 'srcIfName': item['inta']['ifName'],
                 'tgtIfName': item['intb']['ifName'],
-                'srcDevice': str(item['nodea']),
-                'tgtDevice': str(item['nodeb'])
+                'srcDevice': int(item['nodea']),
+                'tgtDevice': int(item['nodeb'])
             })                          
         result=topology_dict
-        #with open('/root/topotemp.json','w') as f:
-        #    json.dump(result,f)
-        from pprint import pprint
-        pprint(nodes)
+        from pprint import pprint,pformat
+        with open('/root/topotemp.js','w') as f:
+           f.write(pformat(result))
+        
+#        pprint(result)
 #        pprint(links)
 
 if __name__ == "__main__":

@@ -45,6 +45,17 @@ class CustomerMapAPI(NBIAPI):
         }
         return [route_post]
 
+    def generate_link_id(ip1,ifnum1,ip2,ifnum2):
+        if ip1 > ip2:
+            idstr=f"{ip2}-{ifnum2}-{ip1}-{ifnum1}"
+        elif ip1 < ip2:
+            idstr=f"{ip1}-{ifnum1}-{ip2}-{ifnum2}"
+        return idstr
+
+    def generate_node_id(ipstr='1.1.1.1'):
+        ip = netaddr.IPAddress(ipstr)
+        return ip.value
+
     def getnode(self, dev_type, dev_id):
         response = requests.get(f"{self.usurl}+&cat=device&action=get_data&object_type={dev_type}&object_id={dev_id}")
         if(response.ok):
@@ -54,26 +65,29 @@ class CustomerMapAPI(NBIAPI):
             return {}
     
     def get_links(self, dev_type, dev_id, nodes, links):
+        #Получить списко коммутаций устойства
         response = requests.get(f"{self.usurl}&cat=commutation&action=get_data&object_type={dev_type}&object_id={dev_id}")
         if(response.ok):
             data = json.loads(response.content)
             if data['Result'] == 'OK':
+                #Перебираем соединения, если интерфейс устройства на имеет признак Uplink переходим к следующему интерфейсу
                 for k in data['data']:
                     if not k in nodes[dev_id].get('uplink_ifaces'):
                         continue
+                    #Цикл по списку коммутаций интерфейса
                     for item in data['data'][k]:
-                        if item['connect_id'] in links:
-                            continue
+                        #Проверяем наличие устройства с которым скоммутирован интерфейс в списке устройств nodes
                         if item['object_type']=='switch' or item['object_type']=='radio':
-                            if item['object_id'] in nodes:
-                                devdata = nodes[item['object_id']]
+                            newnodeid = generate_node_id(item['host'])
+                            if newnodeid in nodes:
+                                devdata = nodes[newnodeid]
                                 ifaces = devdata.get('ifaces')
                                 uplink_ifaces = devdata.get('uplink_iface_array')
                             else:
                                 devdata = self.getnode(item['object_type'], item['object_id'])                        
                                 ifaces = devdata.get('ifaces')
                                 uplink_ifaces = devdata.get('uplink_iface_array')
-                                nodes[item['object_id']] = {'id': item['object_id'],
+                                nodes[newnodeid] = {'id': item['object_id'],
                                                             'type':item['object_type'],
                                                             'nazv': devdata.get('nazv'),
                                                             'location': devdata.get('location'),
@@ -84,15 +98,19 @@ class CustomerMapAPI(NBIAPI):
                                                             'uplink_ifaces': uplink_ifaces
                                                             }
                             ifnum =  item.get('interface')
-                            links[item['connect_id']]={
+                            #Создать id для линка
+                            newlinkid = self.generate_link_id(dev_id,nodes[dev_id][k].get('ifIndex'),newnodeid,ifaces['ifnum']['ifIndex'])
+                            if newlinkid in links:
+                                continue
+                            links[newlinkid]={
                                 'id':item['connect_id'],
-                                'nodea': dev_id,
-                                'nodeb':item['object_id'],
+                                'nodea': nodes[dev_id].get('ip'),
+                                'nodeb':item['host'],
                                 'inta':nodes[dev_id]['ifaces'].get(k),
                                 'intb': ifaces.get(str(ifnum))
                                 }
                             if (devdata.get('host')!='217.76.46.108' and devdata.get('host')!='217.76.46.119' and devdata.get('host')!='10.76.33.82'):
-                                self.get_links(item['object_type'], item['object_id'], nodes, links)
+                                self.get_links(item['object_type'], item['host'], nodes, links)
     
     async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         result = {}
@@ -143,7 +161,8 @@ class CustomerMapAPI(NBIAPI):
                                                                                                             'ifName': 'C',
                                                                                                             'ifNumber': 1},
                                                     'nodeb':ac_item['object_id'], 'intb': ifaces.get(str(ifnum))}
-                        nodes[ac_item['object_id']] = {'id': ac_item['object_id'],
+                        newnodeid = generate_node_id(ac_item['host'])
+                        nodes[newnodeid] = {'id': ac_item['object_id'],
                                                     'type':ac_item['object_type'],
                                                     'nazv': devdata.get('nazv'),
                                                     'location': devdata.get('location'),
