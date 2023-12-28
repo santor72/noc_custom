@@ -52,7 +52,7 @@ class Command(BaseCommand):
                     for item in data['data'][k]:
                         #Проверяем наличие устройства с которым скоммутирован интерфейс в списке устройств nodes
                         if item['object_type']=='switch' or item['object_type']=='radio':
-                            newnodeid = generate_node_id(item['host'])
+                            newnodeid = self.generate_node_id(item['host'])
                             if newnodeid in nodes:
                                 devdata = nodes[newnodeid]
                                 ifaces = devdata.get('ifaces')

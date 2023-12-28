@@ -78,7 +78,7 @@ class CustomerMapAPI(NBIAPI):
                     for item in data['data'][k]:
                         #Проверяем наличие устройства с которым скоммутирован интерфейс в списке устройств nodes
                         if item['object_type']=='switch' or item['object_type']=='radio':
-                            newnodeid = generate_node_id(item['host'])
+                            newnodeid = self.generate_node_id(item['host'])
                             if newnodeid in nodes:
                                 devdata = nodes[newnodeid]
                                 ifaces = devdata.get('ifaces')
@@ -161,7 +161,7 @@ class CustomerMapAPI(NBIAPI):
                                                                                                             'ifName': 'C',
                                                                                                             'ifNumber': 1},
                                                     'nodeb':ac_item['object_id'], 'intb': ifaces.get(str(ifnum))}
-                        newnodeid = generate_node_id(ac_item['host'])
+                        newnodeid = self.generate_node_id(ac_item['host'])
                         nodes[newnodeid] = {'id': ac_item['object_id'],
                                                     'type':ac_item['object_type'],
                                                     'nazv': devdata.get('nazv'),
