@@ -32,63 +32,67 @@ class TopologyInfo:
     link_id_map = []
 #Возвращает id из словаря links по хешу линка
     def map_link_id(self, link_hash):
-        for l in links:
-            if link_hash == l.get('hash'):
-                return l.get('id')
+        for l in self.links:
+            if link_hash == self.links[l].get('hash'):
+                return self.links[l].get('id')
         return 0
 #возвращает id из словаря nodes по хешу устройства
     def map_node_id(self, node_hash):
-        for n in nodes:
-            if node_hash == n.get('hash'):
+        for n in self.nodes:
+            if node_hash == self.nodes[n].get('hash'):
                 return n.get('id')
         return 0
 #Новое устройство из данных userside    
-    def newUSnode(**kwarg):
+    def newUSnode(self,devdata):
         newid=self.current_node_id
         self.current_node_id+=1
         self.nodes[newid] = {
             'id': newid,
-            'hash': self.generate_node_hash(host)
+            'hash': self.generate_node_hash(devdata['host']),
             'system': 'userside',
-            'device_id': ID,
-            'host': host,
-            'ip': host,
-            'location': location,
-            'name': name or nazv,
-            'interfaces': ifaces,
-            'uplink_interfaces': uplink_iface_array
+            'type': 'device',
+            'device_id': devdata['ID'],
+            'host': devdata['host'],
+            'ip': devdata['host'],
+            'location': devdata['location'],
+            'name': devdata['name'] or devdata['nazv'],
+            'interfaces': devdata['ifaces'],
+            'uplink_interfaces': devdata['uplink_iface_array']
         }
-        node_id_map.append({'id':newid, 'hash' = self.generate_node_hash(host)})
+        self.node_id_map.append({'id':newid, 'hash': self.generate_node_hash(devdata['host'])})
         return newid
 
-    def newUSlink(a,b, inta, intb):
-        newlinkhash = self.generate_link_hash(a['ip'], b['ip'], inta['ifIndex'], intb['ifIndex'])
-        if self.map_link_id(newlinkhash):
-            return 0
+    def newUSlink(self,a,b, inta, intb):
+        if a['type'] != 'customer':
+            newlinkhash = self.generate_link_hash(a['ip'], b['ip'], inta['ifIndex'], intb['ifIndex'])
+            if self.map_link_id(newlinkhash):
+                return 0
+        else:
+            newlinkhash = f"c-1-{b['host']}-{intb['ifIndex']}"
         newlinkid=self.current_link_id
         self.current_link_id+=1
-        links[newlinkid]={
+        self.links[newlinkid]={
             'id' : newlinkid,
             'hash': newlinkhash,
-            'connect_id':connect_id,
-            'type': 'device',
             'system': 'userside',
             'nodea': a['id'],
             'nodeb':b['id'],
             'inta':{'ifindex': inta['ifIndex'], 'ifname': inta['ifName']},
             'intb': {'ifindex': intb['ifIndex'], 'ifname': intb['ifName']}
             }
+        self.node_id_map.append({'id':newlinkid, 'hash': newlinkhash})
+        return newlinkid
 
     #ищет запись о устройстве с nodes по id в учетной системе
-    def findnode_by_device_id(object_id,extsys):
-        for x in nodes.keys():            
-            if object_id == nodes[x].get('device_id') and extsys == nodes[x].get('system'):
+    def findnode_by_device_id(self,object_id,extsys):
+        for x in self.nodes.keys():            
+            if object_id == self.nodes[x].get('device_id') and extsys == self.nodes[x].get('system'):
                 return x
         return 0
 
     def findnode_id_byip(self, ip):
-        for x in nodes.keys():            
-            if ip == nodes[x].get('ip'):
+        for x in self.nodes.keys():            
+            if ip == self.nodes[x].get('ip'):
                 return x
         return 0
     
@@ -96,12 +100,13 @@ class TopologyInfo:
         ip = netaddr.IPAddress(ipstr)
         return ip.value
 
-    def generate_link_hash(self,ip1,ifnum1,ip2,ifnum2):
+    def generate_link_hash(self,ip1,ip2,ifnum1,ifnum2):
         if ip1 > ip2:
             idstr=f"{ip2}-{ifnum2}-{ip1}-{ifnum1}"
         elif ip1 < ip2:
             idstr=f"{ip1}-{ifnum1}-{ip2}-{ifnum2}"
         return idstr
+
     def generatejs(self):
         topology_dict = {'nodes': [], 'links': []}
         for k,item in self.nodes.items():
@@ -113,7 +118,7 @@ class TopologyInfo:
                 'location': item.get('location'),
                 'icon': 'host' if item['type'] == 'customer' else ('cloud' if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82'] else 'switch')
             })
-        for k,item in links.items():
+        for k,item in self.links.items():
             topology_dict['links'].append({
                 'id': int(item['id']),
                 'source': int(item['nodea']),
@@ -124,7 +129,7 @@ class TopologyInfo:
                 'tgtDevice': int(item['nodeb'])
             })   
         return topology_dict
-             
+
 class CustomerMapfResponse(BaseModel):
     result: List[Dict]
 
@@ -151,13 +156,13 @@ class CustomerMapAPI(NBIAPI):
     #Ищет данные устройства в Userside по ID
     def get_usdevice_by_id(self, dev_type, device_id):
         result = {}
-        nodeid = topoinfo.findnode_id_byip(dev_ip)
-        if nodeid:
+        if device_id:
             response = requests.get(f"{self.usurl}+&cat=device&action=get_data&object_type={dev_type}&object_id={device_id}")
             if(response.ok):
                 data = json.loads(response.content)
                 if data['Result'] == 'OK':
-                    result = data['data']
+                    for i in data['data']:
+                        result = data['data'][i]
         return result
 
     def get_usdevice_commutation(self, devtype=None, device_id=None):
@@ -171,8 +176,8 @@ class CustomerMapAPI(NBIAPI):
         return result
 
     def get_links(self, topoinfo, cur_dev_type, cur_device_ip):
-        cur_node = topoinfo.nodes.get(findnode_id_byip(cur_device_ip))
-        commutations = self.get_usdevice_commutation(topoinfo, cur_dev_type, cur_device_ip)
+        cur_node = topoinfo.nodes.get(topoinfo.findnode_id_byip(cur_device_ip))
+        commutations = self.get_usdevice_commutation(cur_dev_type, cur_node['device_id'])
         if commutations and cur_node:
             #Перебираем соединения, если интерфейс устройства на имеет признак Uplink переходим к следующему интерфейсу
             for cur_device_interface in commutations:
@@ -192,13 +197,15 @@ class CustomerMapAPI(NBIAPI):
                             nextdev =  topoinfo.nodes[nextnodeid]     
                         ifnum =  item.get('interface')
                         #Создать линк
-                        deva = cur_node['id']
-                        devb = nextdev['id']
-                        inta = cur_node['interfaces']['cur_device_interface']
-                        intb = nextdev['interfaces'][ifnum]
-                        topoinfo.newUSlink(deva, devb, inta, intb)   
+                        deva = cur_node
+                        devb = nextdev
+                        inta = cur_node['interfaces'][str(cur_device_interface)]
+                        intb = nextdev['interfaces'][str(ifnum)]
+                        newlinkid = topoinfo.newUSlink(deva, devb, inta, intb)   
+                        if newlinkid==0:
+                            continue
                         if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
-                            self.get_links(topoinfo, item['object_type'], ['ip'])
+                            self.get_links(topoinfo, item['object_type'], nextdev['ip'])
     
     async def handler(self, req:1CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         result = {}
@@ -237,13 +244,13 @@ class CustomerMapAPI(NBIAPI):
                         devdata = self.get_usdevice_by_id(ac_item['object_type'], ac_item['object_id'])
                         nextnodeid = topoinfo.newUSnode(devdata)  
                         nextdev =  topoinfo.nodes[nextnodeid]  
-                        deva = cur_node['id']
-                        devb = nextdev['id']
+                        deva = cur_node
+                        devb = nextdev
                         inta = {'ifIndex': 1,'ifType': 1,'ifName': 'C','ifNumber': 1}
-                        intb = nextdev['interfaces'][ifnum]
+                        nextdev['interfaces'][str(ac_item.get('interface'))]
                         topoinfo.newUSlink(deva, devb, inta, intb)   
                         if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
-                            self.get_links(topoinfo, ac_item['object_type'], ['ip'])
+                            self.get_links(topoinfo, ac_item['object_type'], nextdev['ip'])
             else:
                 result={'Result':'Fail', 'message': 'Fail find customer commutation'}
                 return JSONResponse(content=result, media_type="application/json")                                        
