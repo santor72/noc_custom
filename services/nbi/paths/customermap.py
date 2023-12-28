@@ -5,6 +5,7 @@ import os
 import json
 import requests
 import re
+import netaddr
 from typing import List, Union, Dict
 
 # Third-party modules
