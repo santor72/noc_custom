@@ -46,6 +46,12 @@ class CustomerMapAPI(NBIAPI):
         }
         return [route_post]
 
+    def findnodebyid(self, nodes,dev_id):
+        for x in nodes.keys():            
+            if dev_id == nodes[x].get('id'):
+                return x
+        return 0
+
     def generate_link_id(self,ip1,ifnum1,ip2,ifnum2):
         if ip1 > ip2:
             idstr=f"{ip2}-{ifnum2}-{ip1}-{ifnum1}"
@@ -79,13 +85,14 @@ class CustomerMapAPI(NBIAPI):
                     for item in data['data'][k]:
                         #Проверяем наличие устройства с которым скоммутирован интерфейс в списке устройств nodes
                         if item['object_type']=='switch' or item['object_type']=='radio':
-                            newnodeid = self.generate_node_id(item['host'])
-                            if newnodeid in nodes:
+                            newnodeid = self.findnodebyid(nodes,item['object_id'])
+                            if newnodeid != 0 :
                                 devdata = nodes[newnodeid]
                                 ifaces = devdata.get('ifaces')
                                 uplink_ifaces = devdata.get('uplink_iface_array')
-                            else:
-                                devdata = self.getnode(item['object_type'], item['object_id'])                        
+                            else:    
+                                devdata = self.getnode(item['object_type'], item['object_id'])   
+                                newnodeid = self.generate_node_id(devdata['host'])        
                                 ifaces = devdata.get('ifaces')
                                 uplink_ifaces = devdata.get('uplink_iface_array')
                                 nodes[newnodeid] = {'id': item['object_id'],
