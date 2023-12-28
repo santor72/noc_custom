@@ -173,7 +173,7 @@ class CustomerMapAPI(NBIAPI):
                                                     'ifaces': ifaces,
                                                     'uplink_ifaces': uplink_ifaces
                                                     }
-                        self.get_links(ac_item['object_type'], ac_item['object_id'], nodes, links)
+                        self.get_links(ac_item['object_type'], newnodeid, nodes, links)
             else:
                 result={'Result':'Fail', 'message': 'Fail find customer commutation'}
                 return JSONResponse(content=result, media_type="application/json")                                        
