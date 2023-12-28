@@ -18,7 +18,7 @@ from noc.services.nbi.base import NBIAPI, API_ACCESS_HEADER, FORBIDDEN_MESSAGE
 from noc.sa.models.managedobject import ManagedObject
 from noc.inv.models.interface import Interface
 from noc.inv.models.interfaceprofile import InterfaceProfile
-from noc.Linkin IIv.models.link import Link
+from noc.inv.models.link import Link
 from noc.core.mongo.connection import connect
 
 router = APIRouter()
