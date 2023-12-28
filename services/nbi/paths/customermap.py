@@ -111,7 +111,7 @@ class CustomerMapAPI(NBIAPI):
                                 'intb': ifaces.get(str(ifnum))
                                 }
                             if (devdata.get('host')!='217.76.46.108' and devdata.get('host')!='217.76.46.119' and devdata.get('host')!='10.76.33.82'):
-                                self.get_links(item['object_type'], item['host'], nodes, links)
+                                self.get_links(item['object_type'], newnodeid, nodes, links)
     
     async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         result = {}
