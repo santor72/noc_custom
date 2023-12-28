@@ -67,7 +67,7 @@ class CustomerMapAPI(NBIAPI):
     
     def get_links(self, dev_type, dev_id, nodes, links):
         #Получить списко коммутаций устойства
-        response = requests.get(f"{self.usurl}&cat=commutation&action=get_data&object_type={dev_type}&object_id={dev_id}")
+        response = requests.get(f"{self.usurl}&cat=commutation&action=get_data&object_type={dev_type}&object_id={nodes[dev_id]}")
         if(response.ok):
             data = json.loads(response.content)
             if data['Result'] == 'OK':
