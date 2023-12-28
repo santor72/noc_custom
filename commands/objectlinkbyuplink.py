@@ -13,6 +13,7 @@ import re
 import netaddr
 from typing import List, Union, Dict
 import netaddr
+from pprint import pprint 
 
 class TopologyInfo:
     nodes={}
@@ -57,9 +58,11 @@ class TopologyInfo:
         if a['type'] != 'customer':
             newlinkhash = self.generate_link_hash(a['ip'], b['ip'], inta['ifIndex'], intb['ifIndex'])
             if self.map_link_id(newlinkhash):
+                print('No')
                 return 0
         else:
             newlinkhash = f"c-1-{b['host']}-{intb['ifIndex']}"
+        print('Yes')
         newlinkid=self.current_link_id
         self.current_link_id+=1
         self.links[newlinkid]={
@@ -71,7 +74,7 @@ class TopologyInfo:
             'inta':{'ifindex': inta['ifIndex'], 'ifname': inta['ifName']},
             'intb': {'ifindex': intb['ifIndex'], 'ifname': intb['ifName']}
             }
-        self.node_id_map.append({'id':newlinkid, 'hash': newlinkhash})
+        self.link_id_map.append({'id':newlinkid, 'hash': newlinkhash})
         return newlinkid
 
     #ищет запись о устройстве с nodes по id в учетной системе
@@ -153,6 +156,8 @@ class Command(BaseCommand):
         return result
     
     def get_links(self, topoinfo, cur_dev_type, cur_device_ip):
+        from pprint import pprint
+        print(f"current device id {cur_device_ip}")
         cur_node = topoinfo.nodes.get(topoinfo.findnode_id_byip(cur_device_ip))
         commutations = self.get_usdevice_commutation(cur_dev_type, cur_node['device_id'])
         if commutations and cur_node:
@@ -162,9 +167,10 @@ class Command(BaseCommand):
                     continue
                 #Цикл по списку коммутаций интерфейса
                 for item in commutations[cur_device_interface]:
+                    pprint(topoinfo.node_id_map)
                     if item['object_type']=='switch' or item['object_type']=='radio':
                     #Проверяем наличие устройства с которым скоммутирован интерфейс в списке устройств
-                        newnodeid = topoinfo.findnode_by_device_id(item['object_id'],'us')
+                        newnodeid = topoinfo.findnode_by_device_id(item['object_id'],'userside')
                         if newnodeid != 0 :
                             nextdev = topoinfo.nodes[newnodeid]
                         #если его нет создаем
@@ -172,7 +178,6 @@ class Command(BaseCommand):
                             devdata = self.get_usdevice_by_id(item['object_type'], item['object_id'])   
                             nextnodeid = topoinfo.newUSnode(devdata)  
                             nextdev =  topoinfo.nodes[nextnodeid]  
-                        print(nextdev)   
                         ifnum =  item.get('interface')
                         #Создать линк
                         deva = cur_node
@@ -180,6 +185,7 @@ class Command(BaseCommand):
                         inta = cur_node['interfaces'][str(cur_device_interface)]
                         intb = nextdev['interfaces'][str(ifnum)]
                         newlinkid = topoinfo.newUSlink(deva, devb, inta, intb)   
+                        #pprint([x['hash'] for k,x in topoinfo.links.items()])
                         if newlinkid==0:
                             continue
                         if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
@@ -330,7 +336,8 @@ class Command(BaseCommand):
         from pprint import pprint,pformat
 #        with open('/root/topotemp.js','w') as f:
 #           f.write(pformat(result))
-        pprint(topoinfo.links)
+        pprint([{x['id']: [x['ip'], x.get('device_id')]} for k,x in topoinfo.nodes.items()])
+        pprint([x['hash'] for k,x in topoinfo.links.items()])
 
 if __name__ == "__main__":
     Command().run()

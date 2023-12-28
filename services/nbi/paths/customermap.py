@@ -187,7 +187,7 @@ class CustomerMapAPI(NBIAPI):
                 for item in commutations[cur_device_interface]:
                     if item['object_type']=='switch' or item['object_type']=='radio':
                     #Проверяем наличие устройства с которым скоммутирован интерфейс в списке устройств
-                        newnodeid = topoinfo.findnode_by_device_id(item['object_id'],'us')
+                        newnodeid = topoinfo.findnode_by_device_id(item['object_id'],'userside')
                         if newnodeid != 0 :
                             nextdev = topoinfo.nodes[newnodeid]
                         #если его нет создаем
