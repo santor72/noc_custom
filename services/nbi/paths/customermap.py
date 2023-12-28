@@ -161,7 +161,7 @@ class CustomerMapAPI(NBIAPI):
                                                                                                             'ifName': 'C',
                                                                                                             'ifNumber': 1},
                                                     'nodeb':ac_item['object_id'], 'intb': ifaces.get(str(ifnum))}
-                        newnodeid = self.generate_node_id(ac_item['host'])
+                        newnodeid = self.generate_node_id(devdata.get('host'))
                         nodes[newnodeid] = {'id': ac_item['object_id'],
                                                     'type':ac_item['object_type'],
                                                     'nazv': devdata.get('nazv'),
