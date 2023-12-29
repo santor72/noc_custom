@@ -93,7 +93,7 @@ class TopologyInfo:
         newid=self.current_node_id
         self.current_node_id+=1
         if mo.object_profile.shape == 'Cisco/layer_3_switch':
-            icon = 'aggregation'
+            icon = 'groupswith'
         elif mo.object_profile.shape == 'Cisco/router':
             icon = 'router'
         else:
