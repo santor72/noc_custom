@@ -352,7 +352,7 @@ class CustomerMapNOCAPI(NBIAPI):
         self.asknoc(topoinfo)
         return {'Result': 'Ok', 'data':topoinfo.generatejs()}
 
-    async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
+    async def handler(self, req:CustomerMapNOCRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         result = {}
         if not self.access_granted(access_header):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
