@@ -320,7 +320,7 @@ class CustomerMapAPI(NBIAPI):
                         newlinkid = topoinfo.newUSlink(deva, devb, inta, intb)   
                         if newlinkid==0:
                             continue
-                        if (nextdev.['ip']!='217.76.46.100' and nextdev.['ip']!='217.76.46.127'):
+                        if (nextdev['ip']!='217.76.46.100' and nextdev['ip']!='217.76.46.127'):
 #                        if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'])
 
