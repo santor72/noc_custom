@@ -159,7 +159,7 @@ class TopologyInfo:
         for k,item in self.nodes.items():
             topology_dict['nodes'].append({
                 'id': int(item['id']),
-                'name': 'ММТС-9' if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82'] else item.get('host'),
+                'name': "ММТС-9 {item.get('host')}" if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82'] else item.get('host'),
                 'primaryIP': item.get('host') or item.get('ip'),
                 'nazvanie': item.get('nazv'),
                 'location': item.get('location'),
