@@ -259,7 +259,7 @@ class CustomerMapAPI(NBIAPI):
         customer_id=req.customer_id
         
         result = self.go(customer_id)
-        if result['Result'] = 'Ok'
+        if result['Result'] == 'Ok'
             topology_dict = result['data].generatejs()
             result=topology_dict
             return JSONResponse(content=result, media_type="application/json")
