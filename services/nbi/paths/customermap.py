@@ -342,13 +342,14 @@ class CustomerMapAPI(NBIAPI):
         else:
             result={'Result':'Fail', 'message': 'Customer find error'}
             return JSONResponse(content=result, media_type="application/json")
-        topoinfo.nodes[topoinfo.current_node_id] = {'id': customer_id, 
+        topoinfo.nodes[topoinfo.current_node_id] = {'id': topoinfo.current_node_id, 
                             'type': 'customer',
                             'host':customer['Data']['login'],
                             'ip': customer['Data']['ip_mac'],
                             'location': customer['Data']['login'],
                             'nazv': customer['Data']['login']
                             }
+        topoinfo.current_node_id+=1
         cur_node = topoinfo.nodes[topoinfo.current_node_id]
         topoinfo.current_node_id+=1
         ac_response = requests.get(f"{self.usurl}&cat=commutation&action=get_data&object_type=customer&object_id={customer_id}")
