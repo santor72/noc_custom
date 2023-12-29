@@ -182,6 +182,7 @@ class CustomerMapfResponse(BaseModel):
 
 class CustomerMapRequest(BaseModel):
     customer_id: int
+    with_noc = 0
  
 class CustomerMapAPI(NBIAPI):
     api_name = "customermap"
@@ -303,7 +304,7 @@ class CustomerMapAPI(NBIAPI):
                         if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'])
 
-    def go(self, customer_id):
+    def go(self, customer_id, with_noc):
         topoinfo = TopologyInfo()
         topoinfo.nodes={}
         topoinfo.links={}
@@ -352,7 +353,8 @@ class CustomerMapAPI(NBIAPI):
         else:
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
             return result
-        self.asknoc(topoinfo)
+        if with_noc:
+            self.asknoc(topoinfo)
         return {'Result': 'Ok', 'data':topoinfo.generatejs()}
 
     async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
@@ -361,7 +363,8 @@ class CustomerMapAPI(NBIAPI):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
         customer_id=req.customer_id
-        result = self.go(customer_id)
+        with_noc = req.with_noc
+        result = self.go(customer_id, with_noc)
         if result['Result'] == 'Ok':
             with open('/tmp/topotemp.js','w') as f:
                 f.write(pformat(result['data']))
