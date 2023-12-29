@@ -142,6 +142,7 @@ class CustomerMapAPI(NBIAPI):
     openapi_tags = ["customermap API"]
     usurl="http://usrn.ccs.ru//api.php?key=weifdovIpyirdyilyablichhyasgojyatwejIkKenvaitnajal"
     profiles = []
+    count=0
     def get_routes(self):
         route_post ={
             "path": "/api/nbi/customermap",
@@ -209,7 +210,10 @@ class CustomerMapAPI(NBIAPI):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'])
 
     def go(self, customer_id):
+        self.count+=1
         topoinfo = TopologyInfo()
+        if self.count ==2:
+            return {'Result': 'Ok', 'data':topoinfo.generatejs()}
         a_response = requests.get(f"{self.usurl}&cat=customer&action=get_data&customer_id={customer_id}")
         if a_response.ok:
             customer=json.loads(a_response.content)
