@@ -24,12 +24,12 @@ from noc.core.mongo.connection import connect
 router = APIRouter()
 
 class TopologyInfoNOC:
-    nodes={}
-    links={}
+    nodes=None
+    links=None
     current_link_id = 1
     current_node_id = 1
-    node_id_map = []
-    link_id_map = []
+    node_id_map = None
+    link_id_map = None
 #Возвращает id из словаря links по хешу линка
     def map_link_id(self, link_hash):
         for l in self.links:
@@ -300,15 +300,15 @@ class CustomerMapNOCAPI(NBIAPI):
                         if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'])
     
-    
-    async def handler(self, req:CustomerMapNOCRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
-        result = {}
-        customer={}
-        topoinfo = TopologyInfoNOC()
-        if not self.access_granted(access_header):
-            raise HTTPException(403, FORBIDDEN_MESSAGE)
-        connect()
-        customer_id=req.customer_id
+    def go(self, customer_id):
+        topoinfo = TopologyInfo()
+        topoinfo.nodes={}
+        topoinfo.links={}
+        topoinfo.node_id_map = []
+        topoinfo.link_id_map = []
+#        if self.count ==2:
+#            topoinfo[nodes][1]['nazv'] = sys.getrefcount(topoinfo)
+#            return {'Result': 'Ok', 'data':topoinfo.generatejs()}
         a_response = requests.get(f"{self.usurl}&cat=customer&action=get_data&customer_id={customer_id}")
         if a_response.ok:
             customer=json.loads(a_response.content)
@@ -345,14 +345,27 @@ class CustomerMapNOCAPI(NBIAPI):
                             self.get_links(topoinfo, ac_item['object_type'], nextdev['ip'])
             else:
                 result={'Result':'Fail', 'message': 'Fail find customer commutation'}
-                return JSONResponse(content=result, media_type="application/json")                                        
+                return result
         else:
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
-            return JSONResponse(content=result, media_type="application/json") 
-        self.asknoc(topoinfo) 
-        topology_dict = topoinfo.generatejs()
-        result=topology_dict
-        return JSONResponse(content=result, media_type="application/json")
+            return result
+        self.asknoc(topoinfo)
+        return {'Result': 'Ok', 'data':topoinfo.generatejs()}
+
+    async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
+        result = {}
+        if not self.access_granted(access_header):
+            raise HTTPException(403, FORBIDDEN_MESSAGE)
+        connect()
+        customer_id=req.customer_id
+        result = self.go(customer_id)
+        if result['Result'] == 'Ok':
+            with open('/tmp/topotemp.js','w') as f:
+                f.write(pformat(result['data']))
+            return JSONResponse(content=result['data'], media_type="application/json")
+        else:
+            topoinfo = None
+            return JSONResponse(content={'nodes':{},'links':{}}, media_type="application/json")
 
 # Install router
 CustomerMapNOCAPI(router)
