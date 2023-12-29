@@ -257,7 +257,7 @@ class CustomerMapAPI(NBIAPI):
         connect()
         customer_id=req.customer_id
         topoinfo = TopologyInfo()
-        result = self.go(customer_id)
+        result = self.go(topoinfo,customer_id)
         topoinfo = None
         if result['Result'] == 'Ok':
             #topology_dict = result['data'].generatejs()
