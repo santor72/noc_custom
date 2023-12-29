@@ -6,6 +6,7 @@ import json
 import requests
 import re
 import netaddr
+from pprint import pformat
 from typing import List, Union, Dict
 
 # Third-party modules
@@ -261,6 +262,8 @@ class CustomerMapAPI(NBIAPI):
         topoinfo = None
         if result['Result'] == 'Ok':
             #topology_dict = result['data'].generatejs()
+            with open('/tmp/topotemp.js','w') as f:
+                f.write(pformat(result['data']))
             return JSONResponse(content=result['data'], media_type="application/json")
         else:
             topoinfo = None
