@@ -26,12 +26,12 @@ from noc.core.mongo.connection import connect
 router = APIRouter()
 
 class TopologyInfo:
-    nodes={}
-    links={}
+    nodes=None
+    links=None
     current_link_id = 1
     current_node_id = 1
-    node_id_map = []
-    link_id_map = []
+    node_id_map = None
+    link_id_map = None
 #Возвращает id из словаря links по хешу линка
     def map_link_id(self, link_hash):
         for l in self.links:
@@ -211,11 +211,14 @@ class CustomerMapAPI(NBIAPI):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'])
 
     def go(self, customer_id):
-        self.count+=1
         topoinfo = TopologyInfo()
-        if self.count ==2:
-            topoinfo[nodes][1]['nazv'] = sys.getrefcount(topoinfo)
-            return {'Result': 'Ok', 'data':topoinfo.generatejs()}
+        topoinfo.nodes={}
+        topoinfo.links={}
+        topoinfo.node_id_map = []
+        topoinfo.link_id_map = []
+#        if self.count ==2:
+#            topoinfo[nodes][1]['nazv'] = sys.getrefcount(topoinfo)
+#            return {'Result': 'Ok', 'data':topoinfo.generatejs()}
         a_response = requests.get(f"{self.usurl}&cat=customer&action=get_data&customer_id={customer_id}")
         if a_response.ok:
             customer=json.loads(a_response.content)
