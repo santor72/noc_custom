@@ -2,6 +2,7 @@
 from __future__ import absolute_import
 import time
 import os
+import sys
 import json
 import requests
 import re
@@ -213,6 +214,7 @@ class CustomerMapAPI(NBIAPI):
         self.count+=1
         topoinfo = TopologyInfo()
         if self.count ==2:
+            topoinfo[nodes][1]['nazv'] = sys.getrefcount(topoinfo)
             return {'Result': 'Ok', 'data':topoinfo.generatejs()}
         a_response = requests.get(f"{self.usurl}&cat=customer&action=get_data&customer_id={customer_id}")
         if a_response.ok:
