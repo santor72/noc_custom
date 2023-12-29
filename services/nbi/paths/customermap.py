@@ -212,7 +212,7 @@ class TopologyInfo:
         for x in topology_dict['links']:
             for i in path_edges:
                 if x['source'] in i and x['target'] in i:
-                    x['color'] = 'red'
+                    x['color'] = '#148D09'
         return topology_dict
 
 class CustomerMapfResponse(BaseModel):
