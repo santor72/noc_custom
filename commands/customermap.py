@@ -208,7 +208,6 @@ class CustomerMapAPI(NBIAPI):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'])
 
     def go(self, topoinfo, customer_id):
-        topoinfo = TopologyInfo()
         a_response = requests.get(f"{self.usurl}&cat=customer&action=get_data&customer_id={customer_id}")
         if a_response.ok:
             customer=json.loads(a_response.content)
@@ -257,11 +256,12 @@ class CustomerMapAPI(NBIAPI):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
         customer_id=req.customer_id
-        
+        topoinfo = TopologyInfo()
         result = self.go(customer_id)
         if result['Result'] = 'Ok'
             topology_dict = result['data].generatejs()
             result=topology_dict
+            topoinfo = None
             return JSONResponse(content=result, media_type="application/json")
         else:
             topoinfo = None
