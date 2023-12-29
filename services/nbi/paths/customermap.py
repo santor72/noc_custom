@@ -7,6 +7,7 @@ import json
 import requests
 import re
 import netaddr
+import networkx as nx
 from pprint import pformat
 from typing import List, Union, Dict
 
