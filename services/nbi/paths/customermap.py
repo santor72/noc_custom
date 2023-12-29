@@ -162,14 +162,14 @@ class TopologyInfo:
     def generatejs(self):
         topology_dict = {'nodes': [], 'links': []}
         for k,item in self.nodes.items():
-            if item.get('icon'):
-                icon = item.get('icon')
-            elif item['type'] == 'customer':
-                icon = 'host'
-            elif item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
+            if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
                 icon = 'cloud'
             elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
                 icon = 'cloud'
+            elif item.get('icon'):
+                icon = item.get('icon')
+            elif item['type'] == 'customer':
+                icon = 'host'
             else:
                 icon = 'switch'
             if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
