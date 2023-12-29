@@ -197,23 +197,19 @@ class TopologyInfo:
                 'srcDevice': int(item['nodea']),
                 'tgtDevice': int(item['nodeb'])
             })   
-        topo = json.loads(s)
-        import networkx as nx
         edge_labels={}
         G = nx.Graph()
-        for v in topo['nodes']:
+        for v in topology_dict['nodes']:
             G.add_node(v['id'])
-        for item in topo['links']:
+        for item in topology_dict['links']:
             G.add_edge(item['source'], item['target'])
         pos =  nx.spring_layout(G)
-        for i in topo['nodes']:
+        for i in topology_dict['nodes']:
             if i['primaryIP'] == '217.76.46.100':
                 asbrid = i['id']
-        path = nx.shortest_path(G,source=topo['nodes'][0]['id'],target=asbrid)
+        path = nx.shortest_path(G,source=topology_dict['nodes'][0]['id'],target=asbrid)
         path_edges = list(zip(path,path[1:]))
-        nx.draw(G,pos)
-        nx.draw_networkx_edges(G,pos,edgelist=path_edges,edge_color='r',width=10)
-        for x in topo['links']:
+        for x in topology_dict['links']:
             for i in path_edges:
                 if x['source'] in i and x['target'] in i:
                     x['color'] = 'red'
