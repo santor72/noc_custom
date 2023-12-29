@@ -33,6 +33,7 @@ class TopologyInfo:
     current_node_id = 1
     node_id_map = None
     link_id_map = None
+    hideip=['217.76.46.127']
 #Возвращает id из словаря links по хешу линка
     def map_link_id(self, link_hash):
         for l in self.links:
@@ -97,6 +98,8 @@ class TopologyInfo:
             icon = 'switchwithborder'
         elif mo.object_profile.shape == 'Cisco/router':
             icon = 'router'
+        elif mo.object_profile.shape == 'Cisco | File Server':
+            icon = 'server'
         else:
             icon = 'switch'
         self.nodes[newid] = {
@@ -204,20 +207,21 @@ class TopologyInfo:
         for item in topology_dict['links']:
             G.add_edge(item['source'], item['target'])
         pos =  nx.spring_layout(G)
-        for i in topology_dict['nodes']:
-            if i['primaryIP'] == '217.76.46.100':
-                asbrid = i['id']
-        path = nx.shortest_path(G,source=topology_dict['nodes'][0]['id'],target=asbrid)
-        path_edges = list(zip(path,path[1:]))
-        for x in topology_dict['links']:
-            for i in path_edges:
-                if x['source'] in i and x['target'] in i:
-                    x['color'] = 'green'
-        for x in topology_dict['nodes']:
-            for i in path_edges:
-                if x['id'] in i :
-                    x['color'] = 'green'
-
+        asbrid = 0
+        if asbrid != 0:
+            for i in topology_dict['nodes']:
+                if i['primaryIP'] == '217.76.46.100':
+                    asbrid = i['id']
+            path = nx.shortest_path(G,source=topology_dict['nodes'][0]['id'],target=asbrid)
+            path_edges = list(zip(path,path[1:]))
+            for x in topology_dict['links']:
+                for i in path_edges:
+                    if x['source'] in i and x['target'] in i:
+                        x['color'] = 'green'
+            for x in topology_dict['nodes']:
+                for i in path_edges:
+                    if x['id'] in i :
+                        x['color'] = 'green'
         return topology_dict
 
 class CustomerMapfResponse(BaseModel):
@@ -264,6 +268,8 @@ class CustomerMapAPI(NBIAPI):
         for i in mointerfaces:
             for l in mo_alllinks:
                 if not i.id in l.interface_ids:
+                    continue
+                if l.interfaces[0].managed_object.address in topoinfo.hideip or l.interfaces[1].managed_object in topoinfo.hideip:
                     continue
                 node_id_map=0
                 if i.id == l.interfaces[0].id:
@@ -331,6 +337,8 @@ class CustomerMapAPI(NBIAPI):
                         #если его нет создаем
                         else:    
                             devdata = self.get_usdevice_by_id(item['object_type'], item['object_id'])   
+                            if devdata['host'] in topoinfo.hideip:
+                                continue                            
                             nextnodeid = topoinfo.newUSnode(devdata)  
                             nextdev =  topoinfo.nodes[nextnodeid]     
                         ifnum =  item.get('interface')
