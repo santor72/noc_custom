@@ -111,9 +111,7 @@ class TopologyInfo:
     def newNOClink(self,a,b, inta, intb):
         newlinkhash = self.generate_link_hash(self.nodes[a]['ip'], self.nodes[b]['ip'], inta['ifIndex'], intb['ifIndex'])
         if self.map_link_id(newlinkhash) or newlinkhash == 0:
-            print('No')
             return 0
-        print('Yes')
         newlinkid=self.current_link_id
         self.current_link_id+=1
         self.links[newlinkid]={
@@ -202,7 +200,6 @@ class CustomerMapAPI(NBIAPI):
         }
         return [route_post]
     def nocgetlinks(self, topoinfo, moip):
-        print(f"noc links current ip is {moip}")
         if not self.profiles:
             iprofiles = InterfaceProfile.objects.filter(name__contains='Uplink')
             iprofiles2 = InterfaceProfile.objects.filter(name__contains='Core')
@@ -237,8 +234,6 @@ class CustomerMapAPI(NBIAPI):
                 inta = {'ifIndex': l.interfaces[0].ifindex,'ifName': l.interfaces[0].name}
                 intb = {'ifIndex': l.interfaces[1].ifindex,'ifName': l.interfaces[1].name}
                 newlinkid = topoinfo.newNOClink(deva, devb, inta, intb)   
-                print(newlinkid)
-                #pprint([x['hash'] for k,x in topoinfo.links.items()])
                 if newlinkid==0:
                     continue
                 if (nextmo.address!='217.76.46.108' and nextmo.address!='217.76.46.119' and nextmo.address!='10.76.33.82'):
@@ -366,8 +361,6 @@ class CustomerMapAPI(NBIAPI):
         with_noc = req.with_noc
         result = self.go(customer_id, with_noc)
         if result['Result'] == 'Ok':
-            with open('/tmp/topotemp.js','w') as f:
-                f.write(pformat(result['data']))
             return JSONResponse(content=result['data'], media_type="application/json")
         else:
             topoinfo = None
