@@ -350,7 +350,7 @@ class CustomerMapNOCAPI(NBIAPI):
         else:
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
             return result
-        self.asknoc(topoinfo)
+        #self.asknoc(topoinfo)
         return {'Result': 'Ok', 'data':topoinfo.generatejs()}
 
     async def handler(self, req:CustomerMapNOCRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
