@@ -301,7 +301,7 @@ class CustomerMapNOCAPI(NBIAPI):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'])
     
     def go(self, customer_id):
-        topoinfo = TopologyInfo()
+        topoinfo = TopologyInfoNOC()
         topoinfo.nodes={}
         topoinfo.links={}
         topoinfo.node_id_map = []
