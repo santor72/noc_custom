@@ -208,6 +208,7 @@ class CustomerMapAPI(NBIAPI):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'])
 
     def go(self, topoinfo, customer_id):
+        topoinfo = TopologyInfo()
         a_response = requests.get(f"{self.usurl}&cat=customer&action=get_data&customer_id={customer_id}")
         if a_response.ok:
             customer=json.loads(a_response.content)
@@ -248,7 +249,7 @@ class CustomerMapAPI(NBIAPI):
         else:
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
             return result
-        return ('Result': 'Ok', 'data':topoinfo)
+        return {'Result': 'Ok', 'data':topoinfo}
 
     async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         result = {}
@@ -256,16 +257,15 @@ class CustomerMapAPI(NBIAPI):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
         customer_id=req.customer_id
-        topoinfo = TopologyInfo()
+        
         result = self.go(customer_id)
-        if result['Result'] = 'Ok'
-            topology_dict = result['data].generatejs()
+        if result['Result'] == 'Ok':
+            topology_dict = result['data'].generatejs()
             result=topology_dict
-            topoinfo = None
             return JSONResponse(content=result, media_type="application/json")
         else:
             topoinfo = None
-            return JSONResponse(content={'nodes:{},'links':{}}, media_type="application/json")
+            return JSONResponse(content={'nodes':{},'links':{}}, media_type="application/json")
 
 # Install router
 CustomerMapAPI(router)

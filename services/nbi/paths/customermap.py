@@ -259,13 +259,13 @@ class CustomerMapAPI(NBIAPI):
         customer_id=req.customer_id
         
         result = self.go(customer_id)
-        if result['Result'] == 'Ok'
-            topology_dict = result['data].generatejs()
+        if result['Result'] == 'Ok':
+            topology_dict = result['data'].generatejs()
             result=topology_dict
             return JSONResponse(content=result, media_type="application/json")
         else:
             topoinfo = None
-            return JSONResponse(content={'nodes:{},'links':{}}, media_type="application/json")
+            return JSONResponse(content={'nodes':{},'links':{}}, media_type="application/json")
 
 # Install router
 CustomerMapAPI(router)
