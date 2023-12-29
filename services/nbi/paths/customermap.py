@@ -92,6 +92,10 @@ class TopologyInfo:
             return newid
         newid=self.current_node_id
         self.current_node_id+=1
+        if mo.object_profile.shape == 'Cisco/layer_3_switch':
+            icon = 'aggregation'
+        elif mo.object_profile.shape == 'Cisco/router':
+            icon = 'router'
         self.nodes[newid] = {
             'id': newid,
             'type': 'device',
@@ -103,7 +107,8 @@ class TopologyInfo:
             'location': mo.description,
             'name': mo.name,
             'interfaces': {},
-            'uplink_interfaces': {}
+            'uplink_interfaces': {},
+            'icon': icon
         }
         self.node_id_map.append({'id':newid, 'hash': self.generate_node_hash(mo.address)})
         return newid
@@ -155,13 +160,29 @@ class TopologyInfo:
     def generatejs(self):
         topology_dict = {'nodes': [], 'links': []}
         for k,item in self.nodes.items():
+            if item.get('icon'):
+                icon = item.get('icon')
+            elif item['type'] == 'customer':
+                icon = 'host'
+            elif item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
+                icon = 'cloud'
+            elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
+                icon = 'cloud'
+            else:
+                icon = 'switch'
+            if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
+                name= f"ММТС-9 {item.get('host')}"
+            elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
+                name = f"ASBR {item.get('host')}"
+            else:
+                name = item.get('host')
             topology_dict['nodes'].append({
                 'id': int(item['id']),
-                'name': f"ММТС-9 {item.get('host')}" if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82'] else item.get('host'),
+                'name': name,
                 'primaryIP': item.get('host') or item.get('ip'),
                 'nazvanie': item.get('nazv'),
                 'location': item.get('location'),
-                'icon': 'host' if item['type'] == 'customer' else ('cloud' if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82'] else 'switch')
+                'icon':  icon
             })
         for k,item in self.links.items():
             topology_dict['links'].append({
