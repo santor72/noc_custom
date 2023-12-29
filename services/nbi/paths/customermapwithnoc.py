@@ -307,9 +307,6 @@ class CustomerMapNOCAPI(NBIAPI):
         topoinfo.links={}
         topoinfo.node_id_map = []
         topoinfo.link_id_map = []
-#        if self.count ==2:
-#            topoinfo[nodes][1]['nazv'] = sys.getrefcount(topoinfo)
-#            return {'Result': 'Ok', 'data':topoinfo.generatejs()}
         a_response = requests.get(f"{self.usurl}&cat=customer&action=get_data&customer_id={customer_id}")
         if a_response.ok:
             customer=json.loads(a_response.content)
@@ -365,7 +362,6 @@ class CustomerMapNOCAPI(NBIAPI):
                 f.write(pformat(result['data']))
             return JSONResponse(content=result['data'], media_type="application/json")
         else:
-            topoinfo = None
             return JSONResponse(content={'nodes':{},'links':{}}, media_type="application/json")
 
 # Install router

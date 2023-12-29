@@ -85,6 +85,49 @@ class TopologyInfo:
         self.node_id_map.append({'id':newlinkid, 'hash': newlinkhash})
         return newlinkid
 
+#Новое устройство из данных NOC
+    def newNOCnode(self,mo):
+        newid = self.findnode_id_byip(mo.address)
+        if newid:
+            return newid
+        newid=self.current_node_id
+        self.current_node_id+=1
+        self.nodes[newid] = {
+            'id': newid,
+            'type': 'device',
+            'hash': self.generate_node_hash(mo.address),
+            'system': 'noc',
+            'device_id': mo.id,
+            'host': mo.address,
+            'ip': mo.address,
+            'location': mo.description,
+            'name': mo.name,
+            'interfaces': {},
+            'uplink_interfaces': {}
+        }
+        self.node_id_map.append({'id':newid, 'hash': self.generate_node_hash(mo.address)})
+        return newid
+
+    def newNOClink(self,a,b, inta, intb):
+        newlinkhash = self.generate_link_hash(self.nodes[a]['ip'], self.nodes[b]['ip'], inta['ifIndex'], intb['ifIndex'])
+        if self.map_link_id(newlinkhash) or newlinkhash == 0:
+            print('No')
+            return 0
+        print('Yes')
+        newlinkid=self.current_link_id
+        self.current_link_id+=1
+        self.links[newlinkid]={
+            'id' : newlinkid,
+            'hash': newlinkhash,
+            'system': 'noc',
+            'nodea': a,
+            'nodeb':b,
+            'inta':{'ifindex': inta['ifIndex'], 'ifname': inta['ifName']},
+            'intb': {'ifindex': intb['ifIndex'], 'ifname': intb['ifName']}
+            }
+        self.link_id_map.append({'id':newlinkid, 'hash': newlinkhash})
+        return newlinkid
+
     #ищет запись о устройстве с nodes по id в учетной системе
     def findnode_by_device_id(self,object_id,extsys):
         for x in self.nodes.keys():            
@@ -107,6 +150,8 @@ class TopologyInfo:
             idstr=f"{ip2}-{ifnum2}-{ip1}-{ifnum1}"
         elif ip1 < ip2:
             idstr=f"{ip1}-{ifnum1}-{ip2}-{ifnum2}"
+        else:
+            return 0
         return idstr
 
     def generatejs(self):
@@ -155,6 +200,54 @@ class CustomerMapAPI(NBIAPI):
             "description": ""
         }
         return [route_post]
+    def nocgetlinks(self, topoinfo, moip):
+        print(f"noc links current ip is {moip}")
+        if not self.profiles:
+            iprofiles = InterfaceProfile.objects.filter(name__contains='Uplink')
+            iprofiles2 = InterfaceProfile.objects.filter(name__contains='Core')
+            self.profiles = [x for x in iprofiles] + [x for x in iprofiles2]
+        MOs = ManagedObject.objects.filter(address=moip)
+        if MOs:
+            cur_mo = MOs[0]
+        else:
+            return 0
+        mo_links=[]
+        moid = cur_mo.id
+        cur_nodeid = topoinfo.findnode_id_byip(cur_mo.address)
+        if cur_nodeid==0:
+            cur_nodeid = topoinfo.newNOCnode(cur_mo)
+        mo_alllinks = Link.objects.filter(linked_objects__in=[moid])
+        mointerfaces= Interface.objects.filter(managed_object__in=[moid], profile__in=[x.id for x in self.profiles])
+        for i in mointerfaces:
+            for l in mo_alllinks:
+                if not i.id in l.interface_ids:
+                    continue
+                node_id_map=0
+                if i.id == l.interfaces[0].id:
+                    next_nodeid = topoinfo.newNOCnode(l.interfaces[1].managed_object)
+                    nextmo = l.interfaces[1].managed_object
+                    deva = cur_nodeid
+                    devb = next_nodeid                    
+                else:
+                    next_nodeid = topoinfo.newNOCnode(l.interfaces[0].managed_object)
+                    nextmo = l.interfaces[0].managed_object
+                    devb = cur_nodeid
+                    deva = next_nodeid                    
+                inta = {'ifIndex': l.interfaces[0].ifindex,'ifName': l.interfaces[0].name}
+                intb = {'ifIndex': l.interfaces[1].ifindex,'ifName': l.interfaces[1].name}
+                newlinkid = topoinfo.newNOClink(deva, devb, inta, intb)   
+                print(newlinkid)
+                #pprint([x['hash'] for k,x in topoinfo.links.items()])
+                if newlinkid==0:
+                    continue
+                if (nextmo.address!='217.76.46.108' and nextmo.address!='217.76.46.119' and nextmo.address!='10.76.33.82'):
+                    self.nocgetlinks(topoinfo, nextmo.address)
+        return 0
+
+    def asknoc(self,topoinfo):
+        cur_nodelist = [x for x in topoinfo.nodes]
+        for node in cur_nodelist:
+            self.nocgetlinks(topoinfo, topoinfo.nodes[node].get('ip'))
 
     #Ищет данные устройства в Userside по ID
     def get_usdevice_by_id(self, dev_type, device_id):
