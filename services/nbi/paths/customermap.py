@@ -96,6 +96,8 @@ class TopologyInfo:
             icon = 'aggregation'
         elif mo.object_profile.shape == 'Cisco/router':
             icon = 'router'
+        else:
+            icon = 'switch'
         self.nodes[newid] = {
             'id': newid,
             'type': 'device',
