@@ -93,7 +93,7 @@ class TopologyInfo:
         newid=self.current_node_id
         self.current_node_id+=1
         if mo.object_profile.shape == 'Cisco/layer_3_switch':
-            icon = 'groupswith'
+            icon = 'switchwithborder'
         elif mo.object_profile.shape == 'Cisco/router':
             icon = 'router'
         else:
@@ -259,7 +259,8 @@ class CustomerMapAPI(NBIAPI):
                 newlinkid = topoinfo.newNOClink(deva, devb, inta, intb)   
                 if newlinkid==0:
                     continue
-                if (nextmo.address!='217.76.46.108' and nextmo.address!='217.76.46.119' and nextmo.address!='10.76.33.82'):
+#                if (nextmo.address!='217.76.46.108' and nextmo.address!='217.76.46.119' and nextmo.address!='10.76.33.82'):
+                if (nextmo.address!='217.76.46.100' and nextmo.address!='217.76.46.127'):
                     self.nocgetlinks(topoinfo, nextmo.address)
         return 0
 
@@ -319,7 +320,8 @@ class CustomerMapAPI(NBIAPI):
                         newlinkid = topoinfo.newUSlink(deva, devb, inta, intb)   
                         if newlinkid==0:
                             continue
-                        if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
+                        if (nextmo.address!='217.76.46.100' and nextmo.address!='217.76.46.127'):
+#                        if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'])
 
     def go(self, customer_id, with_noc):
