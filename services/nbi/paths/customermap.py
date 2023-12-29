@@ -208,10 +208,10 @@ class TopologyInfo:
             G.add_edge(item['source'], item['target'])
         pos =  nx.spring_layout(G)
         asbrid = 0
+        for i in topology_dict['nodes']:
+            if i['primaryIP'] == '217.76.46.100':
+                asbrid = i['id']
         if asbrid != 0:
-            for i in topology_dict['nodes']:
-                if i['primaryIP'] == '217.76.46.100':
-                    asbrid = i['id']
             path = nx.shortest_path(G,source=topology_dict['nodes'][0]['id'],target=asbrid)
             path_edges = list(zip(path,path[1:]))
             for x in topology_dict['links']:
@@ -269,7 +269,7 @@ class CustomerMapAPI(NBIAPI):
             for l in mo_alllinks:
                 if not i.id in l.interface_ids:
                     continue
-                if l.interfaces[0].managed_object.address in topoinfo.hideip or l.interfaces[1].managed_object in topoinfo.hideip:
+                if l.interfaces[0].managed_object.address in topoinfo.hideip or l.interfaces[1].managed_object.address in topoinfo.hideip:
                     continue
                 node_id_map=0
                 if i.id == l.interfaces[0].id:
