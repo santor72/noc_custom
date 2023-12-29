@@ -249,7 +249,7 @@ class CustomerMapAPI(NBIAPI):
         else:
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
             return result
-        return ('Result': 'Ok', 'data':topoinfo)
+        return {'Result': 'Ok', 'data':topoinfo}
 
     async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         result = {}
