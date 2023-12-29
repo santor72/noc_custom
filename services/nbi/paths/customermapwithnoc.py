@@ -300,10 +300,9 @@ class CustomerMapNOCAPI(NBIAPI):
                         if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'])
     
+    
     async def handler(self, req:CustomerMapNOCRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         result = {}
-        nodes={}
-        links={}
         customer={}
         topoinfo = TopologyInfoNOC()
         if not self.access_granted(access_header):

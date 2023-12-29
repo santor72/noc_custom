@@ -206,17 +206,8 @@ class CustomerMapAPI(NBIAPI):
                             continue
                         if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'])
-    
-    async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
-        result = {}
-        nodes={}
-        links={}
-        customer={}
+    def go(self, customer_id):
         topoinfo = TopologyInfo()
-        if not self.access_granted(access_header):
-            raise HTTPException(403, FORBIDDEN_MESSAGE)
-        connect()
-        customer_id=req.customer_id
         a_response = requests.get(f"{self.usurl}&cat=customer&action=get_data&customer_id={customer_id}")
         if a_response.ok:
             customer=json.loads(a_response.content)
@@ -253,13 +244,25 @@ class CustomerMapAPI(NBIAPI):
                             self.get_links(topoinfo, ac_item['object_type'], nextdev['ip'])
             else:
                 result={'Result':'Fail', 'message': 'Fail find customer commutation'}
-                return JSONResponse(content=result, media_type="application/json")                                        
+                return result
         else:
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
-            return JSONResponse(content=result, media_type="application/json")  
-        topology_dict = topoinfo.generatejs()
-        result=topology_dict
-        return JSONResponse(content=result, media_type="application/json")
+            retrun result
+        return ('Result': 'Ok', 'data':topoinfo)
+
+    async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
+        result = {}
+        if not self.access_granted(access_header):
+            raise HTTPException(403, FORBIDDEN_MESSAGE)
+        connect()
+        customer_id=req.customer_id
+        result = self.go(customer_id)
+        if result['Result'] = 'Ok'
+            topology_dict = result['data].generatejs()
+            result=topology_dict
+            return JSONResponse(content=result, media_type="application/json")
+        else:
+            return JSONResponse(content={'nodes:{},'links':{}}, media_type="application/json")
 
 # Install router
 CustomerMapAPI(router)
