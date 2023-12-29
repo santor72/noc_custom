@@ -33,7 +33,7 @@ class TopologyInfo:
     current_node_id = 1
     node_id_map = None
     link_id_map = None
-    hideip=['217.76.46.127']
+    hideip=['217.76.46.127', '217.76.46.118']
 #Возвращает id из словаря links по хешу линка
     def map_link_id(self, link_hash):
         for l in self.links:
