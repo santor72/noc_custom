@@ -288,7 +288,7 @@ class CustomerMapAPI(NBIAPI):
                 newlinkid = topoinfo.newNOClink(deva, devb, inta, intb)   
                 if newlinkid==0:
                     continue
-                if not (self.to_core==1 and re.findall(r"[C,c]ore.+", nextmoф.segment.name)):
+                if not (self.to_core==1 and re.findall(r"[C,c]ore.+", nextmo.segment.name)):
                     self.nocgetlinks(topoinfo, nextmo.address)
 #                if (nextmo.address!='217.76.46.108' and nextmo.address!='217.76.46.119' and nextmo.address!='10.76.33.82'):
                 if (nextmo.address!='217.76.46.100'):
