@@ -238,6 +238,8 @@ class CustomerMapAPI(NBIAPI):
     usurl="http://usrn.ccs.ru//api.php?key=weifdovIpyirdyilyablichhyasgojyatwejIkKenvaitnajal"
     profiles = []
     count=0
+    with_noc = req.with_noc
+    to_core = req.to_core
     def get_routes(self):
         route_post ={
             "path": "/api/nbi/customermap",
@@ -416,8 +418,7 @@ class CustomerMapAPI(NBIAPI):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
         customer_id=req.customer_id
-        self.with_noc = req.with_noc
-        self.to_core = req.to_core
+    
         result = self.go(customer_id, with_noc)
         if result['Result'] == 'Ok':
             return JSONResponse(content=result['data'], media_type="application/json")
