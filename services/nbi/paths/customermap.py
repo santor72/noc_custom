@@ -359,7 +359,7 @@ class CustomerMapAPI(NBIAPI):
 #                        if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'])
 
-    def go(self, customer_id, with_noc):
+    def go(self, customer_id):
         topoinfo = TopologyInfo()
         topoinfo.nodes={}
         topoinfo.links={}
@@ -421,7 +421,7 @@ class CustomerMapAPI(NBIAPI):
         self.with_noc = req.with_noc
         self.to_core = req.to_core
 
-        result = self.go(customer_id, with_noc)
+        result = self.go(customer_id)
         if result['Result'] == 'Ok':
             return JSONResponse(content=result['data'], media_type="application/json")
         else:
