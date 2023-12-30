@@ -420,7 +420,6 @@ class CustomerMapAPI(NBIAPI):
         customer_id=req.customer_id
         self.with_noc = req.with_noc
         self.to_core = req.to_core
-
         result = self.go(customer_id)
         if result['Result'] == 'Ok':
             return JSONResponse(content=result['data'], media_type="application/json")
