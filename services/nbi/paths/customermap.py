@@ -406,7 +406,7 @@ class CustomerMapAPI(NBIAPI):
         else:
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
             return result
-        if with_noc:
+        if self.with_noc:
             self.asknoc(topoinfo)
         return {'Result': 'Ok', 'data':topoinfo.generatejs()}
 
@@ -416,8 +416,8 @@ class CustomerMapAPI(NBIAPI):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
         customer_id=req.customer_id
-        with_noc = req.with_noc
-        to_core = req.to_core
+        self.with_noc = req.with_noc
+        self.to_core = req.to_core
         result = self.go(customer_id, with_noc)
         if result['Result'] == 'Ok':
             return JSONResponse(content=result['data'], media_type="application/json")
