@@ -230,7 +230,7 @@ class CustomerMapfResponse(BaseModel):
 class CustomerMapRequest(BaseModel):
     customer_id: int
     with_noc = 0
-    tocore=0
+    to_core=0
  
 class CustomerMapAPI(NBIAPI):
     api_name = "customermap"
@@ -417,6 +417,7 @@ class CustomerMapAPI(NBIAPI):
         connect()
         customer_id=req.customer_id
         with_noc = req.with_noc
+        to_core = req.to_core
         result = self.go(customer_id, with_noc)
         if result['Result'] == 'Ok':
             return JSONResponse(content=result['data'], media_type="application/json")
