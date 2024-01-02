@@ -229,8 +229,8 @@ class CustomerMapfResponse(BaseModel):
 
 class CustomerMapRequest(BaseModel):
     customer_id: int
-    with_noc: int
-    to_core: int
+    with_noc= 0
+    to_core= 0
  
 class CustomerMapAPI(NBIAPI):
     api_name = "customermap"
