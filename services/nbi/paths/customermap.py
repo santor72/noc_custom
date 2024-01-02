@@ -230,6 +230,7 @@ class CustomerMapfResponse(BaseModel):
 class CustomerMapRequest(BaseModel):
     customer_id: int
     with_noc=0
+    #sdf
     to_core=0
  
 class CustomerMapAPI(NBIAPI):
