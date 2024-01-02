@@ -356,7 +356,6 @@ class CustomerMapAPI(NBIAPI):
                         if newlinkid==0:
                             continue
                         if self.to_core==1 and devdata.get('additional_data') and devdata['additional_data'].get('26') in ['G.8032', 'core', 'core-ring']:
-                            print(f"core - {devdata['host']}")
                             continue
                         if (nextdev['ip']!='217.76.46.100'):
 #                        if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
