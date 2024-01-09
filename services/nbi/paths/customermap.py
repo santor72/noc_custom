@@ -262,6 +262,8 @@ class CustomerMapAPI(NBIAPI):
         else:
             return 0
         mo_links=[]
+        if  to_core==1 and re.findall(r"[C,c]ore", cur_mo.segment.name) or re.findall(r"G.8032", cur_mo.segment.name):
+            return 0
         moid = cur_mo.id
         cur_nodeid = topoinfo.findnode_id_byip(cur_mo.address)
         if cur_nodeid==0:
@@ -292,7 +294,7 @@ class CustomerMapAPI(NBIAPI):
                     continue
                 self.logger.info(nextmo.address)
                 self.logger.info(nextmo.segment.name)
-                if  to_core==1 and re.findall(r"[C,c]ore", nextmo.segment.name):
+                if  to_core==1 and re.findall(r"[C,c]ore", nextmo.segment.name) or re.findall(r"G.8032", nextmo.segment.name):
                     continue
 #                if (nextmo.address!='217.76.46.108' and nextmo.address!='217.76.46.119' and nextmo.address!='10.76.33.82'):
                 if (nextmo.address!='217.76.46.100'):
