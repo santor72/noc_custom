@@ -424,7 +424,7 @@ class CustomerMapAPI(NBIAPI):
         to_core = req.to_core or 0
         print("----Start\n")
         print(with_noc)
-        result = self.go(customer_id)
+        result = self.go(customer_id,with_noc, to_core)
         if result['Result'] == 'Ok':
             return JSONResponse(content=result['data'], media_type="application/json")
         else:
