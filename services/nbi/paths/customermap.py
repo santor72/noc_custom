@@ -300,7 +300,7 @@ class CustomerMapAPI(NBIAPI):
     def asknoc(self,topoinfo,with_noc, to_core):
         cur_nodelist = [x for x in topoinfo.nodes]
         for node in cur_nodelist:
-            self.nocgetlinks(topoinfo, topoinfo.nodes[node].get('ip'))
+            self.nocgetlinks(topoinfo, topoinfo.nodes[node].get('ip'),with_noc, to_core)
 
     #Ищет данные устройства в Userside по ID
     def get_usdevice_by_id(self, dev_type, device_id):
