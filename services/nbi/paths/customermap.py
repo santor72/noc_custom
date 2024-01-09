@@ -290,6 +290,8 @@ class CustomerMapAPI(NBIAPI):
                 newlinkid = topoinfo.newNOClink(deva, devb, inta, intb)   
                 if newlinkid==0:
                     continue
+                self.logger.info(nextmo.address)
+                self.logger.info(nextmo.segment.name)
                 if  to_core==1 and re.findall(r"[C,c]ore", nextmo.segment.name):
                     continue
 #                if (nextmo.address!='217.76.46.108' and nextmo.address!='217.76.46.119' and nextmo.address!='10.76.33.82'):
@@ -355,6 +357,8 @@ class CustomerMapAPI(NBIAPI):
                         newlinkid = topoinfo.newUSlink(deva, devb, inta, intb)   
                         if newlinkid==0:
                             continue
+                        self.logger.info(devdata.get('host'))
+                        self.logger.info(devdata.get('additional_data'))
                         if to_core==1 and devdata.get('additional_data') and devdata['additional_data'].get('26') in ['G.8032', 'core', 'core-ring']:
                             continue
                         if (nextdev['ip']!='217.76.46.100'):
@@ -419,13 +423,9 @@ class CustomerMapAPI(NBIAPI):
         if not self.access_granted(access_header):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
-        self.logger.info("----Start\n")
         customer_id=req.customer_id
-        self.logger.info(req.json())
-#        self.logger.info(req.with_noc)
-#        self.logger.info(req.to_core)
-        with_noc = req.with_noc or 0
-        to_core = req.to_core or 0
+        with_noc = req.with_noc
+        to_core = req.to_core
         result = self.go(customer_id,with_noc, to_core)
         if result['Result'] == 'Ok':
             return JSONResponse(content=result['data'], media_type="application/json")
