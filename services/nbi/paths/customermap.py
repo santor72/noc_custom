@@ -251,7 +251,7 @@ class CustomerMapAPI(NBIAPI):
             "description": ""
         }
         return [route_post]
-    def nocgetlinks(self, topoinfo, moip):
+    def nocgetlinks(self, topoinfo, moip,with_noc, to_core):
         if not self.profiles:
             iprofiles = InterfaceProfile.objects.filter(name__contains='Uplink')
             iprofiles2 = InterfaceProfile.objects.filter(name__contains='Core')
@@ -290,14 +290,14 @@ class CustomerMapAPI(NBIAPI):
                 newlinkid = topoinfo.newNOClink(deva, devb, inta, intb)   
                 if newlinkid==0:
                     continue
-                if  self.to_core==1 and re.findall(r"[C,c]ore", nextmo.segment.name):
+                if  to_core==1 and re.findall(r"[C,c]ore", nextmo.segment.name):
                     continue
 #                if (nextmo.address!='217.76.46.108' and nextmo.address!='217.76.46.119' and nextmo.address!='10.76.33.82'):
                 if (nextmo.address!='217.76.46.100'):
                     self.nocgetlinks(topoinfo, nextmo.address)
         return 0
 
-    def asknoc(self,topoinfo):
+    def asknoc(self,topoinfo,with_noc, to_core):
         cur_nodelist = [x for x in topoinfo.nodes]
         for node in cur_nodelist:
             self.nocgetlinks(topoinfo, topoinfo.nodes[node].get('ip'))
@@ -324,7 +324,7 @@ class CustomerMapAPI(NBIAPI):
                     result = data['data']
         return result
 
-    def get_links(self, topoinfo, cur_dev_type, cur_device_ip):
+    def get_links(self, topoinfo, cur_dev_type, cur_device_ip,with_noc, to_core):
         cur_node = topoinfo.nodes.get(topoinfo.findnode_id_byip(cur_device_ip))
         commutations = self.get_usdevice_commutation(cur_dev_type, cur_node['device_id'])
         if commutations and cur_node:
@@ -355,13 +355,13 @@ class CustomerMapAPI(NBIAPI):
                         newlinkid = topoinfo.newUSlink(deva, devb, inta, intb)   
                         if newlinkid==0:
                             continue
-                        if self.to_core==1 and devdata.get('additional_data') and devdata['additional_data'].get('26') in ['G.8032', 'core', 'core-ring']:
+                        if to_core==1 and devdata.get('additional_data') and devdata['additional_data'].get('26') in ['G.8032', 'core', 'core-ring']:
                             continue
                         if (nextdev['ip']!='217.76.46.100'):
 #                        if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
-                            self.get_links(topoinfo, item['object_type'], nextdev['ip'])
+                            self.get_links(topoinfo, item['object_type'], nextdev['ip'],with_noc, to_core)
 
-    def go(self, customer_id):
+    def go(self, customer_id, with_noc, to_core):
         topoinfo = TopologyInfo()
         topoinfo.nodes={}
         topoinfo.links={}
@@ -403,15 +403,15 @@ class CustomerMapAPI(NBIAPI):
                         intb = nextdev['interfaces'][str(ac_item.get('interface'))]
                         topoinfo.newUSlink(deva, devb, inta, intb)   
                         if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
-                            self.get_links(topoinfo, ac_item['object_type'], nextdev['ip'])
+                            self.get_links(topoinfo, ac_item['object_type'], nextdev['ip'],with_noc, to_core)
             else:
                 result={'Result':'Fail', 'message': 'Fail find customer commutation'}
                 return result
         else:
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
             return result
-        if self.with_noc:
-            self.asknoc(topoinfo)
+        if with_noc:
+            self.asknoc(topoinfo,with_noc, to_core)
         return {'Result': 'Ok', 'data':topoinfo.generatejs()}
 
     async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
@@ -420,8 +420,8 @@ class CustomerMapAPI(NBIAPI):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
         customer_id=req.customer_id
-        self.with_noc = req.with_noc or 0
-        self.to_core = req.to_core or 0
+        with_noc = req.with_noc or 0
+        to_core = req.to_core or 0
         result = self.go(customer_id)
         if result['Result'] == 'Ok':
             return JSONResponse(content=result['data'], media_type="application/json")
