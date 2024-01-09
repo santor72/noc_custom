@@ -164,7 +164,7 @@ class TopologyInfo:
         return idstr
 
     def generatejs(self, to_core):
-        if to_core:
+        if to_core == 1:
             return self.generate_full()
         else:
             return self.generate_to_asbr()
@@ -172,8 +172,8 @@ class TopologyInfo:
     def generate_to_asbr(self):
         topology_dict = {'nodes': [], 'links': []}
         asbrid = 0 
-        for i in topology_dict['nodes']:
-            if i['primaryIP'] == '217.76.46.100':
+        for for k,item in self.nodes.items():
+            if item['host'] == '217.76.46.100' or item['ip'] == '217.76.46.100':
                 asbrid = i['id']
         if asbrid != 0:
             edge_labels={}
