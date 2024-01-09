@@ -163,7 +163,7 @@ class TopologyInfo:
             return 0
         return idstr
 
-    def generatejs(self, to_asbr):
+    def generatejs(self, to_core):
         if to_core:
             return self.generate_full()
         else:
