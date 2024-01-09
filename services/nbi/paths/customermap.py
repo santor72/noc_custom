@@ -294,7 +294,7 @@ class CustomerMapAPI(NBIAPI):
                     continue
 #                if (nextmo.address!='217.76.46.108' and nextmo.address!='217.76.46.119' and nextmo.address!='10.76.33.82'):
                 if (nextmo.address!='217.76.46.100'):
-                    self.nocgetlinks(topoinfo, nextmo.address)
+                    self.nocgetlinks(topoinfo, nextmo.address,with_noc, to_core)
         return 0
 
     def asknoc(self,topoinfo,with_noc, to_core):
@@ -420,8 +420,8 @@ class CustomerMapAPI(NBIAPI):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
         self.logger.info("----Start\n")
-        self.logger.info(dir(req))        
         customer_id=req.customer_id
+        self.logger.info(req.with_noc)        
         with_noc = req.with_noc or 0
         to_core = req.to_core or 0
         result = self.go(customer_id,with_noc, to_core)
