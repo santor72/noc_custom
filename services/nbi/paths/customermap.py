@@ -421,8 +421,10 @@ class CustomerMapAPI(NBIAPI):
         connect()
         self.logger.info("----Start\n")
         customer_id=req.customer_id
-        self.logger.info(req.with_noc)        
-        self.logger.info(req.to_core)        
+        self.logger.info(dir(req))
+        self.logger.info(req.customer_id)
+        self.logger.info(req.with_noc)
+        self.logger.info(req.to_core)
         with_noc = req.with_noc or 0
         to_core = req.to_core or 0
         result = self.go(customer_id,with_noc, to_core)
