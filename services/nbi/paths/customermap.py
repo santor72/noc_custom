@@ -164,10 +164,10 @@ class TopologyInfo:
         return idstr
 
     def generatejs(self, to_asbr):
-        if to_asbr:
-            return self.generate_to_asbr()
-        else:
+        if to_core:
             return self.generate_full()
+        else:
+            return self.generate_to_asbr()
 
     def generate_to_asbr(self):
         topology_dict = {'nodes': [], 'links': []}
@@ -486,7 +486,7 @@ class CustomerMapAPI(NBIAPI):
             return result
         if with_noc:
             self.asknoc(topoinfo,with_noc, to_core)
-        return {'Result': 'Ok', 'data':topoinfo.generatejs(to_asbr)}
+        return {'Result': 'Ok', 'data':topoinfo.generatejs(to_core)}
 
     async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         result = {}
