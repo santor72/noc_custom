@@ -184,7 +184,7 @@ class TopologyInfo:
             for k,item in self.links.items():
                 G.add_edge(item['nodea'], item['nodeb'])
             pos =  nx.spring_layout(G)
-            path = nx.shortest_path(G,source=,target=asbrid)
+            path = nx.shortest_path(G,source=fistnode,target=asbrid)
             path_edges = list(zip(path,path[1:]))
             if path_edges:
                 for k,item in self.nodes.items():
