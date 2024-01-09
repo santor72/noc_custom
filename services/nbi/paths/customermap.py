@@ -163,7 +163,75 @@ class TopologyInfo:
             return 0
         return idstr
 
-    def generatejs(self):
+    def generatejs(self, to_asbr):
+        if to_asbr:
+            return self.generate_to_asbr()
+        else:
+            return self.generate_full()
+
+    def generate_to_asbr(self):
+        topology_dict = {'nodes': [], 'links': []}
+        asbrid = 0 
+        for i in topology_dict['nodes']:
+            if i['primaryIP'] == '217.76.46.100':
+                asbrid = i['id']
+        if asbrid != 0:
+            edge_labels={}
+            G = nx.Graph()
+            for v in topology_dict['nodes']:
+                G.add_node(v['id'])
+            for item in topology_dict['links']:
+                G.add_edge(item['source'], item['target'])
+            pos =  nx.spring_layout(G)
+            path = nx.shortest_path(G,source=topology_dict['nodes'][0]['id'],target=asbrid)
+            path_edges = list(zip(path,path[1:]))
+            if path_edges:
+                for k,item in self.nodes.items():
+                    if not (k in path):
+                        continue
+                    if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
+                        icon = 'cloud'
+                    elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
+                        icon = 'cloud'
+                    elif item.get('icon'):
+                        icon = item.get('icon')
+                    elif item['type'] == 'customer':
+                        icon = 'host'
+                    else:
+                        icon = 'switch'
+                    if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
+                        name= f"ММТС-9 {item.get('host')}"
+                    elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
+                        name = f"ASBR {item.get('host')}"
+                    else:
+                        name = item.get('host')
+                    topology_dict['nodes'].append({
+                        'id': int(item['id']),
+                        'name': name,
+                        'primaryIP': item.get('host') or item.get('ip'),
+                        'nazvanie': item.get('nazv'),
+                        'location': item.get('location'),
+                        'icon':  icon
+                    })
+                for k,item in self.links.items():
+                    if not (item['nodea'] in path and item['nodeb'] in path):
+                        continue
+                    topology_dict['links'].append({
+                        'id': int(item['id']),
+                        'source': int(item['nodea']),
+                        'target': int(item['nodeb']),
+                        'srcIfName': item['inta']['ifname'],
+                        'tgtIfName': item['intb']['ifname'],
+                        'srcDevice': int(item['nodea']),
+                        'tgtDevice': int(item['nodeb'])
+                    })                   
+                return topology_dict
+            else:
+                return self.generate_full()                         
+        else:
+            return self.generate_full()
+
+    def generate_full(self):
         topology_dict = {'nodes': [], 'links': []}
         for k,item in self.nodes.items():
             if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
