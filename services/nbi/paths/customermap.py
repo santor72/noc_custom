@@ -486,7 +486,7 @@ class CustomerMapAPI(NBIAPI):
             return result
         if with_noc:
             self.asknoc(topoinfo,with_noc, to_core)
-        return {'Result': 'Ok', 'data':topoinfo.generatejs()}
+        return {'Result': 'Ok', 'data':topoinfo.generatejs(to_asbr)}
 
     async def handler(self, req:CustomerMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         result = {}
