@@ -229,9 +229,8 @@ class CustomerMapfResponse(BaseModel):
 
 class CustomerMapRequest(BaseModel):
     customer_id: int
-    with_noc=0
-    #sdf
-    to_core=0
+    with_noc: int
+    to_core: int
  
 class CustomerMapAPI(NBIAPI):
     api_name = "customermap"
@@ -421,8 +420,8 @@ class CustomerMapAPI(NBIAPI):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
         customer_id=req.customer_id
-        self.with_noc = req.with_noc
-        self.to_core = req.to_core
+        self.with_noc = req.with_noc or 0
+        self.to_core = req.to_core or 0
         result = self.go(customer_id)
         if result['Result'] == 'Ok':
             return JSONResponse(content=result['data'], media_type="application/json")
