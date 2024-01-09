@@ -419,11 +419,11 @@ class CustomerMapAPI(NBIAPI):
         if not self.access_granted(access_header):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
+        print("----Start\n")
+        print(dir(req))        
         customer_id=req.customer_id
         with_noc = req.with_noc or 0
         to_core = req.to_core or 0
-        print("----Start\n")
-        print(with_noc)
         result = self.go(customer_id,with_noc, to_core)
         if result['Result'] == 'Ok':
             return JSONResponse(content=result['data'], media_type="application/json")
