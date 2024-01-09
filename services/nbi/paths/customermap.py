@@ -419,8 +419,8 @@ class CustomerMapAPI(NBIAPI):
         if not self.access_granted(access_header):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
-        print("----Start\n")
-        print(dir(req))        
+        self.logger.info("----Start\n")
+        self.logger.info(dir(req))        
         customer_id=req.customer_id
         with_noc = req.with_noc or 0
         to_core = req.to_core or 0
