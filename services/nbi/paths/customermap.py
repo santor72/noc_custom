@@ -172,6 +172,7 @@ class TopologyInfo:
     def generate_to_asbr(self):
         topology_dict = {'nodes': [], 'links': []}
         asbrid = 0 
+        fistnode = self.nodes[(list(self.nodes.keys()))[0]]['id']
         for k,item in self.nodes.items():
             if item['host'] == '217.76.46.100' or item['ip'] == '217.76.46.100':
                 asbrid = item['id']
@@ -183,7 +184,7 @@ class TopologyInfo:
             for k,item in self.links.items():
                 G.add_edge(item['nodea'], item['nodeb'])
             pos =  nx.spring_layout(G)
-            path = nx.shortest_path(G,source=self.nodes[0]['id'],target=asbrid)
+            path = nx.shortest_path(G,source=,target=asbrid)
             path_edges = list(zip(path,path[1:]))
             if path_edges:
                 for k,item in self.nodes.items():
