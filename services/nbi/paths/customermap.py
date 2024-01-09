@@ -178,10 +178,10 @@ class TopologyInfo:
         if asbrid != 0:
             edge_labels={}
             G = nx.Graph()
-            for v in topology_dict['nodes']:
+            for k,v in self.nodes.items():
                 G.add_node(v['id'])
-            for item in topology_dict['links']:
-                G.add_edge(item['source'], item['target'])
+            for k,item in self.links.items():
+                G.add_edge(item['nodea'], item['nodeb'])
             pos =  nx.spring_layout(G)
             path = nx.shortest_path(G,source=topology_dict['nodes'][0]['id'],target=asbrid)
             path_edges = list(zip(path,path[1:]))
