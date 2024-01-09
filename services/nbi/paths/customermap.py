@@ -9,7 +9,7 @@ import re
 import netaddr
 import networkx as nx
 from pprint import pformat
-from typing import List, Union, Dict
+from typing import List, Union, Dict, Optional
 
 # Third-party modules
 from fastapi import APIRouter, Header, HTTPException, Response
@@ -229,8 +229,8 @@ class CustomerMapfResponse(BaseModel):
 
 class CustomerMapRequest(BaseModel):
     customer_id: int
-    with_noc=0
-    to_core=0
+    with_noc: Optional[int] = 0
+    to_core: Optional[int] = 0
  
 class CustomerMapAPI(NBIAPI):
     api_name = "customermap"
