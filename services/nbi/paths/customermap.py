@@ -360,8 +360,6 @@ class CustomerMapAPI(NBIAPI):
                 newlinkid = topoinfo.newNOClink(deva, devb, inta, intb)   
                 if newlinkid==0:
                     continue
-                self.logger.info(nextmo.address)
-                self.logger.info(nextmo.segment.name)
                 if  to_core==1 and re.findall(r"[C,c]ore", nextmo.segment.name) or re.findall(r"G.8032", nextmo.segment.name):
                     continue
 #                if (nextmo.address!='217.76.46.108' and nextmo.address!='217.76.46.119' and nextmo.address!='10.76.33.82'):
@@ -427,8 +425,6 @@ class CustomerMapAPI(NBIAPI):
                         newlinkid = topoinfo.newUSlink(deva, devb, inta, intb)   
                         if newlinkid==0:
                             continue
-                        self.logger.info(devdata.get('host'))
-                        self.logger.info(devdata.get('additional_data'))
                         if to_core==1 and devdata.get('additional_data') and devdata['additional_data'].get('26') in ['G.8032', 'core', 'core-ring']:
                             continue
                         if (nextdev['ip']!='217.76.46.100'):
