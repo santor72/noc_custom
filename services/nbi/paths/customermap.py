@@ -174,7 +174,7 @@ class TopologyInfo:
         asbrid = 0 
         for k,item in self.nodes.items():
             if item['host'] == '217.76.46.100' or item['ip'] == '217.76.46.100':
-                asbrid = i['id']
+                asbrid = item['id']
         if asbrid != 0:
             edge_labels={}
             G = nx.Graph()
