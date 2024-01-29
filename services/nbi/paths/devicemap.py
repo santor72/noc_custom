@@ -462,7 +462,7 @@ class DeviceMapAPI(NBIAPI):
         if not self.access_granted(access_header):
             raise HTTPException(403, FORBIDDEN_MESSAGE)
         connect()
-        customer_id=req.customer_id
+        device_id=req.device_id
         with_noc = req.with_noc
         to_core = req.to_core
         result = self.go(device_id,with_noc, to_core)
