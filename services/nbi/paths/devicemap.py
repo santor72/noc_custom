@@ -50,8 +50,16 @@ class TopologyInfo:
     def newUSnode(self,devdata):
         newid=self.current_node_id
         self.current_node_id+=1
+        if devdata['devtyper']==3:
+            dtype="switch"
+        elif devdata['devtyper']==4:
+            dtype = "radio"
+        else:
+            dtype = "unk"
         self.nodes[newid] = {
             'id': newid,
+            'devtyper': devdata['devtyper']
+            'dtype': dtype
             'hash': self.generate_node_hash(devdata['host']),
             'system': 'userside',
             'type': 'device',
@@ -443,7 +451,7 @@ class DeviceMapAPI(NBIAPI):
         nextnodeid = topoinfo.newUSnode(devdata)  
         nextdev =  topoinfo.nodes[nextnodeid]  
         if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
-            self.get_links(topoinfo, ac_item['object_type'], nextdev['ip'],with_noc, to_core)
+            self.get_links(topoinfo,nextdev['dtype'], nextdev['ip'],with_noc, to_core)
         else:
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
             return result
