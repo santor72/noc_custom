@@ -265,7 +265,7 @@ class TopologyInfo:
             color = 'blue'
             if item.get('devsegment') == 'Core':
                 color='green'
-                name += " "+ item.get('location'd)
+                name += " "+ item.get('location')
             topology_dict['nodes'].append({
                 'id': int(item['id']),
                 'name': name,
