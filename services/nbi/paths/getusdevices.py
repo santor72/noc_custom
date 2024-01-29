@@ -38,7 +38,7 @@ class gUSDAPI(NBIAPI):
             "description": ""
         }
         return [route_post]
-    def getuzel(id):
+    def getuzel(self, id):
         response = requests.get(usurl+"&cat=node&action=get&id=" + str(id))
         if(response.ok):
             data = json.loads(response.content.decode('utf-8'))
@@ -46,7 +46,7 @@ class gUSDAPI(NBIAPI):
         else:
             return {}
 
-    def getnode(dev_type, dev_id):
+    def getnode(self, dev_type, dev_id):
         response = requests.get(usurl+"&cat=device&action=get_data&object_type="+dev_type+"&object_id="+str(dev_id))
         if(response.ok):
             data = json.loads(response.content.decode('utf-8'))
@@ -54,7 +54,7 @@ class gUSDAPI(NBIAPI):
         else:
             return {}
 
-    def getnodes(dev_type="switch"):
+    def getnodes(self, dev_type="switch"):
         response = requests.get(usurl+"&cat=device&action=get_data&object_type="+dev_type)
         if(response.ok):
             data = json.loads(response.content.decode('utf-8'))
