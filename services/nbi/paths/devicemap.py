@@ -374,7 +374,7 @@ class DeviceMapAPI(NBIAPI):
                 if newlinkid==0:
                     continue
                 if  re.findall(r"[C,c]ore", nextmo.segment.name) or re.findall(r"G.8032", nextmo.segment.name):
-                    nextdev['devsegment'] = 50
+                    nextmo['devsegment'] = 50
                     continue
                 if (nextmo.address!='217.76.46.100'):
                     self.nocgetlinks(topoinfo, nextmo.address,with_noc, to_core)
