@@ -68,7 +68,7 @@ class TopologyInfo:
             'ip': devdata['host'],
             'location': devdata['location'],
             'name': devdata['name'] or devdata['nazv'],
-            'devsegment':1,
+            'devsegment':'Access',
             'interfaces': devdata['ifaces'],
             'uplink_interfaces': devdata['uplink_iface_array']
         }
@@ -114,7 +114,7 @@ class TopologyInfo:
         self.nodes[newid] = {
             'id': newid,
             'type': 'device',
-            'devsegment':1,
+            'devsegment':'Access',
             'hash': self.generate_node_hash(mo.address),
             'system': 'noc',
             'device_id': mo.id,
@@ -374,7 +374,7 @@ class DeviceMapAPI(NBIAPI):
                 if newlinkid==0:
                     continue
                 if  re.findall(r"[C,c]ore", nextmo.segment.name) or re.findall(r"G.8032", nextmo.segment.name):
-                    topoinfo.nodes[next_nodeid]['devsegment'] = 50
+                    topoinfo.nodes[next_nodeid]['devsegment'] = 'Core'
                     continue
                 if (nextmo.address!='217.76.46.100'):
                     self.nocgetlinks(topoinfo, nextmo.address,with_noc, to_core)
@@ -439,7 +439,7 @@ class DeviceMapAPI(NBIAPI):
                         if newlinkid==0:
                             continue
                         if (devdata.get('additional_data') and devdata['additional_data'].get('26') in ['G.8032', 'core', 'core-ring']):
-                            nextdev['devsegment'] = 50
+                            nextdev['devsegment'] = 'Core'
                             continue
                         if (nextdev['ip']!='217.76.46.100'):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'],with_noc, to_core)
