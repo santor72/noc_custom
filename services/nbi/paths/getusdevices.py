@@ -92,8 +92,6 @@ class gUSDAPI(NBIAPI):
                                 }
                             }
                             features.append(devfeature)
-                            if a.get('is_online')==0:
-                                offline.append({"id":a.get('code'), "ip":a.get('host'), "type": a.get('devtyper'),"location":a.get('location')})
                 else:
                     continue
 
