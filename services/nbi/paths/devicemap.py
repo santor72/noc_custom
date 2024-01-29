@@ -58,8 +58,8 @@ class TopologyInfo:
             dtype = "unk"
         self.nodes[newid] = {
             'id': newid,
-            'devtyper': devdata['devtyper']
-            'dtype': dtype
+            'devtyper': devdata['devtyper'],
+            'dtype': dtype,
             'hash': self.generate_node_hash(devdata['host']),
             'system': 'userside',
             'type': 'device',
