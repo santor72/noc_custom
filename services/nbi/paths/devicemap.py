@@ -223,7 +223,7 @@ class TopologyInfo:
                         'nazvanie': item.get('nazv'),
                         'location': item.get('location'),
                         'icon':  icon,
-                        'sement': item.get('devsegment')
+                        'segment': item.get('devsegment')
                     })
                 for k,item in self.links.items():
                     if not (item['nodea'] in path and item['nodeb'] in path):
@@ -269,7 +269,7 @@ class TopologyInfo:
                 'nazvanie': item.get('nazv'),
                 'location': item.get('location'),
                 'icon':  icon,
-                'sement': item.get('devsegment')
+                'segment': item.get('devsegment')
             })
         for k,item in self.links.items():
             topology_dict['links'].append({
