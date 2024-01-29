@@ -83,7 +83,7 @@ class gUSDAPI(NBIAPI):
                                     "location":a.get('location'),
                                     "ip":a.get('host'),
                                     "uzelcode": a.get('uzelcode'),
-                                    "is_online": 1,
+                                    "is_online": a.get("is_online"),
             #                        "is_online": a.get('is_online'),
                                     "hasalarm": 0,
                                     "alarmtext":"",
