@@ -262,6 +262,9 @@ class TopologyInfo:
                 name = f"ASBR {item.get('host')}"
             else:
                 name = item.get('host')
+            color = 'blue'
+            if item.get('devsegment') == 'Core':
+                color='green'
             topology_dict['nodes'].append({
                 'id': int(item['id']),
                 'name': name,
@@ -269,7 +272,8 @@ class TopologyInfo:
                 'nazvanie': item.get('nazv'),
                 'location': item.get('location'),
                 'icon':  icon,
-                'segment': item.get('devsegment')
+                'segment': item.get('devsegment'),
+                'color': color
             })
         for k,item in self.links.items():
             topology_dict['links'].append({
