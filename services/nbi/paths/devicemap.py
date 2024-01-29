@@ -438,16 +438,10 @@ class DeviceMapAPI(NBIAPI):
         topoinfo.links={}
         topoinfo.node_id_map = []
         topoinfo.link_id_map = []
-        cur_node = topoinfo.nodes[topoinfo.current_node_id]
         topoinfo.current_node_id+=1
         devdata = self.get_usdevice_by_id('all', device_id)
         nextnodeid = topoinfo.newUSnode(devdata)  
         nextdev =  topoinfo.nodes[nextnodeid]  
-        deva = cur_node
-        devb = nextdev
-        inta = {'ifIndex': 1,'ifType': 1,'ifName': 'C','ifNumber': 1}
-        intb = nextdev['interfaces'][str(ac_item.get('interface'))]
-        topoinfo.newUSlink(deva, devb, inta, intb)   
         if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
             self.get_links(topoinfo, ac_item['object_type'], nextdev['ip'],with_noc, to_core)
         else:
