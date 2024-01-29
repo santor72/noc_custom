@@ -69,7 +69,7 @@ class gUSDAPI(NBIAPI):
         for i in dev_types:
             for a in self.getnodes(i):
                 if a.get('host') and a.get('uzelcode'):
-                b = self.getuzel(a.get('uzelcode'))
+                    b = self.getuzel(a.get('uzelcode'))
                 if b and b.get('coordinates'):
                         devfeature = {
                             "type": "Feature",
