@@ -70,30 +70,30 @@ class gUSDAPI(NBIAPI):
             for a in self.getnodes(i):
                 if a.get('host') and a.get('uzelcode'):
                     b = self.getuzel(a.get('uzelcode'))
-                if b and b.get('coordinates'):
-                        devfeature = {
-                            "type": "Feature",
-                            "geometry": {
-                                "type": "Point",
-                                "coordinates": [b["coordinates"]["lon"],b["coordinates"]["lat"]]
-                            },
-                            "properties": {
-                                "id":a.get('code'),
-                                "name":a.get('name'),
-                                "location":a.get('location'),
-                                "ip":a.get('host'),
-                                "uzelcode": a.get('uzelcode'),
-                                "is_online": 1,
-        #                        "is_online": a.get('is_online'),
-                                "hasalarm": 0,
-                                "alarmtext":"",
-                                "devtype":i,
-                                "devtyper":a.get("devtyper")
+                    if b and b.get('coordinates'):
+                            devfeature = {
+                                "type": "Feature",
+                                "geometry": {
+                                    "type": "Point",
+                                    "coordinates": [b["coordinates"]["lon"],b["coordinates"]["lat"]]
+                                },
+                                "properties": {
+                                    "id":a.get('code'),
+                                    "name":a.get('name'),
+                                    "location":a.get('location'),
+                                    "ip":a.get('host'),
+                                    "uzelcode": a.get('uzelcode'),
+                                    "is_online": 1,
+            #                        "is_online": a.get('is_online'),
+                                    "hasalarm": 0,
+                                    "alarmtext":"",
+                                    "devtype":i,
+                                    "devtyper":a.get("devtyper")
+                                }
                             }
-                        }
-                        features.append(devfeature)
-                        if a.get('is_online')==0:
-                            offline.append({"id":a.get('code'), "ip":a.get('host'), "type": a.get('devtyper'),"location":a.get('location')})
+                            features.append(devfeature)
+                            if a.get('is_online')==0:
+                                offline.append({"id":a.get('code'), "ip":a.get('host'), "type": a.get('devtyper'),"location":a.get('location')})
                 else:
                     continue
 
