@@ -369,9 +369,8 @@ class DeviceMapAPI(NBIAPI):
                 newlinkid = topoinfo.newNOClink(deva, devb, inta, intb)   
                 if newlinkid==0:
                     continue
-                if  to_core==1 and re.findall(r"[C,c]ore", nextmo.segment.name) or re.findall(r"G.8032", nextmo.segment.name):
+                if  re.findall(r"[C,c]ore", nextmo.segment.name) or re.findall(r"G.8032", nextmo.segment.name):
                     continue
-#                if (nextmo.address!='217.76.46.108' and nextmo.address!='217.76.46.119' and nextmo.address!='10.76.33.82'):
                 if (nextmo.address!='217.76.46.100'):
                     self.nocgetlinks(topoinfo, nextmo.address,with_noc, to_core)
         return 0
@@ -434,10 +433,9 @@ class DeviceMapAPI(NBIAPI):
                         newlinkid = topoinfo.newUSlink(deva, devb, inta, intb)   
                         if newlinkid==0:
                             continue
-                        if to_core==1 and devdata.get('additional_data') and devdata['additional_data'].get('26') in ['G.8032', 'core', 'core-ring']:
+                        if (devdata.get('additional_data') and devdata['additional_data'].get('26') in ['G.8032', 'core', 'core-ring']):
                             continue
                         if (nextdev['ip']!='217.76.46.100'):
-#                        if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'],with_noc, to_core)
 
     def go(self, device_id, with_noc, to_core):
