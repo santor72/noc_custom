@@ -276,7 +276,8 @@ class TopologyInfo:
                 'location': item.get('location'),
                 'icon':  icon,
                 'segment': item.get('devsegment'),
-                'color': color
+                'color': color,
+                'Открыть': 'https://usrn.ccs.ru/oper/?core_section=device&action=device&type2=show&code='+str(item['id'])
             })
         for k,item in self.links.items():
             topology_dict['links'].append({
