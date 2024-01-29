@@ -26,7 +26,6 @@ class gUSDAPI(NBIAPI):
     api_name = "getusdevices"
     openapi_tags = ["get US devices API"]
     usurl="http://usrn.ccs.ru//api.php?key=weifdovIpyirdyilyablichhyasgojyatwejIkKenvaitnajal"
-    features=[]
     def get_routes(self):
         route_post ={
             "path": "/api/nbi/getusdevices",
@@ -66,6 +65,7 @@ class gUSDAPI(NBIAPI):
     async def handler(self, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
         result = {}
         dev_types=["switch", "olt", "radio"]
+        features = []
         for i in dev_types:
             for a in self.getnodes(i):
                 if a.get('host') and a.get('uzelcode'):
