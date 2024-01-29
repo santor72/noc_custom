@@ -382,7 +382,7 @@ class DeviceMapAPI(NBIAPI):
                     continue
                 if  re.findall(r"[C,c]ore", nextmo.segment.name) or re.findall(r"G.8032", nextmo.segment.name):
                     topoinfo.nodes[next_nodeid]['devsegment'] = 'Core'
-                //    continue
+                    continue
                 if (nextmo.address!='217.76.46.100'):
                     self.nocgetlinks(topoinfo, nextmo.address,with_noc, to_core)
         return 0
@@ -447,7 +447,7 @@ class DeviceMapAPI(NBIAPI):
                             continue
                         if (devdata.get('additional_data') and devdata['additional_data'].get('26') in ['G.8032', 'core', 'core-ring']):
                             nextdev['devsegment'] = 'Core'
-                        //    continue
+                            continue
                         if (nextdev['ip']!='217.76.46.100'):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'],with_noc, to_core)
 
