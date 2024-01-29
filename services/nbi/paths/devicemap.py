@@ -311,12 +311,12 @@ class DeviceMapAPI(NBIAPI):
     to_core = 0
     def get_routes(self):
         route_post ={
-            "path": "/api/nbi/customermap",
+            "path": "/api/nbi/devicemap",
             "method": "POST",
             "endpoint": self.handler,
             "response_class": JSONResponse,
             "response_model": None,
-            "name": "customermap",
+            "name": "devicemap",
             "description": ""
         }
         return [route_post]
