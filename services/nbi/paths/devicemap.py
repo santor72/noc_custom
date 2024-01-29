@@ -263,6 +263,8 @@ class TopologyInfo:
             else:
                 name = item.get('host')
             color = 'blue'
+            if k==1:
+                color='orange'
             if item.get('devsegment') == 'Core':
                 color='green'
                 name += " "+ item.get('location')
@@ -455,7 +457,6 @@ class DeviceMapAPI(NBIAPI):
         topoinfo.links={}
         topoinfo.node_id_map = []
         topoinfo.link_id_map = []
-        topoinfo.current_node_id+=1
         devdata = self.get_usdevice_by_id('all', device_id)
         nextnodeid = topoinfo.newUSnode(devdata)  
         nextdev =  topoinfo.nodes[nextnodeid]  
