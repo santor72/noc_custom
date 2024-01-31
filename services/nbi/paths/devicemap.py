@@ -66,7 +66,7 @@ class TopologyInfo:
             'device_id': devdata['ID'],
             'host': devdata['host'],
             'ip': devdata['host'],
-            'location': devdata['location'],
+            'location': devdata['location'] if devdata['location'] else '',
             'name': devdata['name'] or devdata['nazv'],
             'devsegment':'Access',
             'interfaces': devdata['ifaces'],
