@@ -332,7 +332,7 @@ class DeviceMapRequest(BaseModel):
 class DeviceMapAPI(NBIAPI):
     api_name = "customermap"
     openapi_tags = ["customermap API"]
-    usurl="http://usrn.ccs.ru//api.php?key=weifdovIpyirdyilyablichhyasgojyatwejIkKenvaitnajal"
+    usurl="http://usrn.ccs.ru/api.php?key=weifdovIpyirdyilyablichhyasgojyatwejIkKenvaitnajal"
     rnusurl="http://usrn.ccs.ru/rnapi.php?key=weifdovIpyirdyilyablichhyasgojyatwejIkKenvaitnajal"
     profiles = []
     count=0
@@ -405,8 +405,12 @@ class DeviceMapAPI(NBIAPI):
     #Ищет данные устройства в Userside по ID
     def get_usdevice_by_id(self, dev_type, device_id):
         result = {}
+        if dev_type == 'system_device': 
+            devtype = 'all'
+        else:
+            devtype = dev_type
         if device_id:
-            response = requests.get(f"{self.usurl}+&cat=device&action=get_data&object_type={dev_type}&object_id={device_id}")
+            response = requests.get(f"{self.usurl}+&cat=device&action=get_data&object_type={devtype}&object_id={device_id}")
             if(response.ok):
                 data = json.loads(response.content)
                 if data['Result'] == 'OK':
@@ -423,7 +427,7 @@ class DeviceMapAPI(NBIAPI):
                 if data['Result'] == 'OK':
                     result = data['data']
         return result
-
+    
     def get_route(self, node,downlinks=0):
         result={}
         if downlinks == 1:
@@ -501,6 +505,7 @@ class DeviceMapAPI(NBIAPI):
 
     def go(self, device_id, with_noc, to_core):
         topoinfo = TopologyInfo()
+        self.t = topoinfo
         topoinfo.nodes={}
         topoinfo.links={}
         topoinfo.node_id_map = []
