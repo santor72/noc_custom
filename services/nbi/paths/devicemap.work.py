@@ -81,7 +81,7 @@ class TopologyInfo:
         self.node_id_map.append({'id':newid, 'hash': self.generate_node_hash(devdata['host'])})
         return newid
 
-    def newUSlink(self,a,b, inta, intb,cid):
+    def newUSlink(self,a,b, inta, intb):
         if a['type'] != 'customer':
             newlinkhash = self.generate_link_hash(a['ip'], b['ip'], inta['ifIndex'], intb['ifIndex'])
             if self.map_link_id(newlinkhash):
@@ -92,7 +92,6 @@ class TopologyInfo:
         self.current_link_id+=1
         self.links[newlinkid]={
             'id' : newlinkid,
-            'connect_id': cid,
             'hash': newlinkhash,
             'system': 'userside',
             'nodea': a['id'],
@@ -333,7 +332,6 @@ class DeviceMapAPI(NBIAPI):
     api_name = "customermap"
     openapi_tags = ["customermap API"]
     usurl="http://usrn.ccs.ru//api.php?key=weifdovIpyirdyilyablichhyasgojyatwejIkKenvaitnajal"
-    rnusurl="http://usrn.ccs.ru/rnapi.php?key=weifdovIpyirdyilyablichhyasgojyatwejIkKenvaitnajal"
     profiles = []
     count=0
     with_noc = 0
@@ -424,63 +422,25 @@ class DeviceMapAPI(NBIAPI):
                     result = data['data']
         return result
 
-    def get_route(self, node,downlinks=0):
-        result={}
-        if downlinks == 1:
-            target_int=node.get('downlink_interfaces')        
-        else:
-            target_int=node.get('uplink_interfaces')
-        for k in target_int:
-            response = requests.get(f"{self.rnusurl}&cat=rncommutation&action=route&type5={node['devtyper']}&code={node['device_id']}&port={k}")
-            if(response.ok):
-                data = json.loads(response.content)
-                if data['data'] and len(data['data'])>1:
-                    lastitem=data['data'][len(data['data'])-1][0]
-                    if lastitem['objectType'] in usdevtypes:
-                        result[k]=[{'object_type': usdevtypes[lastitem['objectType']],
-                                          'object_id': lastitem['objectId'],
-                                          'direction': lastitem['objectSide'],
-                                          'interface': lastitem['objectPort'],
-                                          'comment': lastitem['comment'],
-                                          'connect_id': lastitem['id']
-                                           }
-                                          ]
-
-        return result
-    def get_links(self, topoinfo, cur_dev_type, cur_device_ip,with_noc, to_core,downlinks=0):
+    def get_links(self, topoinfo, cur_dev_type, cur_device_ip,with_noc, to_core):
         cur_node = topoinfo.nodes.get(topoinfo.findnode_id_byip(cur_device_ip))
-        if downlinks == 1:
-            target_int=cur_node.get('downlink_interfaces')
-        else:
-            target_int=cur_node.get('uplink_interfaces')
         commutations = self.get_usdevice_commutation(cur_dev_type, cur_node['device_id'])
-        self.temp1 = downlinks
-        nodata=True
-        for k in commutations:
-            if (target_int and k in target_int):
-                for item in commutations[k]:
-                    if item['object_type']=='switch' or item['object_type']=='radio':
-                        nodata=False
-        if nodata and target_int:
-            commutations = self.get_route(cur_node,downlinks)
         if commutations and cur_node:
             #Перебираем соединения, если интерфейс устройства на имеет признак Uplink переходим к следующему интерфейсу
             for cur_device_interface in commutations:
-                if not cur_device_interface in target_int:
+                if not cur_device_interface in cur_node.get('uplink_interfaces'):
                     continue
                 #Цикл по списку коммутаций интерфейса
                 for item in commutations[cur_device_interface]:
-                    if item['object_type']=='switch' or item['object_type']=='radio'  or item['object_type'] == 'system_device':
-                        cid = item.get('connect_id')
+                    if item['object_type']=='switch' or item['object_type']=='radio':
                     #Проверяем наличие устройства с которым скоммутирован интерфейс в списке устройств
                         newnodeid = topoinfo.findnode_by_device_id(item['object_id'],'userside')
                         if newnodeid != 0 :
                             nextdev = topoinfo.nodes[newnodeid]
-                            devdata = self.get_usdevice_by_id(item['object_type'], item['object_id']) 
                         #если его нет создаем
                         else:    
-                            devdata = self.get_usdevice_by_id(item['object_type'], item['object_id'])  
-                            if devdata.get('host') and devdata['host'] in topoinfo.hideip:
+                            devdata = self.get_usdevice_by_id(item['object_type'], item['object_id'])   
+                            if devdata['host'] in topoinfo.hideip:
                                 continue                            
                             nextnodeid = topoinfo.newUSnode(devdata)  
                             nextdev =  topoinfo.nodes[nextnodeid]     
@@ -490,13 +450,13 @@ class DeviceMapAPI(NBIAPI):
                         devb = nextdev
                         inta = cur_node['interfaces'][str(cur_device_interface)]
                         intb = nextdev['interfaces'][str(ifnum)]
-                        newlinkid = topoinfo.newUSlink(deva, devb, inta, intb,cid)   
+                        newlinkid = topoinfo.newUSlink(deva, devb, inta, intb)   
                         if newlinkid==0:
                             continue
-                        if (devdata and devdata.get('additional_data') and devdata['additional_data'].get('26') in ['G.8032', 'core', 'core-ring']):
+                        if (devdata.get('additional_data') and devdata['additional_data'].get('26') in ['G.8032', 'core', 'core-ring']):
                             nextdev['devsegment'] = 'Core'
                             continue
-                        if (nextdev['ip'] and nextdev['ip']!='217.76.46.100'):
+                        if (nextdev['ip']!='217.76.46.100'):
                             self.get_links(topoinfo, item['object_type'], nextdev['ip'],with_noc, to_core)
 
     def go(self, device_id, with_noc, to_core):
@@ -510,8 +470,6 @@ class DeviceMapAPI(NBIAPI):
         nextdev =  topoinfo.nodes[nextnodeid]  
         if (nextdev['ip']!='217.76.46.108' and nextdev['ip']!='217.76.46.119' and nextdev['ip']!='10.76.33.82'):
             self.get_links(topoinfo,nextdev['dtype'], nextdev['ip'],with_noc, to_core)
-            if devdata.get('dnlink_iface_array'):
-                self.get_links(topoinfo,nextdev['dtype'], nextdev['ip'],with_noc, to_core,1)
         else:
             result={'Result':'Fail', 'message': 'Fail request customer commutation'}
             return result
