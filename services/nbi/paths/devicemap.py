@@ -53,12 +53,16 @@ class TopologyInfo:
         self.current_node_id+=1
         if devdata['devtyper']==3:
             dtype="switch"
+            type = 'device'
         elif devdata['devtyper']==4:
             dtype = "radio"
+            type = 'device'
         elif devdata['devtyper']==2:
             dtype = "system_device"            
+            type = 'cloud'
         else:
             dtype = "unk"
+            type = 'device'
         if not devdata.get('host'):
             devdata['host'] = '255.255.255.'+str(newid)
         self.nodes[newid] = {
@@ -67,7 +71,7 @@ class TopologyInfo:
             'dtype': dtype,
             'hash': self.generate_node_hash(devdata['host']),
             'system': 'userside',
-            'type': 'device',
+            'type': type,
             'device_id': devdata['ID'],
             'host': devdata['host'],
             'ip': devdata['host'],
