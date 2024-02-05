@@ -216,7 +216,7 @@ class TopologyInfo:
                     elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
                         name = f"ASBR {item.get('host')}"
                     elif item['type'] == 'cloud':
-                        name = item.get('location')
+                        name = item.get('name') if item.get('name') else item.get('location')
                     else:
                         name = item.get('host')                    
                     if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
@@ -266,7 +266,7 @@ class TopologyInfo:
             elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
                 name = f"ASBR {item.get('host')}"
             elif item['type'] == 'cloud':
-                name = item.get('location')
+                name = item.get('name') if item.get('name') else item.get('location')
             else:
                 name = item.get('host')            
             if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
