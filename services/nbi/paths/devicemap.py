@@ -306,8 +306,8 @@ class TopologyInfo:
                 'target': int(item['nodeb']),
                 'srcIfName': item['inta']['ifname'],
                 'tgtIfName': item['intb']['ifname'],
-                'srcDevice': int(item['nodea']),
-                'tgtDevice': int(item['nodeb'])
+                'srcDevice': self.nodes[item['nodea']]['name'], #int(item['nodea']),
+                'tgtDevice': self.nodes[item['nodeb']]['name'] #int(item['nodeb'])
             })   
         edge_labels={}
         G = nx.Graph()
