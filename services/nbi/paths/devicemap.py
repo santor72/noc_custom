@@ -208,6 +208,14 @@ class TopologyInfo:
                     if not (k in path):
                         continue
                     if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
+                        name= f"ММТС-9 {item.get('host')}"
+                    elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
+                        name = f"ASBR {item.get('host')}"
+                    elif item['type'] == 'cloud':
+                        name = item.get('location')
+                    else:
+                        name = item.get('host')                    
+                    if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
                         icon = 'cloud'
                     elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
                         icon = 'cloud'
@@ -215,14 +223,10 @@ class TopologyInfo:
                         icon = item.get('icon')
                     elif item['type'] == 'customer':
                         icon = 'host'
+                    elif item['type'] == 'cloud':
+                        icon = 'cloud'                        
                     else:
                         icon = 'switch'
-                    if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
-                        name= f"ММТС-9 {item.get('host')}"
-                    elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
-                        name = f"ASBR {item.get('host')}"
-                    else:
-                        name = item.get('host')
                     topology_dict['nodes'].append({
                         'id': int(item['id']),
                         'name': name,
@@ -254,6 +258,14 @@ class TopologyInfo:
         topology_dict = {'nodes': [], 'links': []}
         for k,item in self.nodes.items():
             if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
+                name= f"ММТС-9 {item.get('host')}"
+            elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
+                name = f"ASBR {item.get('host')}"
+            elif item['type'] == 'cloud':
+                name = item.get('location')
+            else:
+                name = item.get('host')            
+            if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
                 icon = 'cloud'
             elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
                 icon = 'cloud'
@@ -261,14 +273,10 @@ class TopologyInfo:
                 icon = item.get('icon')
             elif item['type'] == 'customer':
                 icon = 'host'
+            elif item['type'] == 'cloud':
+                icon = 'cloud'
             else:
                 icon = 'switch'
-            if item.get('ip') in ['217.76.46.108','217.76.46.119','10.76.33.82']:
-                name= f"ММТС-9 {item.get('host')}"
-            elif item.get('ip') in ['217.76.46.100','217.76.46.127']:
-                name = f"ASBR {item.get('host')}"
-            else:
-                name = item.get('host')
             color = 'blue'
             if k==1:
                 color='orange'
