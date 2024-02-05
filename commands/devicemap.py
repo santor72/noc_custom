@@ -1,20 +1,18 @@
-# Python modules
-from __future__ import absolute_import
-import time
-import os
-import sys
+#!/usr/bin/env python
+# coding: utf-8
+
+
 import json
 import requests
+from requests.auth import HTTPDigestAuth
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+import json
 import re
+import netaddr
+from pprint import pprint
 import netaddr
 import networkx as nx
 from pprint import pformat
-from typing import List, Union, Dict, Optional
-
-# Third-party modules
-from fastapi import APIRouter, Header, HTTPException, Response
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel
 
 # NOC modules
 from noc.services.nbi.base import NBIAPI, API_ACCESS_HEADER, FORBIDDEN_MESSAGE
@@ -24,9 +22,9 @@ from noc.inv.models.interfaceprofile import InterfaceProfile
 from noc.inv.models.link import Link
 from noc.core.mongo.connection import connect
 
-router = APIRouter()
-usdevtypes={2:'system_device', 3:'switch', 4:'radio'}
 
+
+usdevtypes={2:'system_device', 3:'switch', 4:'radio'}
 class TopologyInfo:
     nodes=None
     links=None
@@ -321,15 +319,8 @@ class TopologyInfo:
                         x['color'] = 'green'
         return topology_dict
 
-class DeviceMapfResponse(BaseModel):
-    result: List[Dict]
 
-class DeviceMapRequest(BaseModel):
-    device_id: int
-    with_noc: Optional[int] = 0
-    to_core: Optional[int] = 0
- 
-class DeviceMapAPI(NBIAPI):
+class DeviceMapAPI:
     api_name = "customermap"
     openapi_tags = ["customermap API"]
     usurl="http://usrn.ccs.ru/api.php?key=weifdovIpyirdyilyablichhyasgojyatwejIkKenvaitnajal"
@@ -523,21 +514,7 @@ class DeviceMapAPI(NBIAPI):
         if with_noc:
             self.asknoc(topoinfo,with_noc, to_core)
         return {'Result': 'Ok', 'data':topoinfo.generatejs(to_core)}
-
-    async def handler(self, req:DeviceMapRequest, access_header: str = Header(..., alias=API_ACCESS_HEADER)):
-        result = {}
-        if not self.access_granted(access_header):
-            raise HTTPException(403, FORBIDDEN_MESSAGE)
-        connect()
-        device_id=req.device_id
-        with_noc = req.with_noc
-        to_core = req.to_core
-        result = self.go(device_id,with_noc, to_core)
-        if result['Result'] == 'Ok':
-            return JSONResponse(content=result['data'], media_type="application/json")
-        else:
-            topoinfo = None
-            return JSONResponse(content={'nodes':{},'links':{}}, media_type="application/json")
-
-# Install router
-DeviceMapAPI(router)
+connect()
+r = DeviceMapAPI()
+import pprint
+pprint.pprint(r.go(125,1,1))
