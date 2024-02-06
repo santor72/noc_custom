@@ -95,6 +95,12 @@ class TopologyInfo:
             newlinkhash = f"c-1-{b['host']}-{intb['ifIndex']}"
         newlinkid=self.current_link_id
         self.current_link_id+=1
+        if a.get('linktext'):
+            linktext = a.get('linktext')
+        elif b.get('linktext'):
+            linktext = b.get('linktext')
+        else:
+            linktext = ''
         self.links[newlinkid]={
             'id' : newlinkid,
             'connect_id': cid,
@@ -102,6 +108,7 @@ class TopologyInfo:
             'system': 'userside',
             'nodea': a['id'],
             'nodeb':b['id'],
+            'linktext': linktext,
             'inta':{'ifindex': inta['ifIndex'], 'ifname': inta['ifName']},
             'intb': {'ifindex': intb['ifIndex'], 'ifname': intb['ifName']}
             }
