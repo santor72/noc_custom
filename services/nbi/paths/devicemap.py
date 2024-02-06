@@ -459,6 +459,8 @@ class DeviceMapAPI(NBIAPI):
                                 linktext=data['data'][len(data['data'])-2][0].get('clopis')
                             else:
                                 linktext=''
+                        else:
+                            linktext=''
                         result[k]=[{'object_type': usdevtypes[lastitem['objectType']],
                                           'object_id': lastitem['objectId'],
                                           'direction': lastitem['objectSide'],
