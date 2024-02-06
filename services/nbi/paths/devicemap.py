@@ -26,6 +26,7 @@ from noc.core.mongo.connection import connect
 
 router = APIRouter()
 usdevtypes={2:'system_device', 3:'switch', 4:'radio'}
+ussysdevtype =2
 
 class TopologyInfo:
     nodes=None
@@ -453,12 +454,18 @@ class DeviceMapAPI(NBIAPI):
                 if data['data'] and len(data['data'])>1:
                     lastitem=data['data'][len(data['data'])-1][0]
                     if lastitem['objectType'] in usdevtypes:
+                        if lastitem['objectType'] == ussysdevtype and len(data['data'])>2:
+                            if data['data'][len(data['data'])-2][0].get('clopis'):
+                                linktext=data['data'][len(data['data'])-2][0].get('clopis')
+                            else:
+                                linktext=''
                         result[k]=[{'object_type': usdevtypes[lastitem['objectType']],
                                           'object_id': lastitem['objectId'],
                                           'direction': lastitem['objectSide'],
                                           'interface': lastitem['objectPort'],
                                           'comment': lastitem['comment'],
-                                          'connect_id': lastitem['id']
+                                          'connect_id': lastitem['id'],
+                                          'linktext': linktext
                                            }
                                           ]
 
