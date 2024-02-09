@@ -317,7 +317,6 @@ class TopologyInfo:
                 #'tgtIfName': item['intb']['ifname'],
                 'srcDevice': self.nodes[item['nodea']]['name'] + " . " + str(item['inta']['ifname']), #int(item['nodea']),
                 'tgtDevice': self.nodes[item['nodeb']]['name'] + " . " + str(item['intb']['ifname']) #int(item['nodeb']),
-                #'linktext': item['linktext']
             })   
         edge_labels={}
         G = nx.Graph()
@@ -526,6 +525,8 @@ class DeviceMapAPI(NBIAPI):
                         intb = nextdev['interfaces'][str(ifnum)]
                         newlinkid = topoinfo.newUSlink(deva, devb, inta, intb,cid)   
                         if newlinkid==0:
+                            continue
+                        if downlinks == 1:
                             continue
                         if   to_core==1 and ((devdata and devdata.get('additional_data') and devdata['additional_data'].get('26') in ['G.8032', 'core', 'core-ring'])):
                             nextdev['devsegment'] = 'Core'
