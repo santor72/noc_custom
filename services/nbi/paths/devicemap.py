@@ -81,7 +81,8 @@ class TopologyInfo:
             'devsegment':'Access',
             'interfaces': devdata['ifaces'],
             'uplink_interfaces': devdata['uplink_iface_array'],
-            'downlink_interfaces': devdata.get('dnlink_iface_array')
+            'downlink_interfaces': devdata.get('dnlink_iface_array'),
+            'linktext': devdata.get('linktext')
         }
         self.node_id_map.append({'id':newid, 'hash': self.generate_node_hash(devdata['host'])})
         return newid
