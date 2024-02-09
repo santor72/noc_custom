@@ -468,9 +468,9 @@ class DeviceMapAPI(NBIAPI):
                             if previtem.get('clopis'):
                                 linktext=previtem.get('clopis')
                             else:
-                                linktext='aaaaaaaa'
+                                linktext=''
                         else:
-                            linktext='bbbbbbbbb'
+                            linktext=''
                         result[k]=[{'object_type': usdevtypes[lastitem['objectType']],
                                           'object_id': lastitem['objectId'],
                                           'direction': lastitem['objectSide'],
@@ -516,7 +516,8 @@ class DeviceMapAPI(NBIAPI):
                         else:    
                             devdata = self.get_usdevice_by_id(item['object_type'], item['object_id'])  
                             if devdata.get('host') and devdata['host'] in topoinfo.hideip:
-                                continue                            
+                                continue          
+                            devdata['linktext'] = item['linktext']
                             nextnodeid = topoinfo.newUSnode(devdata)  
                             nextdev =  topoinfo.nodes[nextnodeid]     
                         ifnum =  item.get('interface')
