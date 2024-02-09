@@ -463,9 +463,10 @@ class DeviceMapAPI(NBIAPI):
                 if data['data'] and len(data['data'])>1:
                     lastitem=data['data'][len(data['data'])-1][0]
                     if lastitem['objectType'] in usdevtypes:
-                        if lastitem['objectType'] == ussysdevtype and len(data['data'])>2:
-                            if data['data'][len(data['data'])-2][0].get('clopis'):
-                                linktext=data['data'][len(data['data'])-2][0].get('clopis')
+                        if len(data['data'])>2: #lastitem['objectType'] == ussysdevtype and 
+                            previtem=data['data'][len(data['data'])-2][0]
+                            if previtem.get('clopis'):
+                                linktext=previtem.get('clopis')
                             else:
                                 linktext=''
                         else:
