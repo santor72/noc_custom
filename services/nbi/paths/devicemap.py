@@ -468,7 +468,7 @@ class DeviceMapAPI(NBIAPI):
                             if previtem.get('clopis'):
                                 linktext=previtem.get('clopis')
                             else:
-                                linktext=''
+                                linktext='aaaaaaaa'
                         else:
                             linktext=''
                         result[k]=[{'object_type': usdevtypes[lastitem['objectType']],
