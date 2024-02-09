@@ -304,6 +304,7 @@ class TopologyInfo:
                 'location': item.get('location'),
                 'icon':  icon,
                 'segment': item.get('devsegment'),
+                'linktext': item.get('linktext'),
                 'color': color,
                 #'Открыть': '<a href=https://usrn.ccs.ru/oper/?core_section=device&action=device&type2=show&code='+str(item['id'])+'></a>'
             })
