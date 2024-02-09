@@ -470,7 +470,7 @@ class DeviceMapAPI(NBIAPI):
                             else:
                                 linktext='aaaaaaaa'
                         else:
-                            linktext=''
+                            linktext='bbbbbbbbb'
                         result[k]=[{'object_type': usdevtypes[lastitem['objectType']],
                                           'object_id': lastitem['objectId'],
                                           'direction': lastitem['objectSide'],
