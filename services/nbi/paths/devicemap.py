@@ -95,12 +95,11 @@ class TopologyInfo:
             newlinkhash = f"c-1-{b['host']}-{intb['ifIndex']}"
         newlinkid=self.current_link_id
         self.current_link_id+=1
+        linktext=''
         if a.get('linktext'):
-            linktext = a.get('linktext')
+            linktext += a.get('linktext')
         elif b.get('linktext'):
-            linktext = b.get('linktext')
-        else:
-            linktext = ''
+            linktext += b.get('linktext')
         self.links[newlinkid]={
             'id' : newlinkid,
             'connect_id': cid,
