@@ -27,25 +27,27 @@ def aievent(event):
 #    syslog.syslog(syslog.LOG_INFO, json.dumps(responseJson))
     
 def opentocf(event):
-    a=1
+#    ctx = {"alarm": alarm}
+#    body = alarm.open_template.render_body(**ctx)
     message = {
                 "method": "publish",
                 "params": {
                     "channel": "ch_alarm",
                     "data": {
-                       "msg": pformat(event.body) + pformat(event.raw_vars),
+                       "msg": pformat(alarm.opening_event.body) + pformat(alarm.vars),
                        "id": 1,
                        "is_onpen": 0
                     }
                }
             }
-def closetocf(event):
+def closetocf(alarm):
+    ctx = {"alarm": alarm}
     message = {
                 "method": "publish",
                 "params": {
                     "channel": "ch_alarm",
                     "data": {
-                       "msg": pformat(event.body) + pformat(event.raw_vars),
+                       "msg": pformat(alarm.closing_event.body) + pformat(alarm.vars),
                        "id": 1,
                        "is_clear": 1
                     }
