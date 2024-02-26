@@ -49,8 +49,8 @@ def linkopentocf(alarm):
                         "data": {
                         "msg": event.body,
                         "id": mo.address,
-                        "descr": mo.description
-                        "name": mo.name 
+                        "descr": mo.description,
+                        "name": mo.name, 
                         "has_alarm": 1
                         }
                 }
@@ -78,8 +78,8 @@ def linkclosetocf(alarm):
                         "data": {
                             "msg": event.body,
                             "id": mo.address,
-                            "descr": mo.description
-                            "name": mo.name 
+                            "descr": mo.description,
+                            "name": mo.name,
                             "has_alarm": 0
                         }
                     }
@@ -100,9 +100,9 @@ def opentocf(alarm):
                     "data": {
                         "msg": event.body,
                         "id": mo.address,
-                        "descr": mo.description
-                        "name": mo.name 
-                        "has_alarm": 0
+                        "descr": mo.description,
+                        "name": mo.name, 
+                        "has_alarm": 1
                     }
                 }
             }
@@ -117,8 +117,8 @@ def openclosetocf(alarm):
                     "data": {
                         "msg": event.body,
                         "id": mo.address,
-                        "descr": mo.description
-                        "name": mo.name 
+                        "descr": mo.description,
+                        "name": mo.name, 
                         "has_alarm": 0
                     }
                 }
@@ -136,9 +136,9 @@ def ospfopentocf(alarm):
                     "data": {
                         "msg": event.body,
                         "id": mo.address,
-                        "descr": mo.description
-                        "name": mo.name 
-                        "has_alarm": 0
+                        "descr": mo.description,
+                        "name": mo.name, 
+                        "has_alarm": 1
                     }
                 }
             }
@@ -153,8 +153,8 @@ def ospfclosetocf(alarm):
                     "data": {
                         "msg": event.body,
                         "id": mo.address,
-                        "descr": mo.description
-                        "name": mo.name 
+                        "descr": mo.description,
+                        "name": mo.name, 
                         "has_alarm": 0
                     }
                 }
