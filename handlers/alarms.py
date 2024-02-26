@@ -11,6 +11,7 @@ from noc.main.models.customfieldenumvalue import CustomFieldEnumValue
 from noc.fm.models.activeevent import ActiveEvent
 from noc.sa.models.managedobject import ManagedObject
 from noc.inv.models.interface import Interface
+from noc.core.mongo.connection import connect
 
 capikey="cateirEkGaHaichapEcsyoDribviOj"
 capiurl="http://10.1.40.201:8087/api"
@@ -34,6 +35,7 @@ def linkopentocf(alarm):
 #    body = alarm.open_template.render_body(**ctx)
     if not 'interface' in alarm.vars:
         return 0
+    connect()
     event = ActiveEvent.objects.get(id = alarm.opening_event)
     mo = alarm.managed_object
     i = Interface.objects.filter(managed_object=mo,name=alarm.vars['interface']).first()
@@ -66,6 +68,7 @@ def linkclosetocf(alarm):
     if not 'interface' in alarm.vars:
         return 0
     event = ActiveEvent.objects.get(id = alarm.opening_event)
+    connect()
     mo = alarm.managed_object
     i = Interface.objects.filter(managed_object=mo,name=alarm.vars['interface']).first()
     if i:
