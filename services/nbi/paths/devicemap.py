@@ -312,7 +312,7 @@ class TopologyInfo:
                 'id': int(item['id']),
                 'source': int(item['nodea']),
                 'target': int(item['nodeb']),
-                'linktext': item['linktext'],
+                'linktext': item.get('linktext') if item.get('linktext') else '',
                 #'srcIfName': item['inta']['ifname'],
                 #'tgtIfName': item['intb']['ifname'],
                 'srcDevice': self.nodes[item['nodea']]['name'] + " . " + str(item['inta']['ifname']), #int(item['nodea']),
