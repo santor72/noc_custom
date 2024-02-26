@@ -41,7 +41,7 @@ def linkopentocf(alarm):
         ipr=i.profile
     else:
         return 0
-    if ipr.status_change_notification == 'e':    
+    if ipr.status_change_notification == 'e' or ipr.status_change_notification!='':    
         message = {
                     "method": "publish",
                     "params": {
@@ -61,19 +61,33 @@ def linkopentocf(alarm):
         return 0
 
 def linkclosetocf(alarm):
-    event = ActiveEvent.objects.get(id = alarm.closing_event)
-    message = {
-                "method": "publish",
-                "params": {
-                    "channel": "ch_alarm",
-                    "data": {
-                       "msg": pformat(event.body) + pformat(alarm.vars),
-                       "id": alarm.managed_object.address,
-                       "is_close": 1
+    if not 'interface' in alarm.vars:
+        return 0
+    event = ActiveEvent.objects.get(id = alarm.opening_event)
+    mo = alarm.managed_object
+    i = Interface.objects.filter(managed_object=mo,name=alarm.vars['interface']).first()
+    if i:
+        ipr=i.profile
+    else:
+        return 0
+    if ipr.status_change_notification == 'e' or ipr.status_change_notification!='':    
+        message = {
+                    "method": "publish",
+                    "params": {
+                        "channel": "ch_alarm",
+                        "data": {
+                            "msg": event.body,
+                            "id": mo.address,
+                            "descr": mo.description
+                            "name": mo.name 
+                            "has_alarm": 0
+                        }
                     }
-               }
-            }
-    response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
+                }
+        response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
+        return 1
+    else:
+        return 0
 
 def opentocf(alarm):
 #    ctx = {"alarm": alarm}
@@ -84,11 +98,13 @@ def opentocf(alarm):
                 "params": {
                     "channel": "ch_alarm",
                     "data": {
-                       "msg": pformat(event.body) + pformat(alarm.vars),
-                       "id": alarm.managed_object.address,
-                       "is_open": 0
+                        "msg": event.body,
+                        "id": mo.address,
+                        "descr": mo.description
+                        "name": mo.name 
+                        "has_alarm": 0
                     }
-               }
+                }
             }
     response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
 
@@ -99,11 +115,13 @@ def openclosetocf(alarm):
                 "params": {
                     "channel": "ch_alarm",
                     "data": {
-                       "msg": pformat(event.body) + pformat(alarm.vars),
-                       "id": alarm.managed_object.address,
-                       "is_close": 1
+                        "msg": event.body,
+                        "id": mo.address,
+                        "descr": mo.description
+                        "name": mo.name 
+                        "has_alarm": 0
                     }
-               }
+                }
             }
     response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
 
@@ -116,11 +134,13 @@ def ospfopentocf(alarm):
                 "params": {
                     "channel": "ch_alarm",
                     "data": {
-                       "msg": pformat(event.body) + pformat(alarm.vars),
-                       "id": alarm.managed_object.address,
-                       "is_open": 0
+                        "msg": event.body,
+                        "id": mo.address,
+                        "descr": mo.description
+                        "name": mo.name 
+                        "has_alarm": 0
                     }
-               }
+                }
             }
     response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
 
@@ -131,10 +151,12 @@ def ospfclosetocf(alarm):
                 "params": {
                     "channel": "ch_alarm",
                     "data": {
-                       "msg": pformat(event.body) + pformat(alarm.vars),
-                       "id": alarm.managed_object.address,
-                       "is_close": 1
+                        "msg": event.body,
+                        "id": mo.address,
+                        "descr": mo.description
+                        "name": mo.name 
+                        "has_alarm": 0
                     }
-               }
+                }
             }
     response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
