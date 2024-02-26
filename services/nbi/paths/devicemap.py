@@ -516,7 +516,7 @@ class DeviceMapAPI(NBIAPI):
                             devdata = self.get_usdevice_by_id(item['object_type'], item['object_id'])  
                             if devdata.get('host') and devdata['host'] in topoinfo.hideip:
                                 continue          
-                            devdata['linktext'] = item['linktext']
+                            devdata['linktext'] = item.get('linktext') if item.get('linktext') else ''
                             nextnodeid = topoinfo.newUSnode(devdata)  
                             nextdev =  topoinfo.nodes[nextnodeid]     
                         ifnum =  item.get('interface')
