@@ -26,7 +26,7 @@ def aievent(event):
     responseJson = json.loads(request.getresponse().read().decode('utf-8'))
 #    syslog.syslog(syslog.LOG_INFO, json.dumps(responseJson))
     
-def opentocf(event):
+def opentocf(alarm):
 #    ctx = {"alarm": alarm}
 #    body = alarm.open_template.render_body(**ctx)
     message = {
