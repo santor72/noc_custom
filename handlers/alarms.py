@@ -97,6 +97,7 @@ def opentocf(alarm):
 #    ctx = {"alarm": alarm}
 #    body = alarm.open_template.render_body(**ctx)
     event = ActiveEvent.objects.get(id = alarm.opening_event)
+    mo = alarm.managed_object
     message = {
                 "method": "publish",
                 "params": {
@@ -116,6 +117,7 @@ def opentocf(alarm):
 
 def openclosetocf(alarm):
     event = ActiveEvent.objects.get(id = alarm.closing_event)
+    mo = alarm.managed_object
     message = {
                 "method": "publish",
                 "params": {
@@ -137,6 +139,7 @@ def ospfopentocf(alarm):
 #    ctx = {"alarm": alarm}
 #    body = alarm.open_template.render_body(**ctx)
     event = ActiveEvent.objects.get(id = alarm.opening_event)
+    mo = alarm.managed_object
     message = {
                 "method": "publish",
                 "params": {
@@ -156,6 +159,7 @@ def ospfopentocf(alarm):
 
 def ospfclosetocf(alarm):
     event = ActiveEvent.objects.get(id = alarm.closing_event)
+    mo = alarm.managed_object
     message = {
                 "method": "publish",
                 "params": {
