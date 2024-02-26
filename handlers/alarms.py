@@ -37,11 +37,13 @@ def opentocf(alarm):
                     "channel": "ch_alarm",
                     "data": {
                        "msg": pformat(event.body) + pformat(alarm.vars),
-                       "id": 1,
-                       "is_onpen": 0
+                       "id": alarm.managed_object.address,
+                       "is_open": 0
                     }
                }
             }
+    response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
+    
 def closetocf(alarm):
     event = ActiveEvent.objects.get(id = alarm.closing_event)
     message = {
@@ -50,9 +52,10 @@ def closetocf(alarm):
                     "channel": "ch_alarm",
                     "data": {
                        "msg": pformat(event.body) + pformat(alarm.vars),
-                       "id": 1,
-                       "is_clear": 1
+                       "id": alarm.managed_object.address,
+                       "is_close": 1
                     }
                }
-            }    
+            }
+    response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
 
