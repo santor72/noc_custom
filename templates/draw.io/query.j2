@@ -1,0 +1,1 @@
+SELECT $timeSeries as t, avg(load_in) as {{name}} FROM $table WHERE managed_object = {{bi_id}} and path[4]=toString('{{interface}}') and $timeFilter GROUP BY t ORDER BY t

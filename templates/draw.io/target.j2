@@ -1,0 +1,23 @@
+    {
+      "database": "noc",
+      "datasource": {
+        "type": "vertamedia-clickhouse-datasource",
+        "uid": "qV6bq6bnk"
+      },
+      "dateColDataType": "date",
+      "dateLoading": false,
+      "dateTimeColDataType": "ts",
+      "dateTimeType": "DATETIME",
+      "datetimeLoading": false,
+      "extrapolate": true,
+      "format": "time_series",
+      "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+      "intervalFactor": 1,
+      "query": "SELECT $timeSeries as t, avg(load_in) as {{name}} FROM $table WHERE managed_object = {{bi_id}} and path[4]=toString('{{interface}}') and $timeFilter GROUP BY t ORDER BY t",
+      "rawQuery": "SELECT (intDiv(toUInt32(ts), 15) * 15) * 1000 as t, avg(load_in) as {{name}} FROM noc.interface WHERE managed_object = {{bi_id}} and path[4]=toString('{{interface}}') and date >= toDate(1703130835) AND date <= toDate(1703152435) AND ts >= toDateTime(1703130835) AND ts <= toDateTime(1703152435) GROUP BY t ORDER BY t",
+      "refId": "{{name}}",
+      "round": "0s",
+      "skip_comments": true,
+      "table": "interface",
+      "tableLoading": false
+    }
