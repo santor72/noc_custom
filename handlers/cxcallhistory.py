@@ -16,7 +16,6 @@ from noc.core.mongo.connection import connect
 from noc.sa.models.managedobject import ManagedObject
 from noc.custom.lib.cx import obj3CX
 from noc.core.comp import smart_text
-from noc.core.nsq.topic import TopicQueue
 
 def date_range(start, stop, step):
     while start < stop:
