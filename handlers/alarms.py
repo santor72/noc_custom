@@ -9,6 +9,8 @@ from pprint import pformat
 from noc.main.models.customfieldenumgroup import CustomFieldEnumGroup
 from noc.main.models.customfieldenumvalue import CustomFieldEnumValue
 from noc.fm.models.activeevent import ActiveEvent
+from noc.sa.models.managedobject import ManagedObject
+from noc.inv.models.interface import Interface
 
 capikey="cateirEkGaHaichapEcsyoDribviOj"
 capiurl="http://10.1.40.201:8087/api"
@@ -27,6 +29,52 @@ def aievent(event):
     responseJson = json.loads(request.getresponse().read().decode('utf-8'))
 #    syslog.syslog(syslog.LOG_INFO, json.dumps(responseJson))
     
+def linkopentocf(alarm):
+#    ctx = {"alarm": alarm}
+#    body = alarm.open_template.render_body(**ctx)
+    if not 'interface' in alarm.vars:
+        return 0
+    event = ActiveEvent.objects.get(id = alarm.opening_event)
+    mo = alarm.managed_object
+    i = Interface.objects.filter(managed_object=mo,name=alarm.vars['interface']).first()
+    if i:
+        ipr=i.profile
+    else:
+        return 0
+    if ipr.status_change_notification == 'e':    
+        message = {
+                    "method": "publish",
+                    "params": {
+                        "channel": "ch_alarm",
+                        "data": {
+                        "msg": event.body,
+                        "id": mo.address,
+                        "descr": mo.description
+                        "name": mo.name 
+                        "has_alarm": 1
+                        }
+                }
+                }
+        response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
+        return 1
+    else:
+        return 0
+
+def linkclosetocf(alarm):
+    event = ActiveEvent.objects.get(id = alarm.closing_event)
+    message = {
+                "method": "publish",
+                "params": {
+                    "channel": "ch_alarm",
+                    "data": {
+                       "msg": pformat(event.body) + pformat(alarm.vars),
+                       "id": alarm.managed_object.address,
+                       "is_close": 1
+                    }
+               }
+            }
+    response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
+
 def opentocf(alarm):
 #    ctx = {"alarm": alarm}
 #    body = alarm.open_template.render_body(**ctx)
@@ -43,8 +91,8 @@ def opentocf(alarm):
                }
             }
     response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
-    
-def closetocf(alarm):
+
+def openclosetocf(alarm):
     event = ActiveEvent.objects.get(id = alarm.closing_event)
     message = {
                 "method": "publish",
@@ -59,3 +107,34 @@ def closetocf(alarm):
             }
     response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
 
+def ospfopentocf(alarm):
+#    ctx = {"alarm": alarm}
+#    body = alarm.open_template.render_body(**ctx)
+    event = ActiveEvent.objects.get(id = alarm.opening_event)
+    message = {
+                "method": "publish",
+                "params": {
+                    "channel": "ch_alarm",
+                    "data": {
+                       "msg": pformat(event.body) + pformat(alarm.vars),
+                       "id": alarm.managed_object.address,
+                       "is_open": 0
+                    }
+               }
+            }
+    response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
+
+def ospfclosetocf(alarm):
+    event = ActiveEvent.objects.get(id = alarm.closing_event)
+    message = {
+                "method": "publish",
+                "params": {
+                    "channel": "ch_alarm",
+                    "data": {
+                       "msg": pformat(event.body) + pformat(alarm.vars),
+                       "id": alarm.managed_object.address,
+                       "is_close": 1
+                    }
+               }
+            }
+    response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
