@@ -41,7 +41,7 @@ def linkopentocf(alarm):
         ipr=i.profile
     else:
         return 0
-    if ipr.status_change_notification == 'e' or ipr.status_change_notification!='':    
+    if ipr.status_change_notification == 'e':    
         message = {
                     "method": "publish",
                     "params": {
@@ -51,6 +51,8 @@ def linkopentocf(alarm):
                         "id": mo.address,
                         "descr": mo.description,
                         "name": mo.name, 
+                        "repeats": event.repeats,
+                        "subject": event.subject,
                         "has_alarm": 1
                         }
                 }
@@ -70,7 +72,7 @@ def linkclosetocf(alarm):
         ipr=i.profile
     else:
         return 0
-    if ipr.status_change_notification == 'e' or ipr.status_change_notification!='':    
+    if ipr.status_change_notification == 'e':    
         message = {
                     "method": "publish",
                     "params": {
@@ -80,6 +82,8 @@ def linkclosetocf(alarm):
                             "id": mo.address,
                             "descr": mo.description,
                             "name": mo.name,
+                            "repeats": event.repeats,
+                            "subject": event.subject,
                             "has_alarm": 0
                         }
                     }
@@ -102,6 +106,8 @@ def opentocf(alarm):
                         "id": mo.address,
                         "descr": mo.description,
                         "name": mo.name, 
+                        "repeats": event.repeats,
+                        "subject": event.subject,
                         "has_alarm": 1
                     }
                 }
@@ -119,6 +125,8 @@ def openclosetocf(alarm):
                         "id": mo.address,
                         "descr": mo.description,
                         "name": mo.name, 
+                        "repeats": event.repeats,
+                        "subject": event.subject,
                         "has_alarm": 0
                     }
                 }
@@ -137,7 +145,9 @@ def ospfopentocf(alarm):
                         "msg": event.body,
                         "id": mo.address,
                         "descr": mo.description,
-                        "name": mo.name, 
+                        "name": mo.name,
+                        "repeats": event.repeats,
+                        "subject": event.subject,
                         "has_alarm": 1
                     }
                 }
@@ -154,7 +164,9 @@ def ospfclosetocf(alarm):
                         "msg": event.body,
                         "id": mo.address,
                         "descr": mo.description,
-                        "name": mo.name, 
+                        "name": mo.name,
+                        "repeats": event.repeats,
+                        "subject": event.subject,
                         "has_alarm": 0
                     }
                 }
