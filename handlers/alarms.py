@@ -5,8 +5,14 @@ import syslog
 import requests
 from pprint import pprint
 import apiai
+from pprint import pformat
 from noc.main.models.customfieldenumgroup import CustomFieldEnumGroup
 from noc.main.models.customfieldenumvalue import CustomFieldEnumValue
+
+capikey="cateirEkGaHaichapEcsyoDribviOj"
+capiurl="http://10.1.40.201:8087/api"
+cheaders = {'Content-type': 'application/json', 'Authorization': "apikey " + capikey}
+
 
 def aievent(event):
 #    logging.info(json.dumps(dir(alarm)))
@@ -22,6 +28,27 @@ def aievent(event):
     
 def opentocf(event):
     a=1
+    message = {
+                "method": "publish",
+                "params": {
+                    "channel": "ch_alarm",
+                    "data": {
+                       "msg": pformat(event.body) + pformat(event.raw_vars),
+                       "id": 1,
+                       "is_onpen": 0
+                    }
+               }
+            }
 def closetocf(event):
-    a=1
+    message = {
+                "method": "publish",
+                "params": {
+                    "channel": "ch_alarm",
+                    "data": {
+                       "msg": pformat(event.body) + pformat(event.raw_vars),
+                       "id": 1,
+                       "is_clear": 1
+                    }
+               }
+            }    
 
