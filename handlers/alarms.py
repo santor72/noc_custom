@@ -20,6 +20,8 @@ def aievent(event):
     responseJson = json.loads(request.getresponse().read().decode('utf-8'))
 #    syslog.syslog(syslog.LOG_INFO, json.dumps(responseJson))
     
-def tocentrifuge(event):
+def opentocf(event):
+    a=1
+def closetocf(event):
     a=1
 
