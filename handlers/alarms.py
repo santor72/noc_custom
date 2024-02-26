@@ -4,7 +4,7 @@ import sys
 import syslog
 import requests
 from pprint import pprint
-import apiai
+#import apiai
 from pprint import pformat
 from noc.main.models.customfieldenumgroup import CustomFieldEnumGroup
 from noc.main.models.customfieldenumvalue import CustomFieldEnumValue
