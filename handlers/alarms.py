@@ -8,6 +8,7 @@ from pprint import pprint
 from pprint import pformat
 from noc.main.models.customfieldenumgroup import CustomFieldEnumGroup
 from noc.main.models.customfieldenumvalue import CustomFieldEnumValue
+from noc.fm.models.activeevent import ActiveEvent
 
 capikey="cateirEkGaHaichapEcsyoDribviOj"
 capiurl="http://10.1.40.201:8087/api"
@@ -29,25 +30,26 @@ def aievent(event):
 def opentocf(alarm):
 #    ctx = {"alarm": alarm}
 #    body = alarm.open_template.render_body(**ctx)
+    event = ActiveEvent.objects.get(id = alarm.opening_event)
     message = {
                 "method": "publish",
                 "params": {
                     "channel": "ch_alarm",
                     "data": {
-                       "msg": pformat(alarm.opening_event.body) + pformat(alarm.vars),
+                       "msg": pformat(event.body) + pformat(alarm.vars),
                        "id": 1,
                        "is_onpen": 0
                     }
                }
             }
 def closetocf(alarm):
-    ctx = {"alarm": alarm}
+    event = ActiveEvent.objects.get(id = alarm.closing_event)
     message = {
                 "method": "publish",
                 "params": {
                     "channel": "ch_alarm",
                     "data": {
-                       "msg": pformat(alarm.closing_event.body) + pformat(alarm.vars),
+                       "msg": pformat(event.body) + pformat(alarm.vars),
                        "id": 1,
                        "is_clear": 1
                     }
