@@ -99,6 +99,7 @@ def linkclosetocf(alarm):
 def opentocf(alarm):
 #    ctx = {"alarm": alarm}
 #    body = alarm.open_template.render_body(**ctx)
+    connect()
     event = ActiveEvent.objects.get(id = alarm.opening_event)
     mo = alarm.managed_object
     message = {
@@ -118,7 +119,8 @@ def opentocf(alarm):
             }
     response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
 
-def openclosetocf(alarm):
+def closetocf(alarm):
+    connect()
     event = ActiveEvent.objects.get(id = alarm.closing_event)
     mo = alarm.managed_object
     message = {
@@ -141,6 +143,7 @@ def openclosetocf(alarm):
 def ospfopentocf(alarm):
 #    ctx = {"alarm": alarm}
 #    body = alarm.open_template.render_body(**ctx)
+    connect()
     event = ActiveEvent.objects.get(id = alarm.opening_event)
     mo = alarm.managed_object
     message = {
@@ -161,6 +164,7 @@ def ospfopentocf(alarm):
     response = requests.post(capiurl,verify=False, headers=cheaders, json=message)
 
 def ospfclosetocf(alarm):
+    connect()
     event = ActiveEvent.objects.get(id = alarm.closing_event)
     mo = alarm.managed_object
     message = {
