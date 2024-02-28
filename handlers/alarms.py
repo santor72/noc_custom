@@ -55,8 +55,8 @@ def linkopentocf(alarm):
                         "name": mo.name, 
                         "repeats": event.repeats,
                         "subject": event.subject,
-                        "ts": alarm.timestamp,
-                        'lastupdate': alarm.last_update,
+                        "date": alarm.timestamp.toString(),
+                        "ts": int(round(alarm.timestamp.timestamp()),
                         "has_alarm": 1
                         }
                 }
@@ -89,8 +89,8 @@ def linkclosetocf(alarm):
                             "name": mo.name,
                             "repeats": event.repeats,
                             "subject": event.subject,
-                            "ts": alarm.timestamp,
-                            'lastupdate': alarm.last_update,
+                            "date": alarm.timestamp.toString(),
+                            "ts": int(round(alarm.timestamp.timestamp()),
                             "has_alarm": 0
                         }
                     }
@@ -117,8 +117,8 @@ def opentocf(alarm):
                         "name": mo.name, 
                         "repeats": event.repeats,
                         "subject": event.subject,
-                        "ts": alarm.timestamp,
-                        'lastupdate': alarm.last_update,
+                        "date": alarm.timestamp.toString(),
+                        "ts": int(round(alarm.timestamp.timestamp()),
                         "has_alarm": 1
                     }
                 }
@@ -140,8 +140,8 @@ def closetocf(alarm):
                         "name": mo.name, 
                         "repeats": event.repeats,
                         "subject": event.subject,
-                        "ts": alarm.timestamp,
-                        'lastupdate': alarm.last_update,
+                        "date": alarm.timestamp.toString(),
+                        "ts": int(round(alarm.timestamp.timestamp()),
                         "has_alarm": 0
                     }
                 }
@@ -165,8 +165,8 @@ def ospfopentocf(alarm):
                         "name": mo.name,
                         "repeats": event.repeats,
                         "subject": event.subject,
-                        "ts": alarm.timestamp,
-                        'lastupdate': alarm.last_update,
+                        "date": alarm.timestamp.toString(),
+                        "ts": int(round(alarm.timestamp.timestamp()),
                         "has_alarm": 1
                     }
                 }
@@ -188,8 +188,8 @@ def ospfclosetocf(alarm):
                         "name": mo.name,
                         "repeats": event.repeats,
                         "subject": event.subject,
-                        "ts": alarm.timestamp,
-                        'lastupdate': alarm.last_update,
+                        "date": alarm.timestamp.toString(),
+                        "ts": int(round(alarm.timestamp.timestamp()),
                         "has_alarm": 0
                     }
                 }
