@@ -56,7 +56,7 @@ def linkopentocf(alarm):
                         "repeats": event.repeats,
                         "subject": event.subject,
                         "date": alarm.timestamp.toString(),
-                        "ts": int(round(alarm.timestamp.timestamp()),
+                        "ts": int(round(alarm.timestamp.timestamp())),
                         "has_alarm": 1
                         }
                 }
@@ -90,7 +90,7 @@ def linkclosetocf(alarm):
                             "repeats": event.repeats,
                             "subject": event.subject,
                             "date": alarm.timestamp.toString(),
-                            "ts": int(round(alarm.timestamp.timestamp()),
+                            "ts": int(round(alarm.timestamp.timestamp())),
                             "has_alarm": 0
                         }
                     }
@@ -118,7 +118,7 @@ def opentocf(alarm):
                         "repeats": event.repeats,
                         "subject": event.subject,
                         "date": alarm.timestamp.toString(),
-                        "ts": int(round(alarm.timestamp.timestamp()),
+                        "ts": int(round(alarm.timestamp.timestamp())),
                         "has_alarm": 1
                     }
                 }
@@ -141,7 +141,7 @@ def closetocf(alarm):
                         "repeats": event.repeats,
                         "subject": event.subject,
                         "date": alarm.timestamp.toString(),
-                        "ts": int(round(alarm.timestamp.timestamp()),
+                        "ts": int(round(alarm.timestamp.timestamp())),
                         "has_alarm": 0
                     }
                 }
@@ -166,7 +166,7 @@ def ospfopentocf(alarm):
                         "repeats": event.repeats,
                         "subject": event.subject,
                         "date": alarm.timestamp.toString(),
-                        "ts": int(round(alarm.timestamp.timestamp()),
+                        "ts": int(round(alarm.timestamp.timestamp())),
                         "has_alarm": 1
                     }
                 }
@@ -189,7 +189,7 @@ def ospfclosetocf(alarm):
                         "repeats": event.repeats,
                         "subject": event.subject,
                         "date": alarm.timestamp.toString(),
-                        "ts": int(round(alarm.timestamp.timestamp()),
+                        "ts": int(round(alarm.timestamp.timestamp())),
                         "has_alarm": 0
                     }
                 }
