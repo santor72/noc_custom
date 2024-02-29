@@ -1,0 +1,155 @@
+{% macro interfaces() -%}
+{
+  "id": 4,
+  "gridPos": {
+    "h": 9,
+    "w": 12,
+    "x": 0,
+    "y": 0
+  },
+  "type": "graph",
+  "title": "${i3:text}",
+  "repeat": "i3",
+  "repeatDirection": "h",
+  "maxPerRow": 2,
+  "datasource": {
+    "type": "vertamedia-clickhouse-datasource",
+    "uid": "qV6bq6bnk"
+  },
+  "thresholds": [],
+  "pluginVersion": "8.3.6",
+  "links": [],
+  "libraryPanel": {
+    "description": "",
+    "meta": {
+      "connectedDashboards": 2,
+      "created": "2024-02-28T14:11:53Z",
+      "createdBy": {
+        "avatarUrl": "/grafana/avatar/46d229b033af06a191ff2267bca9ae56",
+        "id": 1,
+        "name": "admin"
+      },
+      "folderName": "General",
+      "folderUid": "",
+      "updated": "2024-02-28T14:11:53Z",
+      "updatedBy": {
+        "avatarUrl": "/grafana/avatar/46d229b033af06a191ff2267bca9ae56",
+        "id": 1,
+        "name": "admin"
+      }
+    },
+    "name": "${i3:text}",
+    "type": "graph",
+    "uid": "4nynQloSz",
+    "version": 1
+  },
+  "legend": {
+    "alignAsTable": true,
+    "avg": true,
+    "current": true,
+    "max": true,
+    "min": true,
+    "show": true,
+    "sortDesc": true,
+    "total": false,
+    "values": true
+  },
+  "aliasColors": {},
+  "bars": false,
+  "dashLength": 10,
+  "dashes": false,
+  "description": "",
+  "fieldConfig": {
+    "defaults": {
+      "links": []
+    },
+    "overrides": []
+  },
+  "fill": 1,
+  "fillGradient": 0,
+  "grid": {},
+  "hiddenSeries": false,
+  "internal_comment": "graph_interface_load.j2",
+  "lines": true,
+  "linewidth": 2,
+  "nullPointMode": "connected",
+  "options": {
+    "alertThreshold": true
+  },
+  "percentage": false,
+  "pointradius": 5,
+  "points": false,
+  "renderer": "flot",
+  "seriesOverrides": [
+    {
+      "$$hashKey": "object:339",
+      "alias": "Input"
+    }
+  ],
+  "spaceLength": 10,
+  "stack": false,
+  "steppedLine": false,
+  "targets": [
+    {
+      "database": "noc",
+      "datasource": {
+        "type": "vertamedia-clickhouse-datasource",
+        "uid": "qV6bq6bnk"
+      },
+      "dateColDataType": "date",
+      "dateLoading": false,
+      "dateTimeColDataType": "ts",
+      "dateTimeType": "DATETIME",
+      "datetimeLoading": false,
+      "extrapolate": true,
+      "format": "time_series",
+      "intervalFactor": 1,
+      "query": "SELECT $timeSeries as t, avg(load_in) as Input, avg(load_out) as Output FROM $table WHERE\nmanaged_object = toUInt64(replaceRegexpOne(toString($i3),'(.*);(.*)','\\\\1'))\nand path[4]=replaceRegexpOne(toString($i3),'(.*);(.*)','\\\\2')\nand $timeFilter GROUP BY t ORDER BY t",
+      "refId": "A",
+      "resultFormat": "time_series",
+      "round": "0s",
+      "skip_comments": true,
+      "table": "interface",
+      "tableLoading": false
+    }
+  ],
+  "timeFrom": null,
+  "timeRegions": [],
+  "timeShift": null,
+  "tooltip": {
+    "msResolution": false,
+    "shared": true,
+    "sort": 0,
+    "value_type": "cumulative"
+  },
+  "xaxis": {
+    "buckets": null,
+    "mode": "time",
+    "name": null,
+    "show": true,
+    "values": []
+  },
+  "y-axis": true,
+  "yaxes": [
+    {
+      "$$hashKey": "object:370",
+      "format": "bps",
+      "label": "bit/s",
+      "logBase": 1,
+      "show": true
+    },
+    {
+      "$$hashKey": "object:371",
+      "format": "short",
+      "logBase": 1,
+      "show": true
+    }
+  ],
+  "yaxis": {
+    "align": false
+  },
+  "scopedVars": {
+  }
+}
+
+{%- endmacro %}

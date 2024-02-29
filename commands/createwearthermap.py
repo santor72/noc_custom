@@ -16,11 +16,12 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("-f", "--file", dest="fin", default=None)
         parser.add_argument("-o", "--output", dest="fout", default=None)
-
+        parser.add_argument("-i", "--interface", dest="intgraph", default=None)
     def handle(self, *args, **options):
         connect()
         fin = options.get("fin")
         fout = options.get("fout")
+        intgraph = options.get("intgraph")
         if not fin:
             print("Need --file for input file name and --out for output file name")
             quit()
@@ -51,6 +52,7 @@ class Command(BaseCommand):
         alllinks = Link.objects.filter(linked_objects__in=[x for x in newnodes.keys()])
         links_tmp=[]
         newlinks=[]
+        interfacegraph=[]
         for k in newnodes.keys():
             l = (alllinks.filter(linked_objects__in=[k])).filter(linked_objects__in=[x for x in newnodes.keys() if x != k])
             for item in l:
@@ -126,11 +128,23 @@ class Command(BaseCommand):
                 'bi_id': nodesbyid[linkb]['bi_id'],
                 'interface': v.interfaces[1].name
             })
+            #Графики для интерфейсов
+            gname=re.sub('\W+','_',f"{v.interfaces[0].managed_object.name} {v.interfaces[0].description}({v.interfaces[0].name})")
+            interfacegraph.append(
+                f"{gname} : {v.interfaces[0].managed_object.bi_id};{v.interfaces[0].name}"
+            )
+#            gname=re.sub('\W+','_',f"{v.interfaces[1].managed_object.name} {v.interfaces[1].description}({v.interfaces[1].name})")
+#            interfacegraph.append(
+#                f"{gname} : {v.interfaces[1].managed_object.bi_id};{v.interfaces[1].name}"
+#            )
         graf={'uuid': str(uuid.uuid1())}
         pm_template_path='/opt/noc_custom/templates/weathermap'
         j2_env = Environment(loader=FileSystemLoader(pm_template_path))
-        template = j2_env.get_template('panel.j2')
-        result = template.render(graf=graf,nodes=nodes,links=links,targets=targets)
+        template = j2_env.get_template('dahsboard.j2')
+        if intgraph:
+            result = template.render(graf=graf,nodes=nodes,links=links,targets=targets, intgraph=1, i3=",".join(interfacegraph))
+        else:
+            result = template.render(graf=graf,nodes=nodes,links=links,targets=targets, intgraph=0, i3="")
         with open(fout,'w') as f:
             #json.dump(template.render(graf=graf,nodes=nodes), f)
             f.write(result)
