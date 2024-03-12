@@ -25,7 +25,6 @@
   "links": [],
   "liveNow": false,
   "panels": [
-    {% if nodes %}
      {
       "collapsed": false,
       "gridPos": {
@@ -42,11 +41,8 @@
     },
     {% from "panel.j2" import panel -%}
     {{panel(graf,nodes,links,targets)}}
-    {% endif %}
-    {% if intgraph %}
-    {% if nodes %}
+      {% if intgraph %}
     ,
-    {% endif %}
      {
       "collapsed": true,
       "gridPos": {
@@ -98,7 +94,6 @@
   },
   "timepicker": {},
   "timezone": "",
-  "weekStart": "",
-  "title": "{{ title }}"
+  "weekStart": ""
 }
 

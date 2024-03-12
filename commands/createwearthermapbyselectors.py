@@ -20,14 +20,102 @@ class Command(BaseCommand):
         \t-a --admindomain for admindomain(admindomains or comma separated admindomains )
         \t-s --segment for segment(or comma separated segments )
         \t-l --labels for label(or comma separated labels )
-        \t-o --fout if you want write to file
+        \t-d, --dashboard if you want write dashboard file
+        \t-t --title dashboard title
+        \t-i for make interface panel
+        \-w for make weathermap panel
+        \--dia for write diagram file
+
+        File write to /home/netmaps
+        \t /dashboard - dashboards json. Add subdir to file name
+        \t /diagram - dia files
         """)
     def add_arguments(self, parser):
         parser.add_argument("-a", "--admindomain", dest="admindomain", default=None)
         parser.add_argument("-l", "--labels", dest="labels", default=None)
         parser.add_argument("-s", "--segment", dest="segment", default=None)
-        parser.add_argument("-i", "--interface", dest="intgraph", default=None)
-        parser.add_argument("-o", "--fout", dest="fout", default=None)
+        parser.add_argument("-i", "--interface", dest="intgraph", action='store_true')
+        parser.add_argument("-d", "--dashboard", dest="dashout", default=None)
+        parser.add_argument("-w", "--weather", dest="weather", action='store_true')
+        parser.add_argument("--dia", dest="dia", default=None)
+        parser.add_argument("-t", "--title", dest="title", default=None)
+   
+    def makenodes(self,newnodes,graf):
+        nodes=[]
+        xstart=100
+        ystart=100
+        with open("/opt/noc_custom/templates/weathermap/icons.json", 'r') as f:
+            icons = json.load(f)
+        for k,v in newnodes.items():
+            uid=str(uuid.uuid1())
+            newnodes[k]['uuid'] = uid
+            if icons.get(v['icon']):
+                icon = icons.get(v['icon'])
+            else:
+                icons.get('default')
+            node = {
+                'id': uid,
+                'noc_id': k,
+                'bi_id': v.get('bi_id'),
+                'label': v.get('name'),
+                'iconname': icon['name'],
+                'iconpath': icon['src'],
+#                'x': xstart,
+#                'y': ystart
+                'x': int(graf[k][0])+400,
+                'y': int(graf[k][1])+400
+                }
+            nodes.append(node)
+            xstart+=35
+            ystart+=35
+        return nodes
+  
+    def makelinks(self,nodes,newlinks):
+        interfacegraph=[]
+        links=[]
+        targets=[]
+        for v in newlinks:
+            #MO id in link
+            linka=v.interfaces[0].managed_object.id
+            linkb=v.interfaces[1].managed_object.id
+            nodea=([x for x in nodes if x['noc_id'] == linka])[0]
+            nodeb=([x for x in nodes if x['noc_id'] == linkb])[0]
+            #Interface names in link
+            inta=v.interfaces[0].name
+            intb=v.interfaces[1].name
+            la = re.sub('\W+','_', nodea['label']+'_'+nodeb['label'])
+            lb = re.sub('\W+','_', nodeb['label']+'_'+nodea['label'])            
+            links.append(
+                {
+                    'id' : str(uuid.uuid1()),
+                    'nodea' : nodea,
+                    'nodeb' : nodeb,
+                    'query_a' : la,
+                    'query_b' : lb,
+                    'bandwidth' : v.interfaces[0].in_speed*1000 if v.interfaces[0].in_speed else 0
+                }
+            )
+            targets.append({
+                'name':la,
+                'bi_id': nodea['bi_id'],
+                'interface': v.interfaces[0].name
+            })
+            targets.append({
+                'name':lb,
+                'bi_id': nodeb['bi_id'],
+                'interface': v.interfaces[1].name
+            })
+            #Графики для интерфейсов
+            gname=re.sub('\W+','_',f"{v.interfaces[0].managed_object.name} {v.interfaces[0].description}({v.interfaces[0].name})")
+            interfacegraph.append(
+                f"{gname} : {v.interfaces[0].managed_object.bi_id};{v.interfaces[0].name}"
+            )
+            gname=re.sub('\W+','_',f"{v.interfaces[1].managed_object.name} {v.interfaces[1].description}({v.interfaces[1].name})")
+            interfacegraph.append(
+                f"{gname} : {v.interfaces[1].managed_object.bi_id};{v.interfaces[1].name}"
+            )
+        return [links, targets, interfacegraph]
+    
     def handle(self, *args, **options):
         connect()
         #Читаем входные параметры
@@ -35,12 +123,15 @@ class Command(BaseCommand):
         plabels = options.get("labels")
         psegment = options.get("segment")
         intgraph = options.get("intgraph")
-        fout = options.get("fout")
+        weather = options.get("weather")
+        dashout = options.get("dashout")
+        dia = options.get("dia")
+        title = options.get("title")
         #Обрабатываем параметры
         admindomains = padmindomain.split(',') if padmindomain else [] 
         labels = plabels.split(',') if plabels else []
         segments = psegment.split(',') if psegment else []
-        if not (admindomains or labels or segments):
+        if not (admindomains or labels or segments or title):
             help()
             quit()
         connect()
@@ -48,8 +139,6 @@ class Command(BaseCommand):
         pm_template_path='/opt/noc_custom/templates/weathermap'
         j2_env = Environment(loader=FileSystemLoader(pm_template_path))
         template = j2_env.get_template('dahsboard.j2')
-        with open("/opt/noc_custom/templates/weathermap/icons.json", 'r') as f:
-            icons = json.load(f)
         moids=[]
         if admindomains:
             admdom = AdministrativeDomain.objects.filter(name__in=admindomains)
@@ -73,7 +162,6 @@ class Command(BaseCommand):
         alllinks = Link.objects.filter(linked_objects__in=[x for x in newnodes.keys()])
         links_tmp=[]
         newlinks=[]
-        interfacegraph=[]
         for k in newnodes.keys():
             l = (alllinks.filter(linked_objects__in=[k])).filter(linked_objects__in=[x for x in newnodes.keys() if x != k])
             for item in l:
@@ -87,88 +175,23 @@ class Command(BaseCommand):
         for v in newlinks:
             G.add_edge(v.interfaces[0].managed_object.id, v.interfaces[1].managed_object.id)
         Gl=nx.nx_agraph.graphviz_layout(G)
-        #newlinks=[]
-        #for k,v in links.items():
-        #    newlinks.append({x.managed_object.id:x.name for x in v.interfaces})
         #Make node list for template
-        nodes=[]
-        nodesbyid={}
-        xstart=100
-        ystart=100
-        for k,v in newnodes.items():
-            uid=str(uuid.uuid1())
-            newnodes[k]['uuid'] = uid
-            if icons.get(v['icon']):
-                icon = icons.get(v['icon'])
-            else:
-                icons.get('default')
-            node = {
-                'id': uid,
-                'bi_id': v.get('bi_id'),
-                'label': v.get('name'),
-                'iconname': icon['name'],
-                'iconpath': icon['src'],
-#                'x': xstart,
-#                'y': ystart
-                'x': int(Gl[k][0])+400,
-                'y': int(Gl[k][1])+400
-                }
-            nodes.append(node)
-            nodesbyid[k] = node
-            xstart+=35
-            ystart+=35
+        nodes = self.makenodes(newnodes,Gl)
         #Make link list for template
-        links=[]
-        targets=[]
-        for v in newlinks:
-            #MO id in link
-            linka=v.interfaces[0].managed_object.id
-            linkb=v.interfaces[1].managed_object.id
-            #Interface names in link
-            inta=v.interfaces[0].name
-            intb=v.interfaces[1].name
-            la = re.sub('\W+','_', newnodes[linka]['name']+'_'+newnodes[linkb]['name'])
-            lb = re.sub('\W+','_', newnodes[linkb]['name']+'_'+newnodes[linka]['name'])            
-            links.append(
-                {
-                    'id' : str(uuid.uuid1()),
-                    'nodea' : nodesbyid[linka],
-                    'nodeb' : nodesbyid[linkb],
-                    'query_a' : la,
-                    'query_b' : lb,
-                    'bandwidth' : v.interfaces[0].in_speed*1000 if v.interfaces[0].in_speed else 0
-                }
-            )
-            targets.append({
-                'name':la,
-                'bi_id': nodesbyid[linka]['bi_id'],
-                'interface': v.interfaces[0].name
-            })
-            targets.append({
-                'name':lb,
-                'bi_id': nodesbyid[linkb]['bi_id'],
-                'interface': v.interfaces[1].name
-            })
-            #Графики для интерфейсов
-            gname=re.sub('\W+','_',f"{v.interfaces[0].managed_object.name} {v.interfaces[0].description}({v.interfaces[0].name})")
-            interfacegraph.append(
-                f"{gname} : {v.interfaces[0].managed_object.bi_id};{v.interfaces[0].name}"
-            )
-#            gname=re.sub('\W+','_',f"{v.interfaces[1].managed_object.name} {v.interfaces[1].description}({v.interfaces[1].name})")
-#            interfacegraph.append(
-#                f"{gname} : {v.interfaces[1].managed_object.bi_id};{v.interfaces[1].name}"
-#            )
+        links,targets,interfacegraph = self.makelinks(nodes,newlinks)
         graf={'uuid': str(uuid.uuid1())}
-        if intgraph:
-            result = template.render(graf=graf,nodes=nodes,links=links,targets=targets, intgraph=1, i3=",".join(interfacegraph))
-        else:
-            result = template.render(graf=graf,nodes=nodes,links=links,targets=targets, intgraph=0, i3="")
-        if fout:
-            with open(fout,'w') as f:
+        #write dashboard
+        result = None
+        if intgraph and weather:
+            result = template.render(title=title,graf=graf,nodes=nodes,links=links,targets=targets, intgraph=1, i3=",".join(interfacegraph))
+        elif weather:
+            result = template.render(title=title,graf=graf,nodes=nodes,links=links,targets=targets, intgraph=0, i3="")
+        elif intgraph:
+            result = template.render(title=title,graf=graf,nodes=[],links=[],targets=[], intgraph=1, i3=",".join(interfacegraph))
+        if dashout and result:
+            with open("/home/netmaps/grafana/dashboards/"+dashout,'w') as f:
             #json.dump(template.render(graf=graf,nodes=nodes), f)
                 f.write(result)
-        print(result)
-        #print(Gl)
 
 if __name__ == "__main__":
     Command().run()
