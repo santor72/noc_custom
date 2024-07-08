@@ -20,7 +20,7 @@ def oper_up(event):
     iface = Interface.objects.filter(
         managed_object=event.managed_object.id, ifindex=event.vars["ifindex"]
     ).first()
-    if iface:
+    if iface and iface.status_change_notification == 'e':
         iface.set_oper_status(True)
         event.set_hint("link_status", True)
         event.vars["interface"] = iface.name
@@ -34,7 +34,7 @@ def oper_down(event):
     iface = Interface.objects.filter(
         managed_object=event.managed_object.id, ifindex=event.vars["ifindex"]
     ).first()
-    if iface:
+    if iface and iface.status_change_notification == 'e':
         iface.set_oper_status(False)
         event.set_hint("link_status", False)
         event.vars["interface"] = iface.name

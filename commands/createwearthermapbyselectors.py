@@ -15,7 +15,7 @@ from noc.sa.models.administrativedomain import AdministrativeDomain
 from noc.inv.models.networksegment import NetworkSegment
 
 class Command(BaseCommand):
-    def help():
+    def help(self):
         print("""Need selector
         \t-a --admindomain for admindomain(admindomains or comma separated admindomains )
         \t-s --segment for segment(or comma separated segments )
@@ -23,8 +23,8 @@ class Command(BaseCommand):
         \t-d, --dashboard if you want write dashboard file
         \t-t --title dashboard title
         \t-i for make interface panel
-        \-w for make weathermap panel
-        \--dia for write diagram file
+        \t-w for make weathermap panel
+        \t--dia for write diagram file
 
         File write to /home/netmaps
         \t /dashboard - dashboards json. Add subdir to file name
@@ -132,7 +132,7 @@ class Command(BaseCommand):
         labels = plabels.split(',') if plabels else []
         segments = psegment.split(',') if psegment else []
         if not (admindomains or labels or segments or title):
-            help()
+            self.help()
             quit()
         connect()
         #Read template files
