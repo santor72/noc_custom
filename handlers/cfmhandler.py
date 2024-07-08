@@ -33,6 +33,8 @@ from noc.core.mongo.connection import connect
 from noc.sa.models.action import Action
 from noc.sa.models.service import Service
 from noc.inv.models.capability import Capability
+from noc.wf.models.workflow import Workflow
+from noc.wf.models.state import State
 
 #номер справочника с rmep в enum groups
 cfmrmep_EG = 10
@@ -91,6 +93,12 @@ def rmep_down(event):
     services_target = [x for x in services_parced if istarget(x['caps'], event)]
     description = ''
     for y in services_target:
+        try:
+            stateDown = State.objects.get(name='Down', workflow = y['service'].profile.workflow)
+            y['service'].state=stateDown
+            y['service'].save()
+        except:
+            pass
         if not description:
            description = y['service'].description
         if y['caps']['interfaces']:
@@ -122,6 +130,12 @@ def rmep_up(event):
     services_target = [x for x in services_parced if istarget(x['caps'], event)]
     description = ''
     for y in services_target:
+        try:
+            stateOk = State.objects.get(name='Ok', workflow = y['service'].profile.workflow)
+            y['service'].state=stateOk
+            y['service'].save()
+        except:
+            pass
         if not description:
            description = y['service'].description
         if y['caps']['interfaces']:

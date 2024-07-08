@@ -22,7 +22,7 @@ Network | CFM | Handler
 """
 import requests
 import pickle
-from pprint import pformat,pprint
+from pprint import pformat
 
 #NOC modules
 from noc.main.models.customfieldenumgroup import CustomFieldEnumGroup
@@ -33,6 +33,8 @@ from noc.core.mongo.connection import connect
 from noc.sa.models.action import Action
 from noc.sa.models.service import Service
 from noc.inv.models.capability import Capability
+from noc.wf.models.workflow import Workflow
+from noc.wf.models.state import State
 
 #номер справочника с rmep в enum groups
 cfmrmep_EG = 10
@@ -51,7 +53,6 @@ def int_godown(m,i):
     action = Action.objects.get(name='interface_shutdown')
     cmd = str(action.expand(m,ifname=i))
     return m.scripts.commands(commands=cmd.split("\n"))
-
 #Словарь с данными capabilities сервиса
 def parsecaps(p_service:Service):
     result = {
@@ -92,19 +93,25 @@ def rmep_down(event):
     services_target = [x for x in services_parced if istarget(x['caps'], event)]
     description = ''
     for y in services_target:
+        try:
+            stateDown = State.objects.get(name='Down', workflow = y['service'].profile.workflow)
+            y['service'].state=stateDown
+            y['service'].save()
+        except:
+            raise
         if not description:
            description = y['service'].description
         if y['caps']['interfaces']:
            for i in y['caps']['interfaces']:
              print(f"Interface {i} go down")
-             resdown = int_godown(mo,i)
+#             resdown = int_godown(mo,i)
     if sendalarm == 1:
                 msg = [f"Alarm on {mo.name}"]
                 msg.append(f"IP: {mo.address}")
                 msg.append(f"Remote device disconnected.")
                 if description:
                    msg.append(f"For service {description}.")
-                print('\n'.join(msg))
+#                print('\n'.join(msg))
 #                response =  requests.post(tel_url + '\n'.join(msg), headers=headers)
 
 #Обработчик включения rmep
@@ -122,8 +129,13 @@ def rmep_up(event):
     istarget = lambda c,e: True if c['md'] == e.vars.get('md') and c['ma'] == e.vars.get('ma') and c['rmep'] == e.vars.get('rmep') else Flase
     services_target = [x for x in services_parced if istarget(x['caps'], event)]
     description = ''
-    pprint(services_target)
     for y in services_target:
+        try:
+            stateOk = State.objects.get(name='Ok', workflow = y['service'].profile.workflow)
+            y['service'].state=stateOk
+            y['service'].save()
+        except:
+            raise
         if not description:
            description = y['service'].description
         if y['caps']['interfaces']:
@@ -137,7 +149,7 @@ def rmep_up(event):
                 if description:
                    msg.append(f"For service {description}.")
                 print('\n'.join(msg))
-                response =  requests.post(tel_url + '\n'.join(msg), headers=headers)
+#                response =  requests.post(tel_url + '\n'.join(msg), headers=headers)
 
 with open("/tmp/e.pickle","rb") as f:
    e = pickle.load(f)
