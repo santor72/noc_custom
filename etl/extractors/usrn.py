@@ -20,6 +20,7 @@ from typing import Any, List, Iterable, Type, Union, Tuple, Set, Optional
 
 # NOC modules
 from noc.core.etl.extractor.base import BaseExtractor,RemovedItem
+from noc.core.etl.loader.base import BaseLoader
 from noc.core.etl.models.base import BaseModel
 from noc.core.etl.remotesystem.base import BaseRemoteSystem
 from noc.gis.models.geocodercache import GeocoderCache

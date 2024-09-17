@@ -1,0 +1,1 @@
+/opt/noc/sa/profiles/NAG/SNR/profile.py
