@@ -22,15 +22,13 @@ from noc.sa.models.action import Action
 from noc.sa.models.managedobject import ManagedObject
 from noc.core.mongo.connection import connect
 from noc.services.nbi.base import NBIAPI, API_ACCESS_HEADER, FORBIDDEN_MESSAGE
-from noc.sa.interfaces.base import (
-    DictParameter
-)
+from typing import Dict
 
 router = APIRouter()
 
 class RunActionRequest(BaseModel):
     actname: str
-    p: DictParameter
+    p: Dict
 
 class RunAction(NBIAPI):
     api_name = "/api/nbi/runaction"
