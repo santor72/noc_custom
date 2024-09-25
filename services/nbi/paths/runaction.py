@@ -27,8 +27,8 @@ from typing import Dict
 router = APIRouter()
 
 class RunActionRequest(BaseModel):
-    actname: str,
-    ip: str,
+    actname: str
+    ip: str
     p: Dict
 
 class RunAction(NBIAPI):
@@ -56,7 +56,9 @@ class RunAction(NBIAPI):
         data = {x.name:'' for x in action.params}
         for k,v in p.items():
             data[k] = v
-
+        cmd = str(action.expand(mo,**data))
+        params={"commands":cmd.split('\n'), "ignore_cli_errors":True}
+        result = mo.scripts.commands(**params)            
         return JSONResponse(content=result, media_type="application/json")
         
 # Install router
