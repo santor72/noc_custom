@@ -28,7 +28,6 @@ router = APIRouter()
 
 class RunActionRequest(BaseModel):
     actname: str,
-    ip: str,
     p: Dict
 
 class RunAction(NBIAPI):
