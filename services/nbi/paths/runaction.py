@@ -57,7 +57,8 @@ class RunAction(NBIAPI):
             data[k] = v
         cmd = str(action.expand(mo,**data))
         params={"commands":cmd.split('\n'), "ignore_cli_errors":True}
-        result = mo.scripts.commands(**params)            
+        result = mo.scripts.commands(**params)         
+        result['commands'] = cmd
         return JSONResponse(content=result, media_type="application/json")
         
 # Install router
