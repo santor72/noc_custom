@@ -36,7 +36,7 @@ class Script(BaseScript):
             if match.group("type") == "N/A":
                 continue
             ifname=match.group("interface")
-            
+            description=match.group("interface")
             if re.match(r'^gpon-onu',ifname):
                ifname=re.sub(r':\d+$', '', re.sub(r'gpon-onu','gpon-olt', ifname))
             r += [
@@ -45,6 +45,7 @@ class Script(BaseScript):
                     "mac": match.group("mac"),
                     "interfaces": [ifname],
                     "type": {"Dynamic": "D"}[match.group("type")],
+                    "description": description,
                 }
             ]
         return r

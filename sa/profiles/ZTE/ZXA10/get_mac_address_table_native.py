@@ -1,7 +1,7 @@
 # ---------------------------------------------------------------------
-# ZTE.ZXA10-1-2.get_mac_address_table
+# ZTE.ZXA10.get_mac_address_table
 # ---------------------------------------------------------------------
-# Copyright (C) 2007-2020 The NOC Project
+# Copyright (C) 2007-2022 The NOC Project
 # See LICENSE for details
 # ---------------------------------------------------------------------
 
@@ -15,11 +15,11 @@ from noc.core.mac import MAC
 
 
 class Script(BaseScript):
-    name = "ZTE.ZXA10-1-2.get_mac_address_table"
+    name = "ZTE.ZXA10.get_mac_address_table"
     interface = IGetMACAddressTable
 
     rx_mac = re.compile(
-        r"^(?P<mac>\S+[0-9a-f\.]+)\s+(?P<vlan_id>\d+)\s+(?P<type>\S+)\s+(?P<interface>\S+)",
+        r"^(?P<mac>\S+[0-9a-f\.]+)\s+(?P<vlan_id>\d+).*(?P<type>Dynamic)\s+(?P<interface>\S+)",
         re.MULTILINE,
     )
 
@@ -36,7 +36,7 @@ class Script(BaseScript):
             if match.group("type") == "N/A":
                 continue
             ifname=match.group("interface")
-            
+            description=match.group("interface")
             if re.match(r'^gpon-onu',ifname):
                ifname=re.sub(r':\d+$', '', re.sub(r'gpon-onu','gpon-olt', ifname))
             r += [
@@ -44,7 +44,8 @@ class Script(BaseScript):
                     "vlan_id": match.group("vlan_id"),
                     "mac": match.group("mac"),
                     "interfaces": [ifname],
-                    "type": {"Dynamic": "D"}[match.group("type")],
+                    "type": {"Dynamic": "D", "Static": "S"}[match.group("type")],
+                    "interface_native": description
                 }
             ]
         return r
