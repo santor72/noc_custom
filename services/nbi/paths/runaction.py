@@ -50,8 +50,7 @@ class RunAction(NBIAPI):
         hostip = req.ip
         mo = ManagedObject.objects.get(address = hostip)
         actname = req.actname
-        params = req.p
-        result = params
+        p = req.p
         action = Action.objects.get(name=actname)
         data = {x.name:'' for x in action.params}
         for k,v in p.items():
