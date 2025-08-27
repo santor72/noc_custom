@@ -108,8 +108,9 @@ def rmep_down(event):
     if sendalarm == 1:
                 msg = [f"‼ Alarm on {mo.name}"]
                 msg.append(f"IP: {mo.address}")
+                msg.append(mo.description)                
                 msg.append(event.body)
-                msg.append(f"Remote device disconnected.")
+#                msg.append(f"Remote device disconnected.")
                 if description:
                    msg.append(f"For service {description}.")
 #                print('\n'.join(msg))
@@ -146,8 +147,9 @@ def rmep_up(event):
     if sendalarm == 1:
                 msg = [f"✅Alarm cleared on {mo.name}"]
                 msg.append(f"IP: {mo.address}")
+                msg.append(mo.description)
                 msg.append(event.body)
-                msg.append(f"Remote device connected.")
+#                msg.append(f"Remote device connected.")
                 if description:
                    msg.append(f"For service {description}.")
 #                print('\n'.join(msg))
