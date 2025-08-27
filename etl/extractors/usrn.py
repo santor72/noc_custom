@@ -74,6 +74,7 @@ class USRNRemoteSystem(BaseRemoteSystem):
         with open('/var/lib/noc/import/RNUserside/managedobjectprofile/mappings.csv','w') as f:
             for moprofileitem in moprofiledata:
                 f.write("{0},{1}\n".format(moprofileitem[0],moprofileitem[1]))
+#For initial unload
         """
         us = RemoteSystem.objects.get(name = 'RNUserside')
         modata = ManagedObjectNoc.objects.filter(remote_system  = us)
@@ -81,7 +82,7 @@ class USRNRemoteSystem(BaseRemoteSystem):
             for moitem in modata:
                 if moitem.remote_id:
                     f.write("{0},{1}\n".format(moitem.remote_id,moitem.id))
-        """ 
+         """
         super(USRNRemoteSystem, self).extract(extractors, incremental, checkpoint)
     
 
@@ -237,7 +238,7 @@ class USRNManagedObjectExtractor(BaseExtractor):
                     "tt_system_id" : None
                     }
             
-            newMO['id'] = dev['id']
+            newMO['id'] = str(dev['id'])
             newMO['name'] = dev['host']
             newMO['description'] = dev['location']
             newMO['address'] = dev['host']
@@ -250,6 +251,7 @@ class USRNManagedObjectExtractor(BaseExtractor):
             if not mo:
                 mo = ManagedObjectNoc.objects.filter(address=dev['host'])
                 if mo:
+                    continue
                     mo[0].remote_system = rems
                     mo[0].remote_id = dev['id']
                     try:
@@ -265,11 +267,13 @@ class USRNManagedObjectExtractor(BaseExtractor):
                 newMO["object_profile"] = mo[0].object_profile.name
                 newMO["auth_profile"] = mo[0].auth_profile.name if mo[0].auth_profile else 'login'
                 newMO["scheme"] = mo[0].scheme
+#For initial unload
 #            else:
 #                continue
 
             yield ManagedObject(id = newMO["id"],
                     name = newMO["name"],
+                    scheme=str(newMO["scheme"]),
                     is_managed = newMO["is_managed"],
                     administrative_domain=newMO["administrative_domain"],
                     pool=newMO["pool"],
@@ -278,7 +282,6 @@ class USRNManagedObjectExtractor(BaseExtractor):
                     static_service_groups=[],
                     profile=newMO["profile"],
                     object_profile=newMO["object_profile"],
-                    scheme=newMO["scheme"],
                     address=newMO["address"],
                     description=newMO["description"],
                     auth_profile=newMO["auth_profile"],

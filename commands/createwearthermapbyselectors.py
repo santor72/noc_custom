@@ -1,4 +1,5 @@
 import networkx as nx
+from networkx.readwrite import json_graph
 import json
 import re
 from pprint import pprint
@@ -38,7 +39,9 @@ class Command(BaseCommand):
         parser.add_argument("-d", "--dashboard", dest="dashout", default=None)
         parser.add_argument("-w", "--weather", dest="weather", action='store_true')
         parser.add_argument("--dia", dest="dia", default=None)
+        parser.add_argument("--json", dest="jsonout", default=None)
         parser.add_argument("-t", "--title", dest="title", default=None)
+
    
     def makenodes(self,newnodes,graf):
         nodes=[]
@@ -58,6 +61,7 @@ class Command(BaseCommand):
                 'noc_id': k,
                 'bi_id': v.get('bi_id'),
                 'label': v.get('name'),
+                'ip': v.get('adress'),
                 'iconname': icon['name'],
                 'iconpath': icon['src'],
 #                'x': xstart,
@@ -88,8 +92,11 @@ class Command(BaseCommand):
             links.append(
                 {
                     'id' : str(uuid.uuid1()),
+                    'l_id': str(v.id),
                     'nodea' : nodea,
                     'nodeb' : nodeb,
+                    'int_a': inta,
+                    'int_b': intb,
                     'query_a' : la,
                     'query_b' : lb,
                     'bandwidth' : v.interfaces[0].in_speed*1000 if v.interfaces[0].in_speed else 0
@@ -125,6 +132,7 @@ class Command(BaseCommand):
         intgraph = options.get("intgraph")
         weather = options.get("weather")
         dashout = options.get("dashout")
+        jsonout = options.get("jsonout")
         dia = options.get("dia")
         title = options.get("title")
         #Обрабатываем параметры
@@ -192,6 +200,12 @@ class Command(BaseCommand):
             with open("/home/netmaps/grafana/dashboards/"+dashout,'w') as f:
             #json.dump(template.render(graf=graf,nodes=nodes), f)
                 f.write(result)
-
+        if jsonout:
+            with open("/home/netmaps/json/"+jsonout,'w') as f:
+                
+                json_out = {'nodes': nodes, 'links': links}
+                graph_data = nx.node_link_data(G)
+                #pprint(json_out)
+                json.dump(json_out, f, indent=4)            
 if __name__ == "__main__":
     Command().run()

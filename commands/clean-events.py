@@ -8,16 +8,24 @@ connect()
 alarms = ActiveAlarm.objects()
 events = ActiveEvent.objects()
 ar_alarms = ArchivedAlarm.objects()
-
+delta=15
 for alarm in alarms:
-   if alarm.timestamp < datetime.now() - timedelta(days=15):
+ if alarm.timestamp:
+   if alarm.timestamp < datetime.now() - timedelta(days=delta):
     alarm.delete()
+ else:
+   alarm.delete()
 
 for alarm in ar_alarms:
-   if alarm.timestamp < datetime.now() - timedelta(days=15):
+ if alarm.timestamp:
+   if alarm.timestamp < datetime.now() - timedelta(days=delta):
     alarm.delete()
+ else:
+   alarm.delete()
 
-for event in events:
-   if alarm.timestamp < datetime.now() - timedelta(days=15):
+for  event in events:
+ if event.timestamp:
+   if event.timestamp < datetime.now() - timedelta(days=delta):
     event.delete()
-
+ else:
+   event.delete()
