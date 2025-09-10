@@ -4,10 +4,10 @@ from noc.sa.interfaces.igetconfig import IGetConfig
 
 
 class Script(BaseScript):
-    name = "Cisco.IOS.get_config"
+    name = "Topaz.Topaz.get_config"
     interface = IGetConfig
 
-    def execute_cli(self):
+    def execute_cli(self,**kwargs):
         config = self.cli("uci show")
         #config = self.strip_first_lines(config, 3)
         return self.cleaned_config(config)
