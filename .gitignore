@@ -6,3 +6,9 @@ etl/extractors/old/archive/import-2024-08-30-13-01-38.jsonl.gz
 etl/extractors/old/archive/import-2024-08-30-13-08-55.jsonl.gz
 etl/extractors/old/archive/import-2024-08-30-13-11-37.jsonl.gz
 etl/extractors/old/archive/import-2024-08-30-13-15-42.jsonl.gz
+commands/ns.py
+sa/profiles/Topaz/__pycache__/__init__.cpython-311.pyc
+sa/profiles/Topaz/Topaz/__pycache__/__init__.cpython-311.pyc
+sa/profiles/Topaz/Topaz/__pycache__/get_version.cpython-311.pyc
+sa/profiles/Topaz/Topaz/__pycache__/profile.cpython-311.pyc
+sa/profiles/Topaz/Topaz/__pycache__/get_config.cpython-311.pyc

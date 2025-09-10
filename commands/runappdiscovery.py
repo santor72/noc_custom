@@ -44,12 +44,15 @@ mos = [
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument("-p", dest="isprint", default=None)
-        parser.add_argument("object_name", nargs=1, help="Object name")
+#        parser.add_argument("object_name", nargs=1, help="Object name")
     def handle(self,  *args, **options):
-        object_name = options.get("object_name")
+#        object_name = options.get("object_name")
         connect()
         isprint = options.get("isprint")
         c = Command2()
+        now = time.localtime()
+        date = time.strftime("%Y-%m-%d", now)
+        ts = time.strftime("%Y-%m-%d %H:%M:%S", now)
         for i in mos:
             print(i)
             #mo =  ManagedObject.objects.filter(name=object_name[0]).first()
@@ -67,9 +70,6 @@ class Command(BaseCommand):
                     update_spec=None,
                     beef_output=None
                     )
-                now = time.localtime()
-                date = time.strftime("%Y-%m-%d", now)
-                ts = time.strftime("%Y-%m-%d %H:%M:%S", now)
                 r1 = []
                 for vpn in r:
                     for a in vpn["addresses"]:
