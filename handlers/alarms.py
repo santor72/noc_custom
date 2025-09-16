@@ -29,7 +29,8 @@ def aievent(event):
     request.query = json.dumps({'mo':event.managed_object_id,'body' : event.body, 'raw' : event.raw_vars})
     responseJson = json.loads(request.getresponse().read().decode('utf-8'))
 #    syslog.syslog(syslog.LOG_INFO, json.dumps(responseJson))
-    
+
+#Функции отправки алармов в cetnrifugo для отображения на оперативной карте
 def linkopentocf(alarm):
 #    ctx = {"alarm": alarm}
 #    body = alarm.open_template.render_body(**ctx)
