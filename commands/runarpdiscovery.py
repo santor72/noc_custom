@@ -38,8 +38,46 @@ mos = [
     'Ovchinki-Hw6730-10.76.46.227',
     'talalihino10-hw5320',
     '10.76.46.226_ButovoPark',
-    'plk78-Huawei6730-217.76.46.130'
+    'plk78-Huawei6730-217.76.46.130',
+    'Esipovo-hw5320',
+    'Chv_ASR',
+    'sher_hw5720-10.76.46.223'
 ]
+
+mos = ['k18.gw',
+'klim-49k1-snr300-10.76.46.158',
+'talalihino10-hw5320',
+'rosseti-podolsk-asr01',
+'evh.gw',
+'m1-hw6720',
+'trikolor.gw',
+'Esipovo-hw5320',
+'Sever-Durikino-hw5720-10.76.46.220',
+'Sever-Fedotovo-hw5720',
+'sher_hw5720-10.76.46.223',
+'Iksha_hw5320',
+'Ovchinki-Hw6730-10.76.46.227',
+'Sever-Kachugino-hw5720-10.76.46.228',
+'Lvov-Krasnaya18-10.76.46.230',
+'dc-pemz-7600',
+'tomilimo-snr300-217.76.33.213',
+'bras-skl104',
+'pemz-Huawei6730',
+'FM-Sidorovo-asr1002F',
+'admiral',
+'mskix-hw6320-217.76.46.108',
+'chv-Huawei6720',
+'m34-mikrotik',
+'m34-hw6720',
+'mskix-7600',
+'Chv_ASR',
+'colonel',
+'skl-104-7600-217.76.46.129',
+'plk78-Huawei6730-217.76.46.130',
+'skl104-Hw6720-217.76.46.246',
+'mskix-7600'
+]
+
 
 class Command(BaseCommand):
     def add_arguments(self, parser):

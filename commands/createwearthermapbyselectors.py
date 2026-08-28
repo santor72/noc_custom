@@ -165,6 +165,7 @@ class Command(BaseCommand):
                 if not item2 in moids:
                     moids.append(item2)
         newnodes={}
+        print(len(moids))
         for mo in moids:
             newnodes[mo.id] = {'name':mo.name, 'id': mo.id,'bi_id':mo.bi_id,'icon':mo.object_profile.shape}
         alllinks = Link.objects.filter(linked_objects__in=[x for x in newnodes.keys()])

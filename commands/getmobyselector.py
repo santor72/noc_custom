@@ -1,7 +1,7 @@
 # coding: utf-8
 from noc.core.management.base import BaseCommand
 from noc.core.mongo.connection import connect
-from noc.sa.models.managedobjectselector import ManagedObjectSelector
+#from noc.sa.models.managedobjectselector import ManagedObjectSelector
 from noc.sa.models.managedobject import ManagedObject
 
 class Command(BaseCommand):
